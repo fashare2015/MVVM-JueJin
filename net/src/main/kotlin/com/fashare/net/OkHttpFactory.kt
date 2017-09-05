@@ -5,19 +5,19 @@ import com.socks.library.KLog
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 
-object OkHttpManager {
+object OkHttpFactory {
     private var CONNECT_TIMEOUT_SECONDS = 20L
     private var READ_TIMEOUT_SECONDS = 20L
     private var WRITE_TIMEOUT_SECONDS = 20L
 
-    val client: OkHttpClient by lazy { createClient() }
+    val client: OkHttpClient by lazy { create() }
 
-    fun createClient(): OkHttpClient {
+    fun create(): OkHttpClient {
         val sslParams = HttpsUtil.getSslSocketFactory(null, null, null)
         val loggingInterceptor = HttpLoggingInterceptor({ chain, msg ->
             KLog.json("okhttp-${chain.request().url().uri().path}", msg)
         }).apply {
-            this.level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.BASIC
+            this.level = HttpLoggingInterceptor.Level.BODY
         }
 
         return OkHttpClient.Builder()

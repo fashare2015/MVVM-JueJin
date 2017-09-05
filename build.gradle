@@ -91,8 +91,11 @@ subprojects {
     }
 
     dependencies {
+        // kotlin
         compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-//    compile 'org.jetbrains.anko:anko-support-v4:0.8.2' // In case you need support-v4 bindings
-//    compile 'org.jetbrains.anko:anko-appcompat-v7:0.8.2' // For appcompat-v7 bindings
+
+        /******* rx ****************************************************************************/
+        compile "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjavaVersion"    //1.3MB [EventBus]
+        compile "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxandroidVersion" //8KB
     }
 }

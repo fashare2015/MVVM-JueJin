@@ -49,7 +49,7 @@ import static okhttp3.internal.platform.Platform.INFO;
  * this class should not be considered stable and may change slightly between releases. If you need
  * a stable logging format, use your own interceptor.
  */
-public final class HttpLoggingInterceptor implements Interceptor {
+final class HttpLoggingInterceptor implements Interceptor {
   private static final Charset UTF8 = Charset.forName("UTF-8");
   private static Gson GSON = new Gson();
 
