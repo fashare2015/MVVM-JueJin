@@ -1,1 +1,1 @@
-include ':app', ':net'
+include ':app', ':net', ':databinding', ':adapter'

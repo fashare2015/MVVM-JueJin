@@ -28,9 +28,9 @@ class HotRecomment {
          * osTime : 2017-09-05T17:03:07.461Z
          */
 
-        var banner: List<BannerBean>? = null
+        var banner: List<BannerBean2>? = null
 
-        class BannerBean {
+        class BannerBean2 {
             var objectId: String? = null
             var description: String? = null
             var startedAt: String? = null
