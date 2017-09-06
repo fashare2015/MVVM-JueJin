@@ -1,1 +1,1 @@
-include ':app', ':net', ':databinding', ':adapter'
+include ':app', ':net', ':databinding', ':adapter', ':imageloader'

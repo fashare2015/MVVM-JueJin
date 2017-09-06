@@ -22,7 +22,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             tools:src="@mipmap/ic_launcher"
-            bind:src="@{viewModel.iconRes}"/>
+            bind:placeholder="@{viewModel.iconRes}"/>
     </LinearLayout>
 
 </layout>

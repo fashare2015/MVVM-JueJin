@@ -15,6 +15,7 @@ import java.util.*
  * </pre>
  */
 class TabVM{
+    var img = "https://img.mp.itc.cn/upload/20160506/0afc31ee80dd444687b2b52fb21ec5e3_th.png"
     var text = "haha"
     var itemView: ItemView = ItemView.of(com.fashare.mvvm_juejin.BR.viewModel, R.layout.item_main_tab)
     var itemList: ObservableList<Any> = ObservableArrayList<Any>().apply{

@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.fashare.imageloader">
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+
+        <!--glide 全局配置-->
+        <meta-data
+            android:name="com.fashare.imageloader.config.GlideConfig"
+            android:value="GlideModule" />
+
+    </application>
+
+</manifest>

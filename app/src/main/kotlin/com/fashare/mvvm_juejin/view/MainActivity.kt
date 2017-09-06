@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply{
             this.viewModel = TabVM()
         }
+        // 等价于
 //        val binding = DataBindingUtil.setContentView<ViewDataBinding>(this, R.layout.activity_main)
 //        binding.setVariable(com.fashare.mvvm_juejin.BR.viewModel, TabVM())
 

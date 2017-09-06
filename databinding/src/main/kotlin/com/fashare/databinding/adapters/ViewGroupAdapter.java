@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import me.tatarka.bindingcollectionadapter.ItemView;
 
 public final class ViewGroupAdapter {
-
     @BindingAdapter({"itemView", "viewModels"})
     public static void addViews(ViewGroup viewGroup, final ItemView itemView, final ObservableList<?> viewModelList) {
         if (viewModelList != null && !viewModelList.isEmpty()) {
