@@ -6,9 +6,7 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-            name="viewModel"
-            type="com.fashare.mvvm_juejin.viewmodel.TabVM.ItemVM"/>
+        <variable name="viewModel" type="int"/>
     </data>
 
     <LinearLayout
@@ -22,7 +20,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             tools:src="@mipmap/ic_launcher"
-            bind:placeholder="@{viewModel.iconRes}"/>
+            bind:placeholder="@{viewModel}"/>
     </LinearLayout>
 
 </layout>
