@@ -15,12 +15,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
             bind:itemView="@{viewModel.itemView}"
-            bind:viewModels="@{viewModel.itemList}"/>
+            bind:viewModels="@{viewModel.viewModels}"
+            bind:onItemClick="@{viewModel.onItemClick}"/>
     </LinearLayout>
 
 </layout>

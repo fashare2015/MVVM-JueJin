@@ -2,4 +2,5 @@ apply plugin: 'com.android.library'
 
 dependencies {
     compile project(":imageloader")
+    compile project(":adapter")
 }
