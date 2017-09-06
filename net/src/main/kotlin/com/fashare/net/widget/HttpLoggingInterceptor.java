@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fashare.net;
+package com.fashare.net.widget;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -49,7 +49,7 @@ import static okhttp3.internal.platform.Platform.INFO;
  * this class should not be considered stable and may change slightly between releases. If you need
  * a stable logging format, use your own interceptor.
  */
-final class HttpLoggingInterceptor implements Interceptor {
+public final class HttpLoggingInterceptor implements Interceptor {
   private static final Charset UTF8 = Charset.forName("UTF-8");
   private static Gson GSON = new Gson();
 

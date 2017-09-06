@@ -1,6 +1,7 @@
-package com.fashare.net
+package com.fashare.net.widget
 
 import com.fashare.net.util.HttpsUtil
+import com.fashare.net.widget.HttpLoggingInterceptor
 import com.socks.library.KLog
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit

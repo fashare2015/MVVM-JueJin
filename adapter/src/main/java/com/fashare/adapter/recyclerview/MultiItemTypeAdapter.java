@@ -6,9 +6,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.fashare.adapter.OnItemClickListener;
+import com.fashare.adapter.ViewHolder;
 import com.fashare.adapter.recyclerview.base.ItemViewDelegate;
 import com.fashare.adapter.recyclerview.base.ItemViewDelegateManager;
-import com.saike.alps.view.AlpsOnClickListener;
 
 import java.util.List;
 
@@ -73,9 +74,9 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
 
     protected void setListener(final ViewHolder viewHolder, final int position) {
         if (!isEnabled(getItemViewType(position))) return;
-        viewHolder.getConvertView().setOnClickListener(new AlpsOnClickListener() {
+        viewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
             @Override
-            public void doClick(View v) {
+            public void onClick(View v) {
                 if (mOnItemClickListener != null) {
                     mOnItemClickListener.onItemClick(viewHolder, mDatas.get(position), position);
                 }

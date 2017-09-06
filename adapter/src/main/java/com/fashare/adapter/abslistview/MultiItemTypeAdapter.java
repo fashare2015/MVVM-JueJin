@@ -1,16 +1,15 @@
 package com.fashare.adapter.abslistview;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.saike.android.util.XLog;
 import com.fashare.adapter.OnItemClickListener;
 import com.fashare.adapter.ViewHolder;
 import com.fashare.adapter.abslistview.base.ItemViewDelegate;
 import com.fashare.adapter.abslistview.base.ItemViewDelegateManager;
-import com.saike.alps.view.AlpsOnClickListener;
 
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class MultiItemTypeAdapter<T> extends BaseAdapter {
             this.mDatas = dataList;
             notifyDataSetChanged();
         }else{
-            XLog.e(TAG, "mDataList is null");
+            Log.e(TAG, "mDataList is null");
         }
     }
 
@@ -97,9 +96,9 @@ public class MultiItemTypeAdapter<T> extends BaseAdapter {
 
     protected void setListener(final ViewHolder viewHolder, int viewType, final int position) {
         if (!isEnabled(viewType)) return;
-        viewHolder.getConvertView().setOnClickListener(new AlpsOnClickListener() {
+        viewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
             @Override
-            public void doClick(View v) {
+            public void onClick(View v) {
                 if (mOnItemClickListener != null) {
                     mOnItemClickListener.onItemClick(viewHolder, mDatas.get(position), position);
                 }
