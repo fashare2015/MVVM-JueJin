@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="tab"
-            type="com.fashare.mvvm_juejin.viewmodel.TabVM"/>
+            name="pages"
+            type="com.fashare.mvvm_juejin.viewmodel.HomePagesVM"/>
     </data>
 
     <LinearLayout
@@ -17,8 +17,16 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="home"/>
+
+        <android.support.v4.view.ViewPager
+            android:background="@color/colorAccent"
+            android:id="@+id/vp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            bind:fragments="@{pages.pageList}"
+            bind:curIndex="@{0}"/>
     </LinearLayout>
 
 </layout>
