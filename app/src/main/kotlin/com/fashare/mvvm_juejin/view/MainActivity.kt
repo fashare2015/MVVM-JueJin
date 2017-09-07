@@ -2,18 +2,30 @@ package com.fashare.mvvm_juejin.view
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import com.fashare.base_ui.BaseActivity
 import com.fashare.mvvm_juejin.R
 import com.fashare.mvvm_juejin.databinding.ActivityMainBinding
+import com.fashare.mvvm_juejin.view.explore.ExploreFragment
+import com.fashare.mvvm_juejin.view.home.HomeFragment
+import com.fashare.mvvm_juejin.view.home.NotifyFragment
+import com.fashare.mvvm_juejin.view.home.ProfileFragment
+import com.fashare.mvvm_juejin.viewmodel.PagesVM
 import com.fashare.mvvm_juejin.viewmodel.TabVM
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply{
-            this.viewModel = TabVM()
+            this.pages = PagesVM(listOf(
+                    HomeFragment(),
+                    ExploreFragment(),
+                    NotifyFragment(),
+                    ProfileFragment()
+            ))
+
+            this.tab = TabVM(null)
         }
 
 //        ApiFactory.getApi(JueJinApis:: class.java)

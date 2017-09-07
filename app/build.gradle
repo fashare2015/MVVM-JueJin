@@ -6,6 +6,7 @@ dependencies {
     compile project(":imageloader")
     compile project(":adapter")
     compile project(":databinding")
+    compile project(":base-ui")
 
     /******* support 包 ****************************************************************************/
     compile "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion"
@@ -25,7 +26,7 @@ dependencies {
     /******* 其它常用库 ****************************************************************************/
     compile "com.jude:swipebackhelper:$rootProject.ext.swipebackhelperVersion"
 
-    compile "com.trello.rxlifecycle2:rxlifecycle:$rootProject.ext.rxlifecycleVersion"
+
 
     /******* 内存泄漏 ****************************************************************************/
     debugCompile "com.squareup.leakcanary:leakcanary-android:$rootProject.ext.leakcanaryVersion"

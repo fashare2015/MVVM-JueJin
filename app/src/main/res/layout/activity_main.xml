@@ -6,7 +6,11 @@
 
     <data>
         <variable
-            name="viewModel"
+            name="pages"
+            type="com.fashare.mvvm_juejin.viewmodel.PagesVM"/>
+
+        <variable
+            name="tab"
             type="com.fashare.mvvm_juejin.viewmodel.TabVM"/>
     </data>
 
@@ -15,18 +19,21 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <View
+        <FrameLayout
+            android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            bind:fragments="@{pages.pageList}"
+            bind:curIndex="@{tab.curIndex}"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            bind:itemView="@{viewModel.itemView}"
-            bind:viewModels="@{viewModel.viewModels}"
-            bind:onItemClick="@{viewModel.onItemClick}"/>
+            bind:itemView="@{tab.itemView}"
+            bind:viewModels="@{tab.viewModels}"
+            bind:onItemClick="@{tab.onItemClick}"/>
     </LinearLayout>
 
 </layout>

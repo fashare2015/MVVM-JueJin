@@ -6,7 +6,7 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="viewModel" type="com.fashare.mvvm_juejin.viewmodel.TabVM.Item"/>
+        <variable name="tabItem" type="com.fashare.mvvm_juejin.viewmodel.TabVM.Item"/>
     </data>
 
     <LinearLayout
@@ -18,7 +18,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            bind:placeholder="@{viewModel.isSelected? viewModel.iconResSelected: viewModel.iconResNormal}"/>
+            bind:placeholder="@{tabItem.isSelected? tabItem.iconResSelected: tabItem.iconResNormal}"/>
     </LinearLayout>
 
 </layout>
