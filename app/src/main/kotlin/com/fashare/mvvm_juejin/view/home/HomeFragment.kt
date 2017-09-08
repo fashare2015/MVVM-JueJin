@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import com.fashare.base_ui.BaseFragment
 import com.fashare.mvvm_juejin.R
 import com.fashare.mvvm_juejin.databinding.FragmentHomeBinding
-import com.fashare.mvvm_juejin.view.explore.ExploreFragment
 import com.fashare.mvvm_juejin.viewmodel.HomePagesVM
 
 /**
@@ -25,7 +24,7 @@ class HomeFragment : BaseFragment(){
         return DataBindingUtil.inflate<FragmentHomeBinding>(inflater, R.layout.fragment_home, container, false).apply {
 //            binding = this
             this.pages = HomePagesVM(listOf(
-                    ExploreFragment(),
+                    HomeListFragment(),
                     ProfileFragment()
             ))
         }.root

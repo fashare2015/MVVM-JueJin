@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="listVM"
+            type="com.fashare.mvvm_juejin.viewmodel.HomeListVM"/>
+
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="home_list"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            bind:layoutManager="@{LayoutManagers.linear()}"
+            bind:itemView="@{listVM.itemView}"
+            bind:items="@{listVM.viewModels}"/>
+    </LinearLayout>
+
+</layout>
+
