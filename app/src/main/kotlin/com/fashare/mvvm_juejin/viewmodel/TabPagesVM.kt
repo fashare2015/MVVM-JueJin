@@ -10,4 +10,4 @@ import android.support.v4.app.Fragment
  *     desc   :
  * </pre>
  */
-class PagesVM(var pageList: List<Fragment>)
+class TabPagesVM(var pageList: List<Fragment>)

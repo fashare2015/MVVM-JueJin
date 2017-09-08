@@ -7,7 +7,7 @@
     <data>
         <variable
             name="pages"
-            type="com.fashare.mvvm_juejin.viewmodel.PagesVM"/>
+            type="com.fashare.mvvm_juejin.viewmodel.TabPagesVM"/>
 
         <variable
             name="tab"

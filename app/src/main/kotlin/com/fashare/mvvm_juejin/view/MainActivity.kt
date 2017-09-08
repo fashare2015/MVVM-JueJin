@@ -9,7 +9,7 @@ import com.fashare.mvvm_juejin.view.explore.ExploreFragment
 import com.fashare.mvvm_juejin.view.home.HomeFragment
 import com.fashare.mvvm_juejin.view.home.NotifyFragment
 import com.fashare.mvvm_juejin.view.home.ProfileFragment
-import com.fashare.mvvm_juejin.viewmodel.PagesVM
+import com.fashare.mvvm_juejin.viewmodel.TabPagesVM
 import com.fashare.mvvm_juejin.viewmodel.TabVM
 
 class MainActivity : BaseActivity() {
@@ -18,7 +18,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply{
-            this.pages = PagesVM(listOf(
+            this.pages = TabPagesVM(listOf(
                     HomeFragment(),
                     ExploreFragment(),
                     NotifyFragment(),

@@ -19,20 +19,16 @@ import com.fashare.mvvm_juejin.viewmodel.HomePagesVM
 </pre> *
  */
 class HomeFragment : BaseFragment(){
-    lateinit var binding: FragmentHomeBinding
+//    lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return DataBindingUtil.inflate<FragmentHomeBinding>(inflater, R.layout.fragment_home, container, false).apply {
-            binding = this
+//            binding = this
+            this.pages = HomePagesVM(listOf(
+                    ExploreFragment(),
+                    ProfileFragment()
+            ))
         }.root
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.pages = HomePagesVM(listOf(
-                ExploreFragment(),
-                ProfileFragment()
-        ))
-    }
 }

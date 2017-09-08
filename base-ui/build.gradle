@@ -10,4 +10,6 @@ dependencies {
     // If you want to bind to Android-specific lifecycles
     compile "com.trello.rxlifecycle2:rxlifecycle-android:$rootProject.ext.rxlifecycleVersion"
     compile "com.trello.rxlifecycle2:rxlifecycle-components:$rootProject.ext.rxlifecycleVersion"
+
+    compile "com.liaoinstan.springview:library:$rootProject.ext.springViewVersion"
 }
