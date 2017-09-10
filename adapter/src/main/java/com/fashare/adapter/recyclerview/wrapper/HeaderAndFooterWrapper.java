@@ -131,6 +131,15 @@ public class HeaderAndFooterWrapper<T> extends RecyclerView.Adapter<RecyclerView
         return position >= getHeadersCount() + getRealItemCount();
     }
 
+    public void removeHeaderViews()
+    {
+        mHeaderViews.clear();
+    }
+
+    public void removeFootView(View view)
+    {
+        mFootViews.clear();
+    }
 
     public void addHeaderView(View view)
     {

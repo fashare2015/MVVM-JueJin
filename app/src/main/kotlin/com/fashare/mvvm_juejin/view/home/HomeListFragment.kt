@@ -16,6 +16,7 @@ import com.fashare.mvvm_juejin.repo.JueJinApis
 import com.fashare.mvvm_juejin.viewmodel.HomeListVM
 import com.fashare.net.ApiFactory
 import com.google.gson.Gson
+import java.util.*
 
 /**
  * <pre>
@@ -36,11 +37,11 @@ class HomeListFragment : BaseFragment(){
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        loadData()
+        loadHeaderData()
         loadArticles()
     }
 
-    private fun loadData(){
+    private fun loadHeaderData(){
         ApiFactory.getApi(JueJinApis:: class.java)
                 .getEntryByHotRecomment(
                         "57bd25f4a34131005b211b84",
@@ -50,12 +51,11 @@ class HomeListFragment : BaseFragment(){
                         "android")
                 .compose(Composers.compose())
                 .subscribe({
-                    val list = it?.entry?.entrylist as Iterable<ArticleBean>
-                    Log.d("aaa", Gson().toJson(list))
+                    val list = it?.entry?.entrylist?: Collections.emptyList<ArticleBean>()
 
-                    binding.listVM.viewModels.apply{
+                    binding.listVM.headerViewModels.get(0).viewModels.apply{
                         this.clear()
-                        this.addAll(list)
+                        this.addAll(if(list.size<=3) list else list.subList(0, 3))
                     }
                 })
     }
@@ -72,7 +72,6 @@ class HomeListFragment : BaseFragment(){
                 .compose(Composers.compose())
                 .subscribe({
                     val list = it?.entrylist as Iterable<ArticleBean>
-                    Log.d("aaa", Gson().toJson(list))
 
                     binding.listVM.viewModels.apply{
                         this.clear()

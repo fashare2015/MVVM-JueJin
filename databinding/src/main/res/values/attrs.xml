@@ -22,10 +22,10 @@
     </declare-styleable>
 
     <declare-styleable name="RecyclerView">
-        <!--me.tatarka.bindingcollectionadapter.ItemView-->
-        <!--<attr name="itemView" format="reference"/>-->
+        <!--List<? extends me.tatarka.bindingcollectionadapter.ItemView>-->
+        <attr name="headerItemViews" format="reference"/>
         <!--List<?>-->
-        <!--<attr name="viewModels" format="reference" />-->
+        <attr name="headerViewModels" format="reference" />
         <!--com.fashare.adapter.OnItemClickListener<?>-->
         <!--<attr name="onItemClick" format="reference" />-->
     </declare-styleable>

@@ -23,7 +23,9 @@
             android:layout_height="match_parent"
             bind:layoutManager="@{LayoutManagers.linear()}"
             bind:itemView="@{listVM.itemView}"
-            bind:viewModels="@{listVM.viewModels}"/>
+            bind:viewModels="@{listVM.viewModels}"
+            bind:headerItemViews="@{listVM.headerItemViews}"
+            bind:headerViewModels="@{listVM.headerViewModels}"/>
     </LinearLayout>
 
 </layout>

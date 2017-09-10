@@ -14,6 +14,16 @@ import me.tatarka.bindingcollectionadapter.ItemView
 </pre> *
  */
 class HomeListVM{
-    var itemView = ItemView.of(BR.item, R.layout.item_home_list)
-    var viewModels = ObservableArrayList<ArticleBean>()
+    val itemView = ItemView.of(BR.item, R.layout.item_home_list)
+    val viewModels = ObservableArrayList<ArticleBean>()
+
+    val headerItemViews = listOf<ItemView>(
+            ItemView.of(BR.headerVM, R.layout.header_home)
+    )
+    val headerViewModels = listOf(HeaderVM())
+
+    class HeaderVM {
+        val itemView = ItemView.of(BR.item, R.layout.header_item_home)
+        val viewModels = ObservableArrayList<ArticleBean>()
+    }
 }
