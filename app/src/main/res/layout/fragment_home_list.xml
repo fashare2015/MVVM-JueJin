@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             bind:layoutManager="@{LayoutManagers.linear()}"
             bind:itemView="@{listVM.itemView}"
-            bind:items="@{listVM.viewModels}"/>
+            bind:viewModels="@{listVM.viewModels}"/>
     </LinearLayout>
 
 </layout>

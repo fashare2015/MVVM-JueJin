@@ -80,8 +80,8 @@ subprojects {
         if(enableDataBinding){
             kapt "com.android.databinding:compiler:$rootProject.ext.android_plugin_version"
 
-            compile 'me.tatarka.bindingcollectionadapter:bindingcollectionadapter:1.1.0'
-            compile 'me.tatarka.bindingcollectionadapter:bindingcollectionadapter-recyclerview:1.1.0'
+//            compile 'me.tatarka.bindingcollectionadapter:bindingcollectionadapter:1.1.0'
+//            compile 'me.tatarka.bindingcollectionadapter:bindingcollectionadapter-recyclerview:1.1.0'
         }
     }
 }

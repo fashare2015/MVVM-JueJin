@@ -20,4 +20,13 @@
         <attr name="fragments" format="reference"/>
         <attr name="curIndex" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="RecyclerView">
+        <!--me.tatarka.bindingcollectionadapter.ItemView-->
+        <!--<attr name="itemView" format="reference"/>-->
+        <!--List<?>-->
+        <!--<attr name="viewModels" format="reference" />-->
+        <!--com.fashare.adapter.OnItemClickListener<?>-->
+        <!--<attr name="onItemClick" format="reference" />-->
+    </declare-styleable>
 </resources>

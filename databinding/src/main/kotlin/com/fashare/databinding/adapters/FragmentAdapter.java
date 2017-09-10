@@ -35,9 +35,9 @@ public class FragmentAdapter {
         }
 
         if (fragments != null && !fragments.isEmpty()) {
-            boolean isInited = container.getTag(R.id.db_fragment_container_inited) != null;
+            boolean isInited = container.getTag(R.id.db_inited) != null;
             if(!isInited) {
-                container.setTag(R.id.db_fragment_container_inited, true);
+                container.setTag(R.id.db_inited, true);
                 // initialize, fragments are only added once !!!
                 for (Fragment fragment : fragments) {
                     String tag = fragment.toString();
@@ -70,9 +70,9 @@ public class FragmentAdapter {
         FragmentManager fm = ((FragmentActivity) container.getContext()).getSupportFragmentManager();
 
         if (fragments != null && !fragments.isEmpty()) {
-            boolean isInited = container.getTag(R.id.db_fragment_container_inited) != null;
+            boolean isInited = container.getTag(R.id.db_inited) != null;
             if(!isInited) {
-                container.setTag(R.id.db_fragment_container_inited, true);
+                container.setTag(R.id.db_inited, true);
                 // initialize, fragments are only added once !!!
                 container.setAdapter(new FragmentPagerAdapter(fm) {
                     @Override
