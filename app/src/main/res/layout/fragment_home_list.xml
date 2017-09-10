@@ -2,6 +2,7 @@
 
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sv="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -12,10 +13,12 @@
         <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
     </data>
 
-    <LinearLayout
+    <com.liaoinstan.springview.widget.SpringView
+        android:id="@+id/sv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+        <!--sv:header="@layout/g_ptr_header"-->
+        <!--sv:footer="@layout/g_ptr_footer">-->
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv"
@@ -26,7 +29,8 @@
             bind:viewModels="@{listVM.viewModels}"
             bind:headerItemViews="@{listVM.headerItemViews}"
             bind:headerViewModels="@{listVM.headerViewModels}"/>
-    </LinearLayout>
+
+    </com.liaoinstan.springview.widget.SpringView>
 
 </layout>
 
