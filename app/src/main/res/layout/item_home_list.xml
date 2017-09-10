@@ -6,14 +6,218 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="item" type="com.fashare.mvvm_juejin.model.HotRecomment.EntryBean.EntrylistBean"/>
+        <import type="android.view.View"/>
+        <import type="android.text.TextUtils"/>
+        <import type="com.fashare.mvvm_juejin.R"/>
+        <variable name="item" type="com.fashare.mvvm_juejin.model.article.ArticleBean"/>
     </data>
 
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@{item.title}"/>
+        android:layout_marginBottom="@dimen/home_article_padding"
+        android:orientation="vertical"
+        android:background="@color/home_article_bg">
+
+        <!--用户-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/home_article_padding"
+            android:paddingLeft="@dimen/home_article_padding"
+            android:paddingRight="@dimen/home_article_padding"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="centerCrop"
+                bind:uri="@{item.user.avatarLarge}"
+                bind:placeholder="@{R.mipmap.g_default_avatar}"
+                tools:src="@mipmap/ic_launcher"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{item.user.username}"
+                    android:textSize="14sp"
+                    android:textColor="@color/home_article_username"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    tools:text="用户"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text='@{(!TextUtils.isEmpty(item.user.jobTitle)? item.user.jobTitle+" ": "") + (!TextUtils.isEmpty(item.user.company)? "@"+item.user.company: "") + " " + item.updatedAt}'
+                    android:textSize="12sp"
+                    android:textColor="@color/home_article_user_company"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    tools:text="Android开发者"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--内容-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--类型: 投稿-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility='@{item.type.equals("post") || item.type.equals("vote")? View.VISIBLE: View.GONE}'
+                tools:background="@android:color/holo_red_light">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:layout_marginTop="@dimen/home_article_padding"
+                    tools:src="@mipmap/ic_launcher"
+                    android:scaleType="centerCrop"
+                    bind:uri="@{item.screenshot}"
+                    android:visibility="@{!TextUtils.isEmpty(item.screenshot)? View.VISIBLE: View.GONE}"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/home_article_padding"
+                    android:paddingLeft="@dimen/home_article_padding"
+                    android:paddingRight="@dimen/home_article_padding">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{item.title}"
+                        android:textSize="18sp"
+                        android:textColor="@color/home_article_title"
+                        android:textStyle="bold"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        tools:text="标题"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/home_article_padding"
+                        android:text="@{item.content}"
+                        android:textSize="14sp"
+                        android:textColor="@color/home_article_content"
+                        android:maxLines="3"
+                        android:ellipsize="end"
+                        tools:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--类型: 文章-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/home_article_padding"
+                android:paddingRight="@dimen/home_article_padding"
+                android:orientation="vertical"
+                android:visibility='@{item.type.equals("article")? View.VISIBLE: View.GONE}'
+                tools:background="@android:color/darker_gray">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/home_article_padding"
+                    android:text="@{item.content}"
+                    android:textSize="14sp"
+                    android:textColor="@color/home_article_title"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:visibility='@{!TextUtils.isEmpty(item.content!=null? item.content.trim(): "")? View.VISIBLE: View.GONE}'
+                    tools:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/home_article_padding"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@color/home_article_link_bg">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        bind:uri="@{item.screenshot}"
+                        bind:placeholder="@{R.mipmap.home_article_default_link_icon}"
+                        tools:src="@mipmap/ic_launcher"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/home_article_padding"
+                        android:text="@{item.title}"
+                        android:textSize="17sp"
+                        android:textColor="@color/home_article_title"
+                        android:textStyle="bold"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        tools:text="标题"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--收藏, 评论-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/home_article_padding"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:src="@mipmap/g_like_normal"
+                bind:placeholder="@{item.isCollected? R.mipmap.g_like: R.mipmap.g_like_normal}"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text='@{"" + item.collectionCount}'
+                android:textSize="14sp"
+                android:textColor="@color/home_article_user_company"
+                tools:text="20"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:src="@mipmap/g_comment"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text='@{"" + item.commentsCount}'
+                android:textSize="14sp"
+                android:textColor="@color/home_article_user_company"
+                tools:text="5"/>
+        </LinearLayout>
+
+    </LinearLayout>
 
 </layout>
 

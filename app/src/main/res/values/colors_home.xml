@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="home_article_bg">@android:color/white</color>
+    <color name="home_article_username">#47769B</color>
+    <color name="home_article_user_company">#D0D0D0</color>
+    <color name="home_article_title">@android:color/black</color>
+    <color name="home_article_content">#969696</color>
+
+    <color name="home_article_link_bg">#FAFAFA</color>
+
+</resources>

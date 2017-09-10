@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import com.fashare.imageloader.ImageLoader;
 
 public final class ImageViewAdapter {
-    @BindingAdapter(value = {"uri", "placeholder", "callback"}, requireAll = false)
+    @BindingAdapter(value = {"uri", "placeholder", "onImageLoad"}, requireAll = false)
     public static void loadImage(ImageView imageView, String uri, @DrawableRes int placeholder, ImageLoader.Callback callback){
         ImageLoader.INSTANCE.loadImage(imageView, uri, placeholder, callback);
     }

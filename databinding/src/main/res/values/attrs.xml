@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ImageView">
+        <attr name="uri" format="string"/>
+        <attr name="placeholder" format="reference|color" />
+        <!--ImageLoader.Callback-->
+        <attr name="onImageLoad" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="ViewGroup">
+        <!--me.tatarka.bindingcollectionadapter.ItemView-->
+        <attr name="itemView" format="reference"/>
+        <!--Object[] | List<?>-->
+        <attr name="viewModels" format="reference" />
+        <!--com.fashare.adapter.OnItemClickListener<?>-->
+        <attr name="onItemClick" format="reference" />
+
+        <!--                bind Fragment               -->
+        <!--List<? extends Fragment>-->
+        <attr name="fragments" format="reference"/>
+        <attr name="curIndex" format="integer" />
+    </declare-styleable>
+</resources>
