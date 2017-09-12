@@ -1,5 +1,7 @@
 package com.fashare.mvvm_juejin.model
 
+import com.fashare.mvvm_juejin.model.article.ArticleListBean
+
 /**
  * User: fashare(153614131@qq.com)
  * Date: 2017-09-06

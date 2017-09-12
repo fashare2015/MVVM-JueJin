@@ -1,6 +1,6 @@
 package com.fashare.mvvm_juejin.repo
 
-import com.fashare.mvvm_juejin.model.ArticleListBean
+import com.fashare.mvvm_juejin.model.article.ArticleListBean
 import com.fashare.mvvm_juejin.model.HotRecomment
 import com.fashare.mvvm_juejin.model.user.UserBean
 import com.fashare.net.ApiFactory

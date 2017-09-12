@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.fashare.base_ui.BaseFragment
 import com.fashare.mvvm_juejin.R
 import com.fashare.mvvm_juejin.databinding.FragmentHomeBinding
+import com.fashare.mvvm_juejin.view.profile.ProfileFragment
 import com.fashare.mvvm_juejin.viewmodel.HomePagesVM
 
 /**

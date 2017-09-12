@@ -7,8 +7,8 @@ import com.fashare.mvvm_juejin.R
 import com.fashare.mvvm_juejin.databinding.ActivityMainBinding
 import com.fashare.mvvm_juejin.view.explore.ExploreFragment
 import com.fashare.mvvm_juejin.view.home.HomeFragment
-import com.fashare.mvvm_juejin.view.home.NotifyFragment
-import com.fashare.mvvm_juejin.view.home.ProfileFragment
+import com.fashare.mvvm_juejin.view.notify.NotifyFragment
+import com.fashare.mvvm_juejin.view.profile.ProfileFragment
 import com.fashare.mvvm_juejin.viewmodel.TabPagesVM
 import com.fashare.mvvm_juejin.viewmodel.TabVM
 

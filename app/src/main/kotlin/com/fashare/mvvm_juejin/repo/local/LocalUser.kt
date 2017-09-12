@@ -2,7 +2,7 @@ package com.fashare.mvvm_juejin.repo.local
 
 import com.fashare.mvvm_juejin.JueJinApp
 import com.fashare.mvvm_juejin.model.user.UserBean
-import com.saike.library.util.PreferencesUtil
+import com.fashare.util.PreferencesUtil
 
 /**
  * Created by apple on 2017/9/12.

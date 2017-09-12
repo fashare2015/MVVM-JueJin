@@ -1,6 +1,4 @@
-package com.fashare.mvvm_juejin.model
-
-import com.fashare.mvvm_juejin.model.article.ArticleBean
+package com.fashare.mvvm_juejin.model.article
 
 /**
  * User: fashare(153614131@qq.com)

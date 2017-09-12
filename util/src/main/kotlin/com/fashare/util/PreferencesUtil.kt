@@ -1,4 +1,4 @@
-package com.saike.library.util
+package com.fashare.util
 
 import android.content.Context
 import android.content.SharedPreferences

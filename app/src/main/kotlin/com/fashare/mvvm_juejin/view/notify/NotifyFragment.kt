@@ -1,4 +1,4 @@
-package com.fashare.mvvm_juejin.view.home
+package com.fashare.mvvm_juejin.view.notify
 
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
