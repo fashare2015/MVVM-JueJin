@@ -63,5 +63,15 @@ interface JueJinApis {
         )
         @POST("/v1/login")
         fun login(@FieldMap param: Map<String, String>): Observable<Response<UserBean.TokenBean>>
+
+        @ApiFactory.BaseUrl("https://user-storage-api-ms.juejin.im")
+        interface Storage{
+            @POST("v1/getUserInfo")
+            fun getUserInfo(@Query("uid") uid: String,
+                            @Query("current_uid") current_uid: String,
+                            @Query("token") token: String,
+                            @Query("device_id") device_id: String,
+                            @Query("src") src: String): Observable<Response<UserBean>>
+        }
     }
 }

@@ -43,6 +43,7 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    bind:uri="@{profileVM.user != null? profileVM.user.avatarLarge: null}"
                     bind:placeholder="@{R.mipmap.g_default_avatar}"
                     tools:src="@mipmap/g_default_avatar"/>
 
@@ -56,7 +57,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text='@{profileVM.userToken!=null? profileVM.userToken: "登录/注册"}'
+                        android:text='@{profileVM.user != null? profileVM.user.username: "登录/注册"}'
                         android:textSize="20sp"
                         android:textColor="@color/profile_title"/>
 
@@ -64,7 +65,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="添加职位 @ 添加公司"
+                        android:text='@{profileVM.parseJobAndCompany(profileVM.user)}'
                         android:textSize="13sp"
                         android:textColor="@color/profile_content"/>
 

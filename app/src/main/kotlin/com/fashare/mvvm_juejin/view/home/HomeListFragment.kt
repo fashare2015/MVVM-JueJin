@@ -11,6 +11,7 @@ import com.fashare.mvvm_juejin.databinding.FragmentHomeListBinding
 import com.fashare.mvvm_juejin.model.article.ArticleBean
 import com.fashare.mvvm_juejin.repo.Composers
 import com.fashare.mvvm_juejin.repo.JueJinApis
+import com.fashare.mvvm_juejin.repo.local.LocalUser
 import com.fashare.mvvm_juejin.viewmodel.HomeListVM
 import com.fashare.net.ApiFactory
 import com.liaoinstan.springview.container.DefaultFooter
@@ -62,7 +63,7 @@ class HomeListFragment : BaseFragment(){
                 .getEntryByHotRecomment(
                         "57bd25f4a34131005b211b84",
                         "20",
-                        "eyJhY2Nlc3NfdG9rZW4iOiIyeFVONlB4VDF0SWxxTWhMIiwicmVmcmVzaF90b2tlbiI6InFqR0R0Q3h6dGxqYVZUQ2MiLCJ0b2tlbl90eXBlIjoibWFjIiwiZXhwaXJlX2luIjoyNTkyMDAwfQ==",
+                        LocalUser.userToken?.token?: "",
                         "b9ae8b6a-efe0-4944-b574-b01a3a1303ee",
                         "android")
                 .compose(Composers.compose())
@@ -85,7 +86,7 @@ class HomeListFragment : BaseFragment(){
                         "57bd25f4a34131005b211b84",
                         before,
                         "20",
-                        "eyJhY2Nlc3NfdG9rZW4iOiIyeFVONlB4VDF0SWxxTWhMIiwicmVmcmVzaF90b2tlbiI6InFqR0R0Q3h6dGxqYVZUQ2MiLCJ0b2tlbl90eXBlIjoibWFjIiwiZXhwaXJlX2luIjoyNTkyMDAwfQ==",
+                        LocalUser.userToken?.token?: "",
                         "b9ae8b6a-efe0-4944-b574-b01a3a1303ee",
                         "android")
                 .compose(Composers.compose())

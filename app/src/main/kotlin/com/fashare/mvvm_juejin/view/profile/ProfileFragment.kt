@@ -9,8 +9,11 @@ import android.view.ViewGroup
 import com.fashare.base_ui.BaseFragment
 import com.fashare.mvvm_juejin.R
 import com.fashare.mvvm_juejin.databinding.FragmentProfileBinding
+import com.fashare.mvvm_juejin.repo.Composers
+import com.fashare.mvvm_juejin.repo.JueJinApis
 import com.fashare.mvvm_juejin.repo.local.LocalUser
 import com.fashare.mvvm_juejin.viewmodel.ProfileVM
+import com.fashare.net.ApiFactory
 
 /**
  * <pre>
@@ -30,6 +33,18 @@ class ProfileFragment : BaseFragment(){
 
     override fun onResume() {
         super.onResume()
-        binding.profileVM.userToken.set(LocalUser.userToken?.token?: null)
+        LocalUser.userToken?.apply{
+            val device_id = "b9ae8b6a-efe0-4944-b574-b01a3a1303ee"
+            ApiFactory.getApi(JueJinApis.User.Storage::class.java)
+                    .getUserInfo(this.user_id?:"",
+                            this.user_id?:"",
+                            this.token?:"",
+                            device_id,
+                            "android")
+                    .compose(Composers.compose())
+                    .subscribe({
+                        binding.profileVM.user.set(it)
+                    }, {})
+        }
     }
 }
