@@ -2,15 +2,17 @@ package com.fashare.mvvm_juejin.repo
 
 import com.fashare.mvvm_juejin.model.ArticleListBean
 import com.fashare.mvvm_juejin.model.HotRecomment
+import com.fashare.mvvm_juejin.model.user.UserBean
 import com.fashare.net.ApiFactory
 import io.reactivex.Observable
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
 /**
  * Created by apple on 2017/9/6.
  */
-@ApiFactory.BaseUrl("https://timeline-merger-ms.juejin.im/")
+const val BASE_URL = "https://timeline-merger-ms.juejin.im/"
+
+@ApiFactory.BaseUrl(BASE_URL)
 interface JueJinApis {
     // 热门推荐
     @GET("/v1/get_entry_by_hot_recomment")
@@ -28,4 +30,38 @@ interface JueJinApis {
                        @Query("token") token: String,
                        @Query("device_id") device_id: String,
                        @Query("src") src: String): Observable<Response<ArticleListBean>>
+
+    @ApiFactory.BaseUrl("https://auth-center-ms.juejin.im")
+    interface User{
+        class LoginParam{
+            var login_type = "tel"
+            var user = ""
+            var psd = ""
+            var client_id = "b9ae8b6a-efe0-4944-b574-b01a3a1303ee"
+            var state = "nOOKnTFSCE"
+            var src = "android"
+
+            fun toMap(): Map<String, String>{
+                return mapOf(
+                        "login_type" to login_type,
+                        "user" to user,
+                        "psd" to psd,
+                        "client_id" to client_id,
+                        "state" to state,
+                        "src" to src
+                )
+//                return (Gson().toJsonTree(this) as JsonObject).let{
+//                    JsonObject:: class.java.getField("members").get(it) as Map<String, *>
+//                }
+            }
+        }
+
+        @FormUrlEncoded
+        @Headers(
+//            "Content-Type: application/x-www-form-urlencoded",
+            "X-Juejin-Src:android"
+        )
+        @POST("/v1/login")
+        fun login(@FieldMap param: Map<String, String>): Observable<Response<UserBean.TokenBean>>
+    }
 }

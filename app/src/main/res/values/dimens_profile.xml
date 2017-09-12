@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="profile_margin">12dp</dimen>
+    <dimen name="profile_padding">20dp</dimen>
+</resources>

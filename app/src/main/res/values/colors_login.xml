@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="login_form_bg">@android:color/white</color>
+    <color name="login_form_text">@android:color/black</color>
+    <color name="login_text_default">@android:color/white</color>
+    <color name="login_text_light">#99ffffff</color>
+
+</resources>

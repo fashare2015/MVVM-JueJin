@@ -2,23 +2,84 @@
 
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="tab"
-            type="com.fashare.mvvm_juejin.viewmodel.TabVM"/>
+        <import type="com.fashare.mvvm_juejin.R"/>
+
+        <variable name="profileVM" type="com.fashare.mvvm_juejin.viewmodel.ProfileVM"/>
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/g_bg">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="profile"/>
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:background="@color/colorPrimary"
+            android:text="我"
+            android:textSize="15sp"
+            android:textColor="@android:color/white"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/profile_margin"
+                android:padding="@dimen/profile_padding"
+                android:background="@color/profile_item_bg"
+                android:onClick="@{profileVM.toLogin}">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    bind:placeholder="@{R.mipmap.g_default_avatar}"
+                    tools:src="@mipmap/g_default_avatar"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/profile_padding">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="登录/注册"
+                        android:textSize="20sp"
+                        android:textColor="@color/profile_title"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="添加职位 @ 添加公司"
+                        android:textSize="13sp"
+                        android:textColor="@color/profile_content"/>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="25dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/profile_move"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
     </LinearLayout>
 
 </layout>

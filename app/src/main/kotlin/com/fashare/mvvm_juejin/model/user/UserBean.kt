@@ -66,4 +66,10 @@ class UserBean {
             var expires_at: String? = null
         }
     }
+
+    class TokenBean{
+        var token: String? = null
+        var user_id: String? = null
+        var state: String? = null
+    }
 }

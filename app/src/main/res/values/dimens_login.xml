@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="login_margin">20dp</dimen>
+    <dimen name="login_edit_padding">14dp</dimen>
+    <dimen name="login_btn_padding">14dp</dimen>
+</resources>

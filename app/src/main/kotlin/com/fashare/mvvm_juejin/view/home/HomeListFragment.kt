@@ -2,8 +2,6 @@ package com.fashare.mvvm_juejin.view.home
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.widget.SwipeRefreshLayout
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -76,6 +74,8 @@ class HomeListFragment : BaseFragment(){
                         this.clear()
                         this.addAll(if(list.size<=3) list else list.subList(0, 3))
                     }
+                }, {
+
                 })
     }
 
@@ -98,6 +98,8 @@ class HomeListFragment : BaseFragment(){
                             this.clear()
                         this.addAll(list)
                     }
+                }, {
+
                 })
     }
 

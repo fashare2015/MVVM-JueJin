@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable name="loginVM" type="com.fashare.mvvm_juejin.viewmodel.LoginVM"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/login_margin"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/login_margin"
+            android:src="@mipmap/login_logo"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/login_margin"
+            android:background="@color/login_form_bg">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/login_edit_padding"
+                android:hint="手机号/邮箱"
+                android:text="@{loginVM.userName}"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/login_edit_padding"
+                android:inputType="textPassword"
+                android:hint="密码"
+                android:text="@{loginVM.passWord}"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:padding="@dimen/login_btn_padding"
+            android:gravity="center"
+            android:background="@android:color/holo_blue_dark"
+            android:text="登录"
+            android:textColor="@color/login_text_default"
+            android:textSize="16sp"
+            android:onClick="@{loginVM.doLogin}"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="忘记密码?"
+                android:textColor="@color/login_text_light"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="注册账号"
+                android:textColor="@color/login_text_default"
+                android:textSize="13sp"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>
+
