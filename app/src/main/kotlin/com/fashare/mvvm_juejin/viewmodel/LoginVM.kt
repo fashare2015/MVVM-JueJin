@@ -5,6 +5,7 @@ import android.databinding.ObservableField
 import android.view.View
 import com.fashare.mvvm_juejin.repo.Composers
 import com.fashare.mvvm_juejin.repo.JueJinApis
+import com.fashare.mvvm_juejin.repo.local.LocalUser
 import com.fashare.net.ApiFactory
 
 /**
@@ -26,6 +27,7 @@ class LoginVM(){
                 }.toMap())
                 .compose(Composers.compose())
                 .subscribe({
+                    LocalUser.userToken = it
                     (view.context as Activity).finish()
                 }, {})
     }

@@ -1,1 +1,1 @@
-include ':app', ':net', ':databinding', ':adapter', ':imageloader', ':base-ui'
+include ':app', ':net', ':databinding', ':adapter', ':imageloader', ':base-ui', ':util'

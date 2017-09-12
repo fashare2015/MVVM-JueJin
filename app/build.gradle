@@ -7,6 +7,7 @@ dependencies {
     compile project(":adapter")
     compile project(":databinding")
     compile project(":base-ui")
+    compile project(":util")
 
     /******* support 包 ****************************************************************************/
     compile "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion"

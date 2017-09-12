@@ -28,6 +28,7 @@ project.ext{
     okhttp3Version = "3.8.0"
     retrofitVersion = "2.3.0"
     retrofit2rxjava2Version = "1.0.0"
+    gsonVersion = "2.7"
     klogVersion = "1.6.0"
 
     leakcanaryVersion = "1.5.1"

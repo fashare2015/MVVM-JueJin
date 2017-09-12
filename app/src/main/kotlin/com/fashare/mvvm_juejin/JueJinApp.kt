@@ -1,6 +1,7 @@
 package com.fashare.mvvm_juejin
 
 import android.app.Application
+import android.content.Context
 
 /**
  * <pre>
@@ -9,9 +10,13 @@ import android.app.Application
  *     desc   :
  * </pre>
  */
-class JueJinApp: Application(){
+class JueJinApp: Application() {
+    companion object {
+        lateinit var instance: Context
+    }
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
     }
 }
