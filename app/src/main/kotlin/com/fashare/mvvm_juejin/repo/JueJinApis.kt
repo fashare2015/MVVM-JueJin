@@ -1,7 +1,8 @@
 package com.fashare.mvvm_juejin.repo
 
-import com.fashare.mvvm_juejin.model.article.ArticleListBean
+import com.fashare.mvvm_juejin.model.BannerListBean
 import com.fashare.mvvm_juejin.model.HotRecomment
+import com.fashare.mvvm_juejin.model.article.ArticleListBean
 import com.fashare.mvvm_juejin.model.user.UserBean
 import com.fashare.net.ApiFactory
 import io.reactivex.Observable
@@ -24,12 +25,14 @@ interface JueJinApis {
 
     // 文章列表
     @GET("/v1/get_entry_by_timeline")
-    fun getEntryByTimeLine(@Query("uid") uid: String,
-                       @Query("before") before: String,
-                       @Query("limit") limit: String,
-                       @Query("token") token: String,
-                       @Query("device_id") device_id: String,
-                       @Query("src") src: String): Observable<Response<ArticleListBean>>
+    fun getEntryByTimeLine(@Query("category") category: String,
+                           @Query("type") type: String,
+                           @Query("uid") uid: String,
+                           @Query("before") before: String,
+                           @Query("limit") limit: String,
+                           @Query("token") token: String,
+                           @Query("device_id") device_id: String,
+                           @Query("src") src: String): Observable<Response<ArticleListBean>>
 
     @ApiFactory.BaseUrl("https://auth-center-ms.juejin.im")
     interface User{
@@ -73,5 +76,17 @@ interface JueJinApis {
                             @Query("device_id") device_id: String,
                             @Query("src") src: String): Observable<Response<UserBean>>
         }
+    }
+
+    @ApiFactory.BaseUrl("https://banner-storage-ms.juejin.im")
+    interface BannerStorage{
+        @GET("v1/get_banner")
+        fun getBanner(@Query("position") position: String,
+                      @Query("page") page: Int,
+                      @Query("pageSize") pageSize: Int,
+                      @Query("platform") platform: String,
+                      @Query("token") token: String,
+                      @Query("device_id") device_id: String,
+                      @Query("src") src: String): Observable<Response<BannerListBean>>
     }
 }

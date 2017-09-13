@@ -34,6 +34,13 @@ public class LayoutManagers {
     }
 
     /**
+     * A {@link LinearLayoutManager}.
+     */
+    public static LayoutManagerFactory linearHorizontal() {
+        return linear(LinearLayoutManager.HORIZONTAL, false);
+    }
+
+    /**
      * A {@link LinearLayoutManager} with the given orientation and reverseLayout.
      */
     public static LayoutManagerFactory linear(@Orientation final int orientation, final boolean reverseLayout) {

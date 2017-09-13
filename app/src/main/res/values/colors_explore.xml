@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="explore_item_bg">@android:color/white</color>
+    <color name="explore_title">@android:color/black</color>
+    <color name="explore_content">#969696</color>
+
+</resources>

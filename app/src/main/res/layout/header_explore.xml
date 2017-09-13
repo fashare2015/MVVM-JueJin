@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+
+        <variable name="headerVM" type="com.fashare.mvvm_juejin.viewmodel.ExploreListVM.HeaderVM"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <android.support.v4.view.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            bind:itemView="@{headerVM.itemView}"
+            bind:viewModels="@{headerVM.viewModels}"/>
+            <!--bind:curIndex="@{0}"/>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/explore_item_bg"
+            bind:itemView="@{headerVM.itemViewEntry}"
+            bind:viewModels="@{headerVM.entrys}"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/explore_margin"
+            android:orientation="vertical"
+            android:background="@color/explore_item_bg">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/explore_margin"
+                android:drawableLeft="@mipmap/explore_feidian_small"
+                android:drawableRight="@mipmap/g_move"
+                android:drawablePadding="5dp"
+                android:text="沸点"
+                android:textColor="@color/explore_title"/>
+            
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                bind:layoutManager="@{LayoutManagers.linearHorizontal()}"
+                bind:itemView="@{headerVM.itemViewTopic}"
+                bind:viewModels="@{headerVM.topics}"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</layout>
+

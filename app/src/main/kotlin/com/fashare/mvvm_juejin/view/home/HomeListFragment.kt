@@ -82,7 +82,7 @@ class HomeListFragment : BaseFragment(){
 
     private fun loadArticles(isClear: Boolean, before: String) {
         ApiFactory.getApi(JueJinApis:: class.java)
-                .getEntryByTimeLine(
+                .getEntryByTimeLine("", "",
                         "57bd25f4a34131005b211b84",
                         before,
                         "20",
