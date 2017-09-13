@@ -23,10 +23,15 @@
             tools:src="@mipmap/ic_launcher"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{item.content}"
-            android:textSize="14sp"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/explore_shade"
+            android:padding="@dimen/explore_margin"
+            android:gravity="center"
+            android:text="@{item.title}"
+            android:textSize="15sp"
+            android:textColor="@color/explore_topic"
+            tools:text="话题1"/>
 
     </RelativeLayout>
 

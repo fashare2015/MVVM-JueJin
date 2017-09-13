@@ -5,7 +5,6 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable name="listVM" type="com.fashare.mvvm_juejin.viewmodel.ExploreListVM"/>
 
         <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
@@ -14,7 +13,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/g_bg">
 
         <android.support.v7.widget.SearchView
             android:layout_width="match_parent"

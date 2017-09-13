@@ -53,7 +53,6 @@ class ExploreFragment : BaseFragment(){
                     }
                 }, {})
 
-
         ApiFactory.getApi(JueJinApis::class.java)
                 .getEntryByTimeLine("all",
                         "vote",
@@ -75,5 +74,29 @@ class ExploreFragment : BaseFragment(){
 
                 })
 
+        loadHotArticles(true, "")
+    }
+
+    private fun loadHotArticles(isClear: Boolean, before: String) {
+        ApiFactory.getApi(JueJinApis:: class.java)
+                .getEntryByRank(LocalUser.userToken?.user_id?:"unlogin",
+                        before,
+                        "20",
+                        LocalUser.userToken?.token?: "",
+                        "b9ae8b6a-efe0-4944-b574-b01a3a1303ee",
+                        "android")
+                .compose(Composers.compose())
+                .subscribe({
+//                    sv.onFinishFreshAndLoad()
+                    val list = it?.entrylist as Iterable<ArticleBean>
+
+                    binding.listVM.viewModels.apply{
+                        if(isClear)
+                            this.clear()
+                        this.addAll(list)
+                    }
+                }, {
+
+                })
     }
 }

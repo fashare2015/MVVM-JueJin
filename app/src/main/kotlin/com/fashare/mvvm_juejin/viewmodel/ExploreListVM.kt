@@ -17,9 +17,7 @@ import me.tatarka.bindingcollectionadapter.ItemView
  */
 class ExploreListVM{
     val itemView = ItemView.of(BR.item, R.layout.item_explore_list)
-    val viewModels = ObservableArrayList<ArticleBean>().apply{
-        this.add(ArticleBean())
-    }
+    val viewModels = ObservableArrayList<ArticleBean>()
 
     val headerItemViews = listOf<ItemView>(
             ItemView.of(BR.headerVM, R.layout.header_explore)

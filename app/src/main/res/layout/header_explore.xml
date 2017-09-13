@@ -58,6 +58,34 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/explore_margin"
+            android:background="@color/explore_item_bg">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/explore_margin"
+                android:drawableLeft="@mipmap/explore_hot_small"
+                android:drawablePadding="5dp"
+                android:text="热门文章"
+                android:textColor="@color/explore_title"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/explore_margin"
+                android:drawableLeft="@mipmap/explore_tag_settings"
+                android:drawablePadding="5dp"
+                android:text="订制热门"
+                android:textColor="@color/explore_content"/>
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

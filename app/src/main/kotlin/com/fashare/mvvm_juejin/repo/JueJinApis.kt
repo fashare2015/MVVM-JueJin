@@ -34,6 +34,15 @@ interface JueJinApis {
                            @Query("device_id") device_id: String,
                            @Query("src") src: String): Observable<Response<ArticleListBean>>
 
+    // 发现 - 热门文章列表
+    @GET("/v1/get_entry_by_rank")
+    fun getEntryByRank(@Query("uid") uid: String,
+                       @Query("before") before: String,
+                       @Query("limit") limit: String,
+                       @Query("token") token: String,
+                       @Query("device_id") device_id: String,
+                       @Query("src") src: String): Observable<Response<ArticleListBean>>
+
     @ApiFactory.BaseUrl("https://auth-center-ms.juejin.im")
     interface User{
         class LoginParam{
@@ -78,6 +87,7 @@ interface JueJinApis {
         }
     }
 
+    // 发现 - banner
     @ApiFactory.BaseUrl("https://banner-storage-ms.juejin.im")
     interface BannerStorage{
         @GET("v1/get_banner")
