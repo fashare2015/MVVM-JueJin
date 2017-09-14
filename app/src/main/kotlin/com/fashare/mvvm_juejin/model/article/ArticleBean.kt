@@ -34,7 +34,8 @@ import com.fashare.mvvm_juejin.model.user.UserBean
 /**
  * 文章
  */
-class ArticleBean {
+data class ArticleBean(var content: String? = null,
+                        var title: String? = null) {
     var collectionCount: Int = 0
     var commentsCount: Int = 0
     var gfw: Boolean = false
@@ -81,8 +82,7 @@ class ArticleBean {
     var screenshot: String? = null
     var original: Boolean = false
     var hotIndex: Double = 0.toDouble()
-    var content: String? = null
-    var title: String? = null
+
     var lastCommentTime: String? = null
     var type: String? = null
     var english: Boolean = false

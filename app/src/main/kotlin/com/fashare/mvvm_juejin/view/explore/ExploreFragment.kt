@@ -15,6 +15,10 @@ import com.fashare.mvvm_juejin.repo.JueJinApis
 import com.fashare.mvvm_juejin.repo.local.LocalUser
 import com.fashare.mvvm_juejin.viewmodel.ExploreListVM
 import com.fashare.net.ApiFactory
+import com.liaoinstan.springview.container.DefaultFooter
+import com.liaoinstan.springview.container.DefaultHeader
+import com.liaoinstan.springview.widget.SpringView
+import kotlinx.android.synthetic.main.fragment_home_list.*
 import java.util.*
 
 /**
@@ -25,7 +29,7 @@ import java.util.*
 </pre> *
  */
 class ExploreFragment : BaseFragment(){
-
+    private val IS_CLEAR = true
     lateinit var binding: FragmentExploreBinding
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -38,6 +42,29 @@ class ExploreFragment : BaseFragment(){
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        loadAll()
+
+        sv.header = DefaultHeader(context)
+        sv.footer = DefaultFooter(context)
+        sv.setListener(object : SpringView.OnFreshListener{
+            override fun onRefresh() {
+                loadAll()
+            }
+
+            override fun onLoadmore() {
+                val list: List<ArticleBean> = binding.listVM.viewModels
+                loadHotArticles(!IS_CLEAR, list[list.size-1].rankIndex.toString())
+            }
+        })
+    }
+
+    fun loadAll(){
+        loadHeaderBanner()
+        loadHeaderTopic()
+        loadHotArticles(IS_CLEAR, "")
+    }
+
+    fun loadHeaderBanner(){
         ApiFactory.getApi(JueJinApis.BannerStorage::class.java)
                 .getBanner("explore", 0, 20, "android",
                         LocalUser.userToken?.token?: "",
@@ -52,7 +79,9 @@ class ExploreFragment : BaseFragment(){
                         this.addAll(list)
                     }
                 }, {})
+    }
 
+    fun loadHeaderTopic(){
         ApiFactory.getApi(JueJinApis::class.java)
                 .getEntryByTimeLine("all",
                         "vote",
@@ -73,8 +102,6 @@ class ExploreFragment : BaseFragment(){
                 }, {
 
                 })
-
-        loadHotArticles(true, "")
     }
 
     private fun loadHotArticles(isClear: Boolean, before: String) {
@@ -87,13 +114,13 @@ class ExploreFragment : BaseFragment(){
                         "android")
                 .compose(Composers.compose())
                 .subscribe({
-//                    sv.onFinishFreshAndLoad()
+                    sv.onFinishFreshAndLoad()
                     val list = it?.entrylist as Iterable<ArticleBean>
 
                     binding.listVM.viewModels.apply{
                         if(isClear)
                             this.clear()
-                        this.addAll(list)
+                        this.addAll(list.filter{ !this.contains(it) })  // 去重
                     }
                 }, {
 
