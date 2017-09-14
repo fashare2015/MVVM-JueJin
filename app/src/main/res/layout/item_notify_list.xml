@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="com.fashare.mvvm_juejin.R"/>
+        <import type="com.fashare.mvvm_juejin.viewmodel.NotifyListVM"/>
+
+        <variable name="item" type="com.fashare.mvvm_juejin.model.notify.NotifyBean"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/notify_margin"
+        android:paddingLeft="@dimen/notify_margin"
+        android:paddingRight="@dimen/notify_margin"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/home_article_bg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="@dimen/notify_margin"
+                android:scaleType="centerCrop"
+                bind:placeholder="@{R.mipmap.g_default_avatar}"
+                bind:uri="@{item.parseUserAvatar()}"
+                tools:src="@mipmap/g_default_avatar"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/notify_margin"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{item.parseTitle()}"
+                        android:textSize="15sp"
+                        android:textColor="@color/notify_title"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        tools:text="用户A评论了你的文章"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/notify_margin"
+                        android:text='@{item.parseContent()}'
+                        android:textSize="14sp"
+                        android:textColor="@color/notify_title"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        tools:text="评论。。。"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/notify_margin"
+                        android:text='@{item.createdAtString}'
+                        android:textSize="12sp"
+                        android:textColor="@color/notify_content"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        tools:text="1天前 "/>
+
+                </LinearLayout>
+
+                <include layout="@layout/g_line_horizontal"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
+

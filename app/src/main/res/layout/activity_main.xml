@@ -31,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
+            android:background="@color/g_item_bg"
             bind:itemView="@{tab.itemView}"
             bind:viewModels="@{tab.viewModels}"
             bind:onItemClick="@{tab.onItemClick}"/>

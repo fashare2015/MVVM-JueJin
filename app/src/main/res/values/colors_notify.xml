@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="notify_item_bg">@android:color/white</color>
+    <color name="notify_title">@android:color/black</color>
+    <color name="notify_content">#969696</color>
+    <color name="notify_topic">@android:color/white</color>
+
+</resources>

@@ -108,7 +108,7 @@ class ExploreFragment : BaseFragment(){
         ApiFactory.getApi(JueJinApis:: class.java)
                 .getEntryByRank(LocalUser.userToken?.user_id?:"unlogin",
                         before,
-                        "20",
+                        "30",
                         LocalUser.userToken?.token?: "",
                         "b9ae8b6a-efe0-4944-b574-b01a3a1303ee",
                         "android")

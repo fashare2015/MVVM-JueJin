@@ -5,9 +5,9 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-            name="tab"
-            type="com.fashare.mvvm_juejin.viewmodel.TabVM"/>
+        <variable name="listVM" type="com.fashare.mvvm_juejin.viewmodel.NotifyListVM"/>
+
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
     </data>
 
     <LinearLayout
@@ -18,8 +18,30 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="notify"/>
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:background="@color/colorPrimary"
+            android:text="消息"
+            android:textSize="15sp"
+            android:textColor="@android:color/white"/>
+
+        <com.liaoinstan.springview.widget.SpringView
+            android:id="@+id/sv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <!--sv:header="@layout/g_ptr_header"-->
+            <!--sv:footer="@layout/g_ptr_footer">-->
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                bind:layoutManager="@{LayoutManagers.linear()}"
+                bind:itemView="@{listVM.itemView}"
+                bind:viewModels="@{listVM.viewModels}"
+                bind:headerItemViews="@{listVM.headerItemViews}"
+                bind:headerViewModels="@{listVM.headerViewModels}"/>
+
+        </com.liaoinstan.springview.widget.SpringView>
     </LinearLayout>
 
 </layout>

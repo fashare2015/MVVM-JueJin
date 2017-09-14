@@ -9,17 +9,20 @@
         <variable name="tabItem" type="com.fashare.mvvm_juejin.viewmodel.TabVM.Item"/>
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center">
+        android:layout_weight="1">
+
+        <include layout="@layout/g_line_horizontal"/>
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            bind:placeholder="@{tabItem.isSelected? tabItem.iconResSelected: tabItem.iconResNormal}"/>
-    </LinearLayout>
+            android:layout_centerInParent="true"
+            bind:placeholder="@{tabItem.isSelected? tabItem.iconResSelected: tabItem.iconResNormal}"
+            android:src="@mipmap/tab_home"/>
+    </RelativeLayout>
 
 </layout>
 

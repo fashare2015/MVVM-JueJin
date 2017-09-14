@@ -60,6 +60,9 @@
             android:orientation="vertical"
             bind:itemView="@{headerVM.itemView}"
             bind:viewModels="@{headerVM.viewModels}"/>
+
+        <include layout="@layout/g_line_horizontal"/>
+
     </LinearLayout>
 
 </layout>
