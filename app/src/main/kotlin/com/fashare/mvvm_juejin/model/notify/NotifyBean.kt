@@ -154,9 +154,9 @@ class NotifyBean {
                     when(it){
                         NotifyBean.Types.COLLECTION.type    -> "喜欢了"
                         NotifyBean.Types.COMMENT.type       -> {
-                            if(data.reply != null)
+                            if(data.reply?.id != null)
                                 "回复了"
-                            else if(data.comment != null)
+                            else if(data.comment?.id != null)
                                 "评论了"
                             else
                                 "喜欢了"
@@ -174,9 +174,9 @@ class NotifyBean {
             when(it){
                 NotifyBean.Types.COLLECTION.type    -> ""
                 NotifyBean.Types.COMMENT.type       -> {
-                    if(data.reply != null)          // 回复
+                    if(data.reply?.id != null)          // 回复
                         data.reply?.content?: ""
-                    else if(data.comment != null)   // 评论
+                    else if(data.comment?.id != null)   // 评论
                         data.comment?.content?: ""
                     else
                         ""

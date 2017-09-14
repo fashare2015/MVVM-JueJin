@@ -32,6 +32,8 @@
             bind:itemView="@{headerVM.itemViewEntry}"
             bind:viewModels="@{headerVM.entrys}"/>
 
+        <include layout="@layout/g_line_horizontal"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,6 +50,8 @@
                 android:drawablePadding="5dp"
                 android:text="沸点"
                 android:textColor="@color/explore_title"/>
+
+            <include layout="@layout/g_line_horizontal"/>
             
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
@@ -55,6 +59,8 @@
                 bind:layoutManager="@{LayoutManagers.linearHorizontal()}"
                 bind:itemView="@{headerVM.itemViewTopic}"
                 bind:viewModels="@{headerVM.topics}"/>
+
+            <include layout="@layout/g_line_horizontal"/>
 
         </LinearLayout>
 
@@ -86,6 +92,7 @@
 
         </LinearLayout>
 
+        <include layout="@layout/g_line_horizontal"/>
 
     </LinearLayout>
 

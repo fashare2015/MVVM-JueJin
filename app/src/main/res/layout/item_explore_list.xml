@@ -14,9 +14,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginBottom="@dimen/explore_margin"
-        android:padding="@dimen/explore_margin"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
         android:background="@color/home_article_bg">
@@ -24,7 +22,8 @@
         <!--内容-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
+            android:padding="@dimen/explore_margin"
             android:orientation="vertical">
 
             <!--类型: 投稿-->
@@ -74,6 +73,8 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <include layout="@layout/g_line_horizontal"/>
 
     </LinearLayout>
 

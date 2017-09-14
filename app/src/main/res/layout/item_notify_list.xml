@@ -64,7 +64,7 @@
                         android:text='@{item.parseContent()}'
                         android:textSize="14sp"
                         android:textColor="@color/notify_title"
-                        android:maxLines="1"
+                        android:maxLines="2"
                         android:ellipsize="end"
                         tools:text="评论。。。"/>
 

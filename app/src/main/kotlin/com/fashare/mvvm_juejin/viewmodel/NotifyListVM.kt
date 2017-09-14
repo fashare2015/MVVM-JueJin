@@ -26,7 +26,4 @@ class NotifyListVM{
 
     }
 
-    companion object{
-
-    }
 }
