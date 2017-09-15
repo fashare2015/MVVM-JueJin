@@ -3,4 +3,11 @@ apply plugin: 'com.android.library'
 dependencies {
     compile project(":imageloader")
     compile project(":adapter")
+
+    /******* support 包 ****************************************************************************/
+    compile "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:recyclerview-v7:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:design:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:cardview-v7:$rootProject.ext.supportLibraryVersion"
 }

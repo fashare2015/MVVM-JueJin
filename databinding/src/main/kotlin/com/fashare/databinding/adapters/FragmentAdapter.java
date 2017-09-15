@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,11 +71,10 @@ public class FragmentAdapter {
         FragmentManager fm = ((FragmentActivity) container.getContext()).getSupportFragmentManager();
 
         if (fragments != null && !fragments.isEmpty()) {
-            boolean isInited = container.getTag(R.id.db_inited) != null;
-            if(!isInited) {
-                container.setTag(R.id.db_inited, true);
+            PagerAdapter adapter = container.getAdapter();
+            if(adapter == null) {
                 // initialize, fragments are only added once !!!
-                container.setAdapter(new FragmentPagerAdapter(fm) {
+                container.setAdapter(adapter = new FragmentPagerAdapter(fm) {
                     @Override
                     public Fragment getItem(int position) {
                         return fragments.get(position);
@@ -86,6 +86,8 @@ public class FragmentAdapter {
                     }
                 });
             }
+
+            adapter.notifyDataSetChanged();
 
             if(curIndex >= 0 && curIndex < fragments.size())
                 container.setCurrentItem(curIndex);

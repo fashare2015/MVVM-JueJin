@@ -29,4 +29,9 @@
         <!--com.fashare.adapter.OnItemClickListener<?>-->
         <!--<attr name="onItemClick" format="reference" />-->
     </declare-styleable>
+
+    <declare-styleable name="TabLayout">
+        <!--@IdRes int-->
+        <attr name="viewPagerIdRes" format="integer"/>
+    </declare-styleable>
 </resources>

@@ -3,6 +3,7 @@ package com.fashare.mvvm_juejin.repo
 import com.fashare.mvvm_juejin.model.BannerListBean
 import com.fashare.mvvm_juejin.model.HotRecomment
 import com.fashare.mvvm_juejin.model.article.ArticleListBean
+import com.fashare.mvvm_juejin.model.category.HomeCategoryListBean
 import com.fashare.mvvm_juejin.model.notify.NotifyBean
 import com.fashare.mvvm_juejin.model.user.UserBean
 import com.fashare.net.ApiFactory
@@ -110,5 +111,12 @@ interface JueJinApis {
                                 @Query("token") token: String,
                                 @Query("device_id") device_id: String,
                                 @Query("src") src: String): Observable<Response<List<NotifyBean>>>
+    }
+
+    @ApiFactory.BaseUrl("https://gold-tag-ms.juejin.im")
+    interface Tags{
+        @Headers("X-Juejin-Src:android")
+        @GET("/v1/categories")
+        fun getCategories(): Observable<Response<HomeCategoryListBean>>
     }
 }

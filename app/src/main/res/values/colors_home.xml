@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="home_tab_text_select">@android:color/white</color>
+    <color name="home_tab_text_unselect">#99FFFFFF</color>
+
     <color name="home_article_bg">@android:color/white</color>
     <color name="home_article_username">#47769B</color>
     <color name="home_article_user_company">#D0D0D0</color>

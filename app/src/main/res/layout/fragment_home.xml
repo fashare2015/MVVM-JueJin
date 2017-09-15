@@ -2,12 +2,13 @@
 
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-            name="pages"
-            type="com.fashare.mvvm_juejin.viewmodel.HomePagesVM"/>
+        <import type="com.fashare.mvvm_juejin.R"/>
+
+        <variable name="pages" type="com.fashare.mvvm_juejin.viewmodel.HomePagesVM"/>
     </data>
 
     <LinearLayout
@@ -15,11 +16,22 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <android.support.design.widget.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:tabIndicatorColor="@color/home_tab_text_select"
+            app:tabSelectedTextColor="@color/home_tab_text_select"
+            app:tabTextColor="@color/home_tab_text_unselect"
+            bind:tabMode="scrollable"
+            bind:viewModels="@{pages.tabList}"
+            bind:viewPagerIdRes="@{R.id.vp}"/>
+
         <android.support.v4.view.ViewPager
-            android:background="@color/g_bg"
             android:id="@+id/vp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/g_bg"
             bind:fragments="@{pages.pageList}"
             bind:curIndex="@{0}"/>
     </LinearLayout>
