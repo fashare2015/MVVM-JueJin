@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="profile_item_bg">@android:color/white</color>
+    <color name="profile_item_bg">@color/g_item_bg</color>
     <!--<color name="profile_username">#47769B</color>-->
     <!--<color name="profile_user_company">#D0D0D0</color>-->
     <color name="profile_title">@android:color/black</color>

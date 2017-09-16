@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="item" type="com.fashare.mvvm_juejin.viewmodel.ProfileVM.Item"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/profile_padding"
+            android:paddingRight="@dimen/profile_padding"
+            android:paddingTop="@dimen/profile_margin"
+            android:paddingBottom="@dimen/profile_margin"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                bind:placeholder="@{item.iconRes}"
+                tools:src="@mipmap/profile_i_like"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/profile_margin"
+                android:text='@{item.name}'
+                android:textSize="15sp"
+                android:textColor="@color/profile_title"
+                tools:text="我喜欢的"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{item.parseItemCount(item.user)}'
+                android:textSize="13sp"
+                android:textColor="@color/profile_content"
+                tools:text="0篇"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/g_line_horizontal"/>
+
+    </LinearLayout>
+
+</layout>
+

@@ -44,6 +44,10 @@ class ProfileFragment : BaseFragment(){
                     .compose(Composers.compose())
                     .subscribe({
                         binding.profileVM.user.set(it)
+                        binding.profileVM.viewModels.apply{
+                            this.clear()
+                            this.addAll(binding.profileVM.getDefaultList())
+                        }
                     }, {})
         }
     }
