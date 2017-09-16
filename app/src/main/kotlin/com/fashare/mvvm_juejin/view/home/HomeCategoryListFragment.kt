@@ -27,7 +27,7 @@ import java.util.*
  * desc   :
 </pre> *
  */
-class HomeCategoryListFragment : BaseFragment(){
+class HomeCategoryListFragment(val categoryId: String = "") : BaseFragment(){
     private val IS_CLEAR = true
     lateinit var binding: FragmentHomeListBinding
 
@@ -82,7 +82,7 @@ class HomeCategoryListFragment : BaseFragment(){
 
     private fun loadArticles(isClear: Boolean, before: String) {
         ApiFactory.getApi(JueJinApis:: class.java)
-                .getEntryByTimeLine("", "",
+                .getEntryByTimeLine(categoryId, "",
                         "57bd25f4a34131005b211b84",
                         before,
                         "20",

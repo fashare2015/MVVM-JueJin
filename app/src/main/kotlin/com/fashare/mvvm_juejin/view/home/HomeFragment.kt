@@ -10,7 +10,6 @@ import com.fashare.mvvm_juejin.R
 import com.fashare.mvvm_juejin.databinding.FragmentHomeBinding
 import com.fashare.mvvm_juejin.repo.Composers
 import com.fashare.mvvm_juejin.repo.JueJinApis
-import com.fashare.mvvm_juejin.view.profile.ProfileFragment
 import com.fashare.mvvm_juejin.viewmodel.HomePagesVM
 import com.fashare.net.ApiFactory
 
@@ -48,7 +47,7 @@ class HomeFragment : BaseFragment(){
                     binding.pages.pageList.apply{
                         this.clear()
                         this.add(HomeListFragment())
-                        this.addAll(list.map{ ProfileFragment() })
+                        this.addAll(list.map{ HomeCategoryListFragment(it.id?: "") })
                     }
                 }, {})
 

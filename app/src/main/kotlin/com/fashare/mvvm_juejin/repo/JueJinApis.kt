@@ -27,7 +27,7 @@ interface JueJinApis {
 
     // 文章列表
     @GET("/v1/get_entry_by_timeline")
-    fun getEntryByTimeLine(@Query("category") category: String,
+    fun getEntryByTimeLine(@Query("category") categoryId: String,
                            @Query("type") type: String,
                            @Query("uid") uid: String,
                            @Query("before") before: String,

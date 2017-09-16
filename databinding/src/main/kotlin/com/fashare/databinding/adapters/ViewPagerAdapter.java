@@ -45,4 +45,10 @@ public class ViewPagerAdapter {
             adapter.notifyDataSetChanged();
         }
     }
+
+    @BindingAdapter({"offscreenPageLimit"})
+    public static void bind(ViewPager container, final int offscreenPageLimit) {
+        container.setOffscreenPageLimit(offscreenPageLimit);
+    }
+
 }

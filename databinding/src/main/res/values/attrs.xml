@@ -2,7 +2,8 @@
 <resources>
     <declare-styleable name="ImageView">
         <attr name="uri" format="string"/>
-        <attr name="placeholder" format="reference|color" />
+        <!--@DrawableRes int-->
+        <attr name="placeholder" format="reference" />
         <!--ImageLoader.Callback-->
         <attr name="onImageLoad" format="reference" />
     </declare-styleable>
@@ -28,6 +29,11 @@
         <attr name="headerViewModels" format="reference" />
         <!--com.fashare.adapter.OnItemClickListener<?>-->
         <!--<attr name="onItemClick" format="reference" />-->
+    </declare-styleable>
+
+    <declare-styleable name="ViewPager">
+        <!--int-->
+        <attr name="offscreenPageLimit" format="integer"/>
     </declare-styleable>
 
     <declare-styleable name="TabLayout">

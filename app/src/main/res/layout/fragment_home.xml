@@ -33,7 +33,8 @@
             android:layout_height="match_parent"
             android:background="@color/g_bg"
             bind:fragments="@{pages.pageList}"
-            bind:curIndex="@{0}"/>
+            bind:curIndex="@{0}"
+            bind:offscreenPageLimit="@{10}"/>
     </LinearLayout>
 
 </layout>
