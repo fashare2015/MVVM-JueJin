@@ -2,10 +2,13 @@ package com.fashare.mvvm_juejin.viewmodel
 
 import android.databinding.ObservableArrayList
 import android.support.annotation.LayoutRes
+import com.fashare.adapter.OnItemClickListener
+import com.fashare.adapter.ViewHolder
 import com.fashare.mvvm_juejin.BR
 import com.fashare.mvvm_juejin.R
 import com.fashare.mvvm_juejin.model.BannerListBean
 import com.fashare.mvvm_juejin.model.article.ArticleBean
+import com.fashare.mvvm_juejin.view.detail.ArticleActivity
 import me.tatarka.bindingcollectionadapter.ItemView
 
 /**
@@ -18,6 +21,14 @@ import me.tatarka.bindingcollectionadapter.ItemView
 class ExploreListVM{
     val itemView = ItemView.of(BR.item, R.layout.item_explore_list)
     val viewModels = ObservableArrayList<ArticleBean>()
+
+    val onItemClick = object: OnItemClickListener<ArticleBean>(){
+        override fun onItemClick(holder: ViewHolder?, data: ArticleBean?, position: Int) {
+            holder?.itemView?.context?.apply {
+                ArticleActivity.start(this, data)
+            }
+        }
+    }
 
     val headerItemViews = listOf<ItemView>(
             ItemView.of(BR.headerVM, R.layout.header_explore)

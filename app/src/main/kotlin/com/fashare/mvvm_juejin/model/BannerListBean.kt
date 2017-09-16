@@ -1,6 +1,8 @@
 package com.fashare.mvvm_juejin.model
 
-class BannerListBean {
+import java.io.Serializable
+
+class BannerListBean : Serializable {
     var total: Int = 0
     /**
      * objectId : 59ad320d6fb9a0247d4f6a8c
@@ -21,7 +23,7 @@ class BannerListBean {
 
     var banner: List<Item>? = null
 
-    class Item {
+    class Item : Serializable{
         var objectId: String? = null
         var description: String? = null
         var startedAt: String? = null

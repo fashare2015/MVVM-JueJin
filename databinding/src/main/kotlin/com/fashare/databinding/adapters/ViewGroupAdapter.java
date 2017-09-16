@@ -17,14 +17,14 @@ import me.tatarka.bindingcollectionadapter.ItemView;
 
 public final class ViewGroupAdapter {
     @BindingAdapter(value = {"itemView", "viewModels", "onItemClick"}, requireAll = false)
-    public static void addViews(ViewGroup viewGroup, ItemView itemView, Object[] viewModelList, OnItemClickListener onItemClickListener) {
+    public static void addViews(ViewGroup viewGroup, ItemView itemView, Object[] viewModelList, OnItemClickListener<?> onItemClickListener) {
         if (viewModelList != null && viewModelList.length > 0) {
             addViews(viewGroup, itemView, Arrays.asList(viewModelList), onItemClickListener);
         }
     }
 
     @BindingAdapter(value = {"itemView", "viewModels", "onItemClick"}, requireAll = false)
-    public static void addViews(ViewGroup viewGroup, ItemView itemView, List<?> viewModelList, final OnItemClickListener<Object> onItemClickListener) {
+    public static void addViews(ViewGroup viewGroup, ItemView itemView, List<?> viewModelList, final OnItemClickListener<?> onItemClickListener) {
         if (viewModelList != null && !viewModelList.isEmpty()) {
             viewGroup.removeAllViews();
             for (int pos=0; pos<viewModelList.size(); pos++) {
@@ -38,7 +38,7 @@ public final class ViewGroupAdapter {
         }
     }
 
-    private static void setListener(final OnItemClickListener<Object> onItemClickListener, final ViewHolder viewHolder, final Object data, final int pos) {
+    private static void setListener(final OnItemClickListener onItemClickListener, final ViewHolder viewHolder, final Object data, final int pos) {
         viewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

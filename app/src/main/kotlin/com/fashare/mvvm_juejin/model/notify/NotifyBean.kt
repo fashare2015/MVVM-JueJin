@@ -1,6 +1,7 @@
 package com.fashare.mvvm_juejin.model.notify
 
 import com.fashare.mvvm_juejin.model.user.UserBean
+import java.io.Serializable
 
 /**
  * objectId : 59b73e69ef23ab6f3540a08b
@@ -24,7 +25,7 @@ import com.fashare.mvvm_juejin.model.user.UserBean
  * desc   :
 </pre> *
  */
-class NotifyBean {
+class NotifyBean : Serializable {
     enum class Types(val type: String){
         COLLECTION("collection"),
         COMMENT("comment")
@@ -62,7 +63,7 @@ class NotifyBean {
      * topComment : null
      * isLiked : false
      */
-    class CommentBean {
+    class CommentBean : Serializable{
         var id: String? = null
         var content: String? = null
         var userId: String? = null
@@ -99,7 +100,7 @@ class NotifyBean {
      * topComment : null
      * isLiked : false
      */
-    class ReplyBean {
+    class ReplyBean : Serializable{
         var id: String? = null
         var content: String? = null
         var userId: String? = null
@@ -126,7 +127,7 @@ class NotifyBean {
      * screenshotUrl : https://user-gold-cdn.xitu.io/2017/9/10/de59f88be631f46c379221e0281ed57a
      * originalUrl : https://juejin.im/post/59b541795188257e8822dfd9
      */
-    class EntryBean {
+    class EntryBean : Serializable{
         var objectId: String? = null
         var title: String? = null
         var url: String? = null

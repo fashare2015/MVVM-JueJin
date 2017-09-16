@@ -2,6 +2,7 @@ package com.fashare.mvvm_juejin.repo
 
 import com.fashare.mvvm_juejin.model.BannerListBean
 import com.fashare.mvvm_juejin.model.HotRecomment
+import com.fashare.mvvm_juejin.model.article.ArticleHtmlBean
 import com.fashare.mvvm_juejin.model.article.ArticleListBean
 import com.fashare.mvvm_juejin.model.category.HomeCategoryListBean
 import com.fashare.mvvm_juejin.model.notify.NotifyBean
@@ -80,7 +81,7 @@ interface JueJinApis {
 
         @ApiFactory.BaseUrl("https://user-storage-api-ms.juejin.im")
         interface Storage{
-            @POST("v1/getUserInfo")
+            @GET("v1/getUserInfo")
             fun getUserInfo(@Query("uid") uid: String,
                             @Query("current_uid") current_uid: String,
                             @Query("token") token: String,
@@ -104,7 +105,7 @@ interface JueJinApis {
 
     @ApiFactory.BaseUrl("https://ufp-api-ms.juejin.im")
     interface Notify{
-        @POST("/v1/getUserNotification")
+        @GET("/v1/getUserNotification")
         fun getUserNotification(@Query("uid") uid: String,
                                 @Query("before") before: String,
                                 @Query("limit") limit: String,
@@ -118,5 +119,16 @@ interface JueJinApis {
         @Headers("X-Juejin-Src:android")
         @GET("/v1/categories")
         fun getCategories(): Observable<Response<HomeCategoryListBean>>
+    }
+
+    interface Article{
+        @ApiFactory.BaseUrl("https://entry-view-storage-api-ms.juejin.im")
+        interface Html{
+            @GET("/v1/getEntryView")
+            fun getHtml(@Query("entryId") articleId: String,
+                        @Query("token") token: String,
+                        @Query("device_id") device_id: String,
+                        @Query("src") src: String): Observable<Response<ArticleHtmlBean>>
+        }
     }
 }

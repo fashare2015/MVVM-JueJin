@@ -23,7 +23,7 @@ public class ViewPagerAdapter {
     public static final String TAG = "ViewPagerAdapter - binding ViewPager...: ";
 
     @BindingAdapter(value = {"itemView", "viewModels", "onItemClick"}, requireAll = false)
-    public static void bind(ViewPager container, final ItemView itemView, final List<?> datas, final OnItemClickListener<Object> onItemClickListener) {
+    public static void bind(ViewPager container, final ItemView itemView, final List<?> datas, final OnItemClickListener<?> onItemClickListener) {
         if(!(container.getContext() instanceof FragmentActivity))
             throw new IllegalArgumentException(TAG + "context must instanceof FragmentActivity");
 
@@ -39,7 +39,7 @@ public class ViewPagerAdapter {
                     }
                 });
 
-                ((CommonPagerAdapter<Object>)adapter).setOnItemClickListener(onItemClickListener);
+                ((CommonPagerAdapter<Object>)adapter).setOnItemClickListener((OnItemClickListener<Object>)onItemClickListener);
             }
 
             adapter.notifyDataSetChanged();

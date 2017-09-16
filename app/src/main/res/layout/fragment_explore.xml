@@ -35,7 +35,8 @@
                 bind:itemView="@{listVM.itemView}"
                 bind:viewModels="@{listVM.viewModels}"
                 bind:headerItemViews="@{listVM.headerItemViews}"
-                bind:headerViewModels="@{listVM.headerViewModels}"/>
+                bind:headerViewModels="@{listVM.headerViewModels}"
+                bind:onItemClick="@{listVM.onItemClick}"/>
 
         </com.liaoinstan.springview.widget.SpringView>
 

@@ -1,4 +1,7 @@
 package com.fashare.mvvm_juejin.model.user
+
+import java.io.Serializable
+
 /**
  * role : editor
  * username : 梁山boy
@@ -39,7 +42,7 @@ package com.fashare.mvvm_juejin.model.user
 /**
  * 用户信息
  */
-class UserBean {
+class UserBean : Serializable {
     var role: String? = null
     var username: String? = null
     var selfDescription: String? = null
@@ -76,7 +79,7 @@ class UserBean {
     var objectId: String? = null
     var uid: String? = null
 
-    class CommunityBean {
+    class CommunityBean: Serializable {
         /**
          * uid : 5885816355
          * nickname : 墨镜猫jacky
@@ -98,25 +101,25 @@ class UserBean {
 
         var github: GithubBean? = null
 
-        class WeiboBean {
+        class WeiboBean : Serializable{
             var uid: String? = null
             var nickname: String? = null
         }
 
-        class WechatBean {
+        class WechatBean : Serializable{
             var nickname: String? = null
             var uid: String? = null
             var expires_at: String? = null
         }
 
-        class GithubBean {
+        class GithubBean : Serializable{
             var nickname: String? = null
             var uid: String? = null
             var expires_at: String? = null
         }
     }
 
-    class TokenBean{
+    class TokenBean: Serializable{
         var token: String? = null
         var user_id: String? = null
         var state: String? = null

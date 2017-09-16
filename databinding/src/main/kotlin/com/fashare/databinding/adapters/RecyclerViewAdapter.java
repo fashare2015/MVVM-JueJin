@@ -29,7 +29,7 @@ public class RecyclerViewAdapter {
     @BindingAdapter(value = {"itemView", "viewModels", "headerItemViews", "headerViewModels", "onItemClick"}, requireAll = false)
     public static void bind(RecyclerView container, final ItemView itemView, final List<?> datas,
                             final List<? extends ItemView> headerItemViews, final List<?> headerDatas,
-                            final OnItemClickListener<Object> onItemClickListener) {
+                            final OnItemClickListener<?> onItemClickListener) {
         if(!(container.getContext() instanceof FragmentActivity))
             throw new IllegalArgumentException(TAG + "context must instanceof FragmentActivity");
 

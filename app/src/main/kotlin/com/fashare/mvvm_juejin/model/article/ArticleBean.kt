@@ -1,6 +1,7 @@
 package com.fashare.mvvm_juejin.model.article
 
 import com.fashare.mvvm_juejin.model.user.UserBean
+import java.io.Serializable
 
 /**
  * collectionCount : 240
@@ -35,7 +36,7 @@ import com.fashare.mvvm_juejin.model.user.UserBean
  * 文章
  */
 data class ArticleBean(var content: String? = null,
-                        var title: String? = null) {
+                        var title: String? = null): Serializable {
     var collectionCount: Int = 0
     var commentsCount: Int = 0
     var gfw: Boolean = false
@@ -97,7 +98,7 @@ data class ArticleBean(var content: String? = null,
     var viewsCount: Int = 0
     var isCollected: Boolean = false
 
-    class CategoryBean {
+    class CategoryBean:Serializable {
         var isNgxCached: Boolean = false
         var title: String? = null
         var id: String? = null
@@ -105,7 +106,7 @@ data class ArticleBean(var content: String? = null,
         var ngxCachedTime: Int = 0
     }
 
-    class TagsBean {
+    class TagsBean:Serializable {
         var ngxCachedTime: Int = 0
         var isNgxCached: Boolean = false
         var title: String? = null

@@ -1,11 +1,13 @@
 package com.fashare.mvvm_juejin.model.category
 
+import java.io.Serializable
+
 /**
  * User: fashare(153614131@qq.com)
  * Date: 2017-09-16
  * Time: 01:11
  */
-class HomeCategoryListBean{
+class HomeCategoryListBean: Serializable {
     val total = 0
     val categoryList = emptyList<Item>()
 
@@ -14,7 +16,7 @@ class HomeCategoryListBean{
      * Date: 2017-09-16
      * Time: 01:10
      */
-    class Item {
+    class Item: Serializable{
         /**
          * id : 5562b410e4b00c57d9b94a92
          * name : Android

@@ -40,4 +40,10 @@
         <!--@IdRes int-->
         <attr name="viewPagerIdRes" format="integer"/>
     </declare-styleable>
+
+    <declare-styleable name="WebView">
+        <!--<attr name="uri" format="string"/>-->
+        <attr name="html" format="string"/>
+        <attr name="cssPath" format="string"/>
+    </declare-styleable>
 </resources>
