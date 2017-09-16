@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.fashare.base_ui.BaseFragment
-import com.fashare.mvvm_juejin.JueJinApp
 import com.fashare.mvvm_juejin.R
 import com.fashare.mvvm_juejin.databinding.FragmentHomeBinding
 import com.fashare.mvvm_juejin.repo.Composers
@@ -48,7 +47,7 @@ class HomeFragment : BaseFragment(){
 
                     binding.pages.pageList.apply{
                         this.clear()
-                        this.add(HomeFragment())
+                        this.add(HomeListFragment())
                         this.addAll(list.map{ ProfileFragment() })
                     }
                 }, {})

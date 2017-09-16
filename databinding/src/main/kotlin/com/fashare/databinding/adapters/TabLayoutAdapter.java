@@ -52,10 +52,29 @@ public class TabLayoutAdapter {
 //                                        }
 //                                    });
 //                                }
-//                            }, 100);
+//                            }, 1000);
 //                        }
 //                    }
 //                });
+
+                /** setupWithViewPager() will call {@link TabLayout#selectTab(TabLayout.Tab)} after fetching datas from viewPager.adapter.
+                 *  so we just listen on the TabSelected event, and then hack the datas.
+                 */
+                container.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                        for (int i=0; i<container.getTabCount() && i<datas.size(); i++){
+                            String title = datas.get(i);
+                            container.getTabAt(i).setText(title);
+                        }
+                    }
+
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {}
+
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {}
+                });
             }
         }
     }
