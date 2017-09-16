@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.webkit.WebView
 import com.fashare.base_ui.BaseActivity
+import com.fashare.mvvm_juejin.JueJinApp
 import com.fashare.mvvm_juejin.R
 import com.fashare.mvvm_juejin.databinding.ActivityArticleBinding
 import com.fashare.mvvm_juejin.model.article.ArticleBean
@@ -22,6 +23,46 @@ import java.io.*
 class ArticleActivity : BaseActivity() {
     companion object{
         private val PARAMS_ARTICLE_ID = "PARAMS_ARTICLE_ID"
+
+        val LOCAL_TEMPLATE by lazy{
+            openAssets(JueJinApp.instance, "www/template.html")?: ""
+        }
+
+        val LOCAL_CSS by lazy{
+            com.daimajia.gold.utils.d.b.a(com.daimajia.gold.utils.g.b())
+        }
+
+        val LOCAL_JS by lazy{
+            com.daimajia.gold.utils.d.b.b(com.daimajia.gold.utils.g.c())
+        }
+
+        fun openAssets(context: Context, filePath: String): String? {
+            try {
+                return openAssets(context.resources.assets.open(filePath))
+            } catch (e: IOException) {
+                e.printStackTrace()
+                return null
+            }
+        }
+
+        @Throws(IOException::class)
+        fun openAssets(inputStream: InputStream): String {
+            val stringWriter = StringWriter()
+            val cArr = CharArray(2048)
+            try {
+                val bufferedReader = BufferedReader(InputStreamReader(inputStream, "utf-8"))
+                while (true) {
+                    val read = bufferedReader.read(cArr)
+                    if (read == -1) {
+                        break
+                    }
+                    stringWriter.write(cArr, 0, read)
+                }
+                return stringWriter.toString()
+            } finally {
+                inputStream.close()
+            }
+        }
 
 //        fun start(from: Context, url: String?){
 //            Intent(from, ArticleActivity::class.java)
@@ -47,6 +88,8 @@ class ArticleActivity : BaseActivity() {
 
     lateinit var binding : ActivityArticleBinding
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DataBindingUtil.setContentView<ActivityArticleBinding>(this, R.layout.activity_article).apply{
@@ -70,46 +113,19 @@ class ArticleActivity : BaseActivity() {
                         "android")
                 .compose(Composers.compose())
                 .subscribe({
-                    var template = openAssets(applicationContext, "www/template.html")?: ""
+                    // 以下代码来自反编译的掘金app
+                    var template = LOCAL_TEMPLATE
                     var screenshot = article.screenshot?: ""
                     if (TextUtils.isEmpty(template)) {
                         template = "<h1>404</h1>"
                     } else {
                         template = template.replace("{gold-toolbar-height}", "55px")
-                                .replace("{gold-css-js}", com.daimajia.gold.utils.d.b.a(com.daimajia.gold.utils.g.b()))
-                                .replace("{gold-js-replace}", com.daimajia.gold.utils.d.b.b(com.daimajia.gold.utils.g.c()))
+                                .replace("{gold-css-js}", LOCAL_CSS)
+                                .replace("{gold-js-replace}", LOCAL_JS)
                                 .replace("{gold-header}", com.daimajia.gold.utils.d.b.a(screenshot, article.originalUrl, article.title, article.user?.username?: ""))
                                 .replace("{gold-content}", it.content?: "")
                     }
                     binding.articleVM.html.set(template)
                 }, {})
-    }
-
-    fun openAssets(context: Context, filePath: String): String? {
-        try {
-            return openAssets(context.resources.assets.open(filePath))
-        } catch (e: IOException) {
-            e.printStackTrace()
-            return null
-        }
-    }
-
-    @Throws(IOException::class)
-    fun openAssets(inputStream: InputStream): String {
-        val stringWriter = StringWriter()
-        val cArr = CharArray(2048)
-        try {
-            val bufferedReader = BufferedReader(InputStreamReader(inputStream, "utf-8"))
-            while (true) {
-                val read = bufferedReader.read(cArr)
-                if (read == -1) {
-                    break
-                }
-                stringWriter.write(cArr, 0, read)
-            }
-            return stringWriter.toString()
-        } finally {
-            inputStream.close()
-        }
     }
 }
