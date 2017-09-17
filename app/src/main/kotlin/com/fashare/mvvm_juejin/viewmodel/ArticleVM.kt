@@ -36,7 +36,8 @@ class ArticleVM(val rv: RecyclerView){
     val scrollToComment = View.OnClickListener {
         val header = rv.layoutManager.findViewByPosition(0)
         header?.apply{
-            rv.smoothScrollBy(0, this.height - rv.computeVerticalScrollOffset())
+            if(this.height > 0)
+                rv.smoothScrollBy(0, this.height - rv.computeVerticalScrollOffset())
         }
     }
 }

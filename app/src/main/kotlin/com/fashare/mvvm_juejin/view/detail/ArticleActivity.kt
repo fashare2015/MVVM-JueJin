@@ -128,7 +128,7 @@ class ArticleActivity : BaseActivity() {
                     if (TextUtils.isEmpty(template)) {
                         template = "<h1>404</h1>"
                     } else {
-                        template = template.replace("{gold-toolbar-height}", "55px")
+                        template = template.replace("{gold-toolbar-height}", "0px")
                                 .replace("{gold-css-js}", LOCAL_CSS)
                                 .replace("{gold-js-replace}", LOCAL_JS)
                                 .replace("{gold-header}", com.daimajia.gold.utils.d.b.a(screenshot, article.originalUrl, article.title, article.user?.username?: ""))
