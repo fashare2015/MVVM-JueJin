@@ -12,11 +12,16 @@ import com.fashare.mvvm_juejin.JueJinApp
 import com.fashare.mvvm_juejin.R
 import com.fashare.mvvm_juejin.databinding.ActivityArticleBinding
 import com.fashare.mvvm_juejin.model.article.ArticleBean
+import com.fashare.mvvm_juejin.model.comment.CommentListBean
+import com.fashare.mvvm_juejin.model.notify.NotifyBean
 import com.fashare.mvvm_juejin.repo.Composers
 import com.fashare.mvvm_juejin.repo.JueJinApis
 import com.fashare.mvvm_juejin.repo.local.LocalUser
 import com.fashare.mvvm_juejin.viewmodel.ArticleVM
 import com.fashare.net.ApiFactory
+import com.liaoinstan.springview.container.DefaultFooter
+import com.liaoinstan.springview.container.DefaultHeader
+import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.activity_article.*
 import java.io.*
 
@@ -64,20 +69,6 @@ class ArticleActivity : BaseActivity() {
             }
         }
 
-//        fun start(from: Context, url: String?){
-//            Intent(from, ArticleActivity::class.java)
-//                    .putExtra(PARAMS_ARTICLE_ID, url?: "").apply {
-//                        from.startActivity(this)
-//                    }
-//        }
-
-//        fun start(from: Context, articleId: String?){
-//            Intent(from, ArticleActivity::class.java)
-//                    .putExtra(PARAMS_ARTICLE_ID, articleId?: "").apply {
-//                from.startActivity(this)
-//            }
-//        }
-
         fun start(from: Context, article: ArticleBean?){
             Intent(from, ArticleActivity::class.java)
                     .putExtra(PARAMS_ARTICLE_ID, article?: ArticleBean("", "")).apply {
@@ -86,15 +77,14 @@ class ArticleActivity : BaseActivity() {
         }
     }
 
+    private val IS_CLEAR = true
     lateinit var binding : ActivityArticleBinding
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DataBindingUtil.setContentView<ActivityArticleBinding>(this, R.layout.activity_article).apply{
             binding = this
-            this.articleVM = ArticleVM().apply { this.url.set("") }
+            this.articleVM = ArticleVM(rv)
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -102,10 +92,29 @@ class ArticleActivity : BaseActivity() {
         }
 
         val article = intent?.getSerializableExtra(PARAMS_ARTICLE_ID) as ArticleBean
-        loadArticle(article)
+        loadArticleHtml(article)
+        loadRelatedArticles(article.objectId)
+        loadComment(IS_CLEAR, article.objectId, "")
+
+        sv.footer = DefaultFooter(this)
+        sv.setListener(object : SpringView.OnFreshListener{
+            override fun onRefresh() {
+            }
+
+            override fun onLoadmore() {
+                val list: List<CommentListBean.Item> = binding.articleVM.viewModels
+                if(!list.isEmpty())
+                    loadComment(!IS_CLEAR, article.objectId, list[list.size-1].createdAt?: "")
+                else
+                    sv.onFinishFreshAndLoad()
+            }
+        })
     }
 
-    private fun loadArticle(article: ArticleBean) {
+    private fun loadArticleHtml(article: ArticleBean) {
+        binding.articleVM.article.set(article)
+        binding.articleVM.headerViewModels.get(0).article.set(article)
+
         ApiFactory.getApi(JueJinApis.Article.Html::class.java)
                 .getHtml(article.objectId?: "",
                         LocalUser.userToken?.token?: "",
@@ -125,7 +134,44 @@ class ArticleActivity : BaseActivity() {
                                 .replace("{gold-header}", com.daimajia.gold.utils.d.b.a(screenshot, article.originalUrl, article.title, article.user?.username?: ""))
                                 .replace("{gold-content}", it.content?: "")
                     }
-                    binding.articleVM.html.set(template)
+                    binding.articleVM.headerViewModels.get(0).html.set(template)
+                }, {})
+    }
+
+    private fun loadRelatedArticles(articleId: String?) {
+        ApiFactory.getApi(JueJinApis:: class.java)
+                .getRelatedEntry(
+                        articleId?: "",
+                        "4",
+                        LocalUser.userToken?.token?: "",
+                        "b9ae8b6a-efe0-4944-b574-b01a3a1303ee",
+                        "android")
+                .compose(Composers.compose())
+                .subscribe({
+                    val list = it?.entrylist as Iterable<ArticleBean>
+
+                    binding.articleVM.headerViewModels.get(0).viewModels.apply{
+                        this.clear()
+                        this.addAll(list.filter{ !this.contains(it) })  // 去重
+                    }
+                }, {
+
+                })
+    }
+
+    private fun loadComment(isClear: Boolean, articleId: String?, before: String?) {
+        ApiFactory.getApi(JueJinApis.Comment::class.java)
+                .getComments(articleId?: "",
+                        before?: "",
+                        "new")
+                .compose(Composers.compose())
+                .subscribe({
+                    sv.onFinishFreshAndLoad()
+                    binding.articleVM.viewModels.apply{
+                        if(isClear)
+                            this.clear()
+                        this.addAll(it.comments)
+                    }
                 }, {})
     }
 }

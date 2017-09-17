@@ -7,4 +7,7 @@
     <color name="g_bg">#F4F6F9</color>
     <color name="g_item_bg">@android:color/white</color>
     <color name="g_line">#dfdfdf</color>
+
+    <color name="g_text_black">@android:color/black</color>
+    <color name="g_text_gray">#969696</color>
 </resources>

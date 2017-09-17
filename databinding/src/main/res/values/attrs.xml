@@ -6,6 +6,12 @@
         <attr name="placeholder" format="reference" />
         <!--ImageLoader.Callback-->
         <attr name="onImageLoad" format="reference" />
+        <!--圆角半径 dimension-->
+        <attr name="radius" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="View">
+        <attr name="visibility" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="ViewGroup">
@@ -45,5 +51,9 @@
         <!--<attr name="uri" format="string"/>-->
         <attr name="html" format="string"/>
         <attr name="cssPath" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="Toolbar">
+        <attr name="title" format="string"/>
     </declare-styleable>
 </resources>

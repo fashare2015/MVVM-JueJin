@@ -5,6 +5,7 @@ import com.fashare.mvvm_juejin.model.HotRecomment
 import com.fashare.mvvm_juejin.model.article.ArticleHtmlBean
 import com.fashare.mvvm_juejin.model.article.ArticleListBean
 import com.fashare.mvvm_juejin.model.category.HomeCategoryListBean
+import com.fashare.mvvm_juejin.model.comment.CommentListBean
 import com.fashare.mvvm_juejin.model.notify.NotifyBean
 import com.fashare.mvvm_juejin.model.user.UserBean
 import com.fashare.net.ApiFactory
@@ -45,6 +46,14 @@ interface JueJinApis {
                        @Query("token") token: String,
                        @Query("device_id") device_id: String,
                        @Query("src") src: String): Observable<Response<ArticleListBean>>
+
+    // 发现 - 热门文章列表
+    @GET("/v1/get_related_entry")
+    fun getRelatedEntry(@Query("entryId") entryId: String,
+                        @Query("limit") limit: String,
+                        @Query("token") token: String,
+                        @Query("device_id") device_id: String,
+                        @Query("src") src: String): Observable<Response<ArticleListBean>>
 
     @ApiFactory.BaseUrl("https://auth-center-ms.juejin.im")
     interface User{
@@ -130,5 +139,14 @@ interface JueJinApis {
                         @Query("device_id") device_id: String,
                         @Query("src") src: String): Observable<Response<ArticleHtmlBean>>
         }
+    }
+
+    @ApiFactory.BaseUrl("https://comment-wrapper-ms.juejin.im")
+    interface Comment{
+        @Headers("X-Juejin-Src:android")
+        @GET("/v1/comments/entry/{articleId}")
+        fun getComments(@Path("articleId") articleId: String,
+                        @Query("createdAt") before: String,
+                        @Query("rankType") rankType: String): Observable<Response<CommentListBean>>
     }
 }

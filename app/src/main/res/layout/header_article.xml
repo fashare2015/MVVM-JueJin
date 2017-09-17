@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+
+        <variable name="headerVM" type="com.fashare.mvvm_juejin.viewmodel.ArticleVM.HeaderVM"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/g_margin"
+            android:orientation="vertical"
+            android:background="@color/g_item_bg">
+
+            <WebView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                bind:html="@{headerVM.html}"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/g_margin"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:text='@{"阅读 " + (headerVM.article.viewsCount) + " ・ " + "喜欢 " + (headerVM.article.collectionCount)}'
+                    android:textColor="@color/g_text_gray"
+                    android:textSize="12sp"
+                    tools:text="阅读 0 ・ 喜欢 0"/>
+
+            </LinearLayout>
+
+            <include layout="@layout/g_line_horizontal"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/g_margin"
+            android:orientation="vertical"
+            android:background="@color/g_item_bg">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/g_item_bg"
+                android:padding="@dimen/g_margin"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:text='@{headerVM.article.user.username + "的更多文章"}'
+                    android:textColor="@color/g_text_black"
+                    android:textSize="15sp"
+                    tools:text="用户A的更多文章"/>
+
+            </LinearLayout>
+
+            <!--列表, 固定3列-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                bind:itemView="@{headerVM.itemView}"
+                bind:viewModels="@{headerVM.viewModels}"/>
+
+            <include layout="@layout/g_line_horizontal"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/g_item_bg"
+            bind:visibility="@{headerVM.article.commentsCount != 0}">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/g_margin"
+                android:text='@{headerVM.article.commentsCount + " 条评论"}'
+                android:textColor="@color/g_text_gray"
+                android:textSize="15sp"
+                tools:text="0 条评论"/>
+
+            <include layout="@layout/g_line_horizontal"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
+

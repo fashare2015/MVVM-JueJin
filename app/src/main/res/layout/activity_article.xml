@@ -2,24 +2,132 @@
 
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.fashare.mvvm_juejin.R"/>
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+
         <variable name="articleVM" type="com.fashare.mvvm_juejin.viewmodel.ArticleVM"/>
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <WebView
-            android:id="@+id/wv"
+        <com.liaoinstan.springview.widget.SpringView
+            android:id="@+id/sv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            bind:html="@{articleVM.html}"/>
-            <!--bind:cssPath="@{articleVM.cssPath}"/>-->
-    </LinearLayout>
+            android:layout_marginBottom="55dp">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                bind:layoutManager="@{LayoutManagers.linear()}"
+                bind:itemView="@{articleVM.itemView}"
+                bind:viewModels="@{articleVM.viewModels}"
+                bind:headerItemViews="@{articleVM.headerItemViews}"
+                bind:headerViewModels="@{articleVM.headerViewModels}"/>
+
+        </com.liaoinstan.springview.widget.SpringView>
+
+        <com.fashare.mvvm_juejin.widget.TitleBar
+            android:id="@+id/titlebar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/g_item_bg"
+            app:navigationIcon="@mipmap/g_back_black"
+            bind:title='@{articleVM.article.title}'
+            app:elevation="4dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                bind:placeholder="@{R.mipmap.g_default_avatar}"
+                bind:uri="@{articleVM.article.user.avatarLarge}"
+                bind:radius="@{90}"
+                tools:src="@mipmap/g_default_avatar"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text='@{articleVM.article.user.username}'
+                tools:text="用户A"/>
+
+        </com.fashare.mvvm_juejin.widget.TitleBar>
+
+        <include
+            layout="@layout/g_line_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/titlebar"/>
+
+        <LinearLayout
+            android:id="@+id/layout_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/g_margin"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@color/g_item_bg">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/g_like_normal"/>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="@dimen/g_margin"
+                android:src="@mipmap/g_comment"/>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="@dimen/g_margin"
+                android:src="@mipmap/g_collection_set_add"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{"喜欢 " + articleVM.article.collectionCount}'
+                bind:visibility="@{articleVM.article.collectionCount != 0}"
+                tools:text="喜欢 20"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=' ・ '/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{"评论 " + articleVM.article.commentsCount}'
+                bind:visibility="@{articleVM.article.commentsCount != 0}"
+                android:onClick="@{articleVM.scrollToComment}"
+                tools:text="评论 20"/>
+
+        </LinearLayout>
+
+        <include
+            layout="@layout/g_line_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_above="@id/layout_bottom"/>
+
+    </RelativeLayout>
 
 </layout>
 
