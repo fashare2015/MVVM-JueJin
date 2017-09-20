@@ -31,17 +31,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/g_item_bg"
-                        app:navigationIcon="@mipmap/g_back_black"
+                        app:navigationIcon="@drawable/g_back_black"
                         bind:title='@{articleVM.article.title}'
                         app:layout_scrollFlags="scroll|enterAlways">
 
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            bind:placeholder="@{R.mipmap.g_default_avatar}"
+                            bind:placeholder="@{R.drawable.g_default_avatar}"
                             bind:uri="@{articleVM.article.user.avatarLarge}"
                             bind:radius="@{90}"
-                            tools:src="@mipmap/g_default_avatar"/>
+                            tools:src="@drawable/g_default_avatar"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -88,19 +88,19 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@mipmap/g_like_normal"/>
+                    android:src="@drawable/g_like_normal"/>
 
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="@dimen/g_margin"
-                    android:src="@mipmap/g_comment"/>
+                    android:src="@drawable/g_comment"/>
 
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="@dimen/g_margin"
-                    android:src="@mipmap/g_collection_set_add"/>
+                    android:src="@drawable/g_collection_set_add"/>
 
                 <View
                     android:layout_width="0dp"

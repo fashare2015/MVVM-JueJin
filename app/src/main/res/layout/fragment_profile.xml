@@ -49,8 +49,8 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         bind:uri="@{profileVM.user != null? profileVM.user.avatarLarge: null}"
-                        bind:placeholder="@{R.mipmap.g_default_avatar}"
-                        tools:src="@mipmap/g_default_avatar"/>
+                        bind:placeholder="@{R.drawable.g_default_avatar}"
+                        tools:src="@drawable/g_default_avatar"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -82,7 +82,7 @@
                         android:layout_width="10dp"
                         android:layout_height="25dp"
                         android:scaleType="fitXY"
-                        android:src="@mipmap/profile_move"/>
+                        android:src="@drawable/profile_move"/>
 
                 </LinearLayout>
 

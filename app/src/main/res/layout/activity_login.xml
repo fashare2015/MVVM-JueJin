@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/login_margin"
-            android:src="@mipmap/login_logo"/>
+            android:src="@drawable/login_logo"/>
 
         <LinearLayout
             android:layout_width="match_parent"

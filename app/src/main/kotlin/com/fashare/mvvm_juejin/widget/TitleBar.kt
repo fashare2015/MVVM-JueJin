@@ -28,7 +28,7 @@ class TitleBar : Toolbar {
 
     private fun init() {
         if(navigationIcon == null) {
-            setNavigationIcon(R.mipmap.g_back_white)
+            setNavigationIcon(R.drawable.g_back_white)
         }
         setNavigationOnClickListener { (context as Activity).finish() }
 

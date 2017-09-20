@@ -21,7 +21,7 @@
             android:layout_height="30dp"
             android:layout_centerInParent="true"
             bind:placeholder="@{tabItem.isSelected? tabItem.iconResSelected: tabItem.iconResNormal}"
-            tools:src="@mipmap/tab_home"/>
+            tools:src="@drawable/tab_home"/>
     </RelativeLayout>
 
 </layout>

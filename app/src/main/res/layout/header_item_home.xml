@@ -53,7 +53,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@mipmap/home_header_like"
+                        android:drawableLeft="@drawable/home_header_like"
                         android:drawablePadding="2dp"
                         android:text='@{"" + item.collectionCount}'
                         android:textSize="11sp"
@@ -64,7 +64,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/home_article_padding"
-                        android:drawableLeft="@mipmap/home_header_user"
+                        android:drawableLeft="@drawable/home_header_user"
                         android:drawablePadding="4dp"
                         android:text="@{item.user.username}"
                         android:textSize="11sp"
@@ -75,7 +75,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/home_article_padding"
-                        android:drawableLeft="@mipmap/home_header_time"
+                        android:drawableLeft="@drawable/home_header_time"
                         android:drawablePadding="2dp"
                         android:text="@{item.createdAt}"
                         android:textSize="11sp"
@@ -90,10 +90,10 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:scaleType="centerCrop"
-                bind:placeholder="@{R.mipmap.home_article_default_link_icon}"
+                bind:placeholder="@{R.drawable.home_article_default_link_icon}"
                 bind:uri="@{item.screenshot}"
                 android:visibility="@{!TextUtils.isEmpty(item.screenshot)? View.VISIBLE: View.GONE}"
-                tools:src="@mipmap/home_article_default_link_icon"/>
+                tools:src="@drawable/home_article_default_link_icon"/>
 
         </LinearLayout>
 

@@ -28,7 +28,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 bind:placeholder="@{item.iconRes}"
-                tools:src="@mipmap/profile_i_like"/>
+                tools:src="@drawable/profile_i_like"/>
 
             <TextView
                 android:layout_width="0dp"

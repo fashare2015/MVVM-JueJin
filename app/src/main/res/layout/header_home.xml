@@ -30,7 +30,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@mipmap/g_hot"
+                android:drawableLeft="@drawable/g_hot"
                 android:drawablePadding="5dp"
                 android:text="热门推荐"
                 android:textColor="@color/colorPrimary"/>
@@ -44,12 +44,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
-                android:src="@mipmap/g_refresh"/>
+                android:src="@drawable/g_refresh"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/g_close"/>
+                android:src="@drawable/g_close"/>
 
         </LinearLayout>
 

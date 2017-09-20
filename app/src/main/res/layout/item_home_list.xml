@@ -33,8 +33,8 @@
                 android:layout_height="30dp"
                 android:scaleType="centerCrop"
                 bind:uri="@{item.user.avatarLarge}"
-                bind:placeholder="@{R.mipmap.g_default_avatar}"
-                tools:src="@mipmap/ic_launcher"/>
+                bind:placeholder="@{R.drawable.g_default_avatar}"
+                tools:src="@drawable/ic_launcher"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="140dp"
                     android:layout_marginTop="@dimen/home_article_padding"
-                    tools:src="@mipmap/ic_launcher"
+                    tools:src="@drawable/ic_launcher"
                     android:scaleType="centerCrop"
                     bind:uri="@{item.screenshot}"
                     android:visibility="@{!TextUtils.isEmpty(item.screenshot)? View.VISIBLE: View.GONE}"/>
@@ -159,8 +159,8 @@
                         android:layout_height="60dp"
                         android:scaleType="centerCrop"
                         bind:uri="@{item.screenshot}"
-                        bind:placeholder="@{R.mipmap.home_article_default_link_icon}"
-                        tools:src="@mipmap/ic_launcher"/>
+                        bind:placeholder="@{R.drawable.home_article_default_link_icon}"
+                        tools:src="@drawable/ic_launcher"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -189,8 +189,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:src="@mipmap/g_like_normal"
-                bind:placeholder="@{item.isCollected? R.mipmap.g_like: R.mipmap.g_like_normal}"/>
+                tools:src="@drawable/g_like_normal"
+                bind:placeholder="@{item.isCollected? R.drawable.g_like: R.drawable.g_like_normal}"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -205,7 +205,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
-                android:src="@mipmap/g_comment"/>
+                android:src="@drawable/g_comment"/>
 
             <TextView
                 android:layout_width="wrap_content"

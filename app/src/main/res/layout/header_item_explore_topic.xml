@@ -19,8 +19,8 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             bind:uri="@{item.screenshot}"
-            android:src="@mipmap/ic_launcher"
-            tools:src="@mipmap/ic_launcher"/>
+            android:src="@drawable/ic_launcher"
+            tools:src="@drawable/ic_launcher"/>
 
         <TextView
             android:layout_width="match_parent"

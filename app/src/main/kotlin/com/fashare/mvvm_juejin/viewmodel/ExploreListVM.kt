@@ -44,10 +44,10 @@ class ExploreListVM{
         val itemViewEntry = ItemView.of(BR.item, R.layout.header_item_explore_entry)
         val entrys = ObservableArrayList<Entry>().apply{
             this.addAll(listOf(
-                    Entry(R.mipmap.explore_hot, "本周热门"),
-                    Entry(R.mipmap.explore_collection_set, "收藏集"),
-                    Entry(R.mipmap.explore_offline, "线下活动"),
-                    Entry(R.mipmap.explore_post, "专栏")
+                    Entry(R.drawable.explore_hot, "本周热门"),
+                    Entry(R.drawable.explore_collection_set, "收藏集"),
+                    Entry(R.drawable.explore_offline, "线下活动"),
+                    Entry(R.drawable.explore_post, "专栏")
             ))
         }
 

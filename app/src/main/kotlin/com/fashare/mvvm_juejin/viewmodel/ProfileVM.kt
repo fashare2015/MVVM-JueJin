@@ -38,12 +38,12 @@ class ProfileVM(){
     }
 
     fun getDefaultList() = listOf(
-            Item(R.mipmap.profile_i_like, "我喜欢的", user.get()),
-            Item(R.mipmap.profile_collection_set, "收藏集", user.get()),
-            Item(R.mipmap.profile_view, "阅读过的文章", user.get()),
-            Item(R.mipmap.profile_tag, "标签管理", user.get()),
-            Item(R.mipmap.profile_feed_back, "意见反馈", user.get()),
-            Item(R.mipmap.profile_settings, "设置", user.get())
+            Item(R.drawable.profile_i_like, "我喜欢的", user.get()),
+            Item(R.drawable.profile_collection_set, "收藏集", user.get()),
+            Item(R.drawable.profile_view, "阅读过的文章", user.get()),
+            Item(R.drawable.profile_tag, "标签管理", user.get()),
+            Item(R.drawable.profile_feed_back, "意见反馈", user.get()),
+            Item(R.drawable.profile_settings, "设置", user.get())
     )
 
     class Item(@DrawableRes val iconRes: Int = 0,
@@ -52,10 +52,10 @@ class ProfileVM(){
 
         fun parseItemCount(user: UserBean?):String{
             when(iconRes){
-                R.mipmap.profile_i_like -> return "" + (user?.collectedEntriesCount?: 0) + "篇"
-                R.mipmap.profile_collection_set -> return "" + (user?.collectionSetCount?: 0) + "个"
-                R.mipmap.profile_view -> return "" + (user?.viewedEntriesCount?: 0) + "篇"
-                R.mipmap.profile_tag -> return "" + (user?.subscribedTagsCount?: 0) + "个"
+                R.drawable.profile_i_like -> return "" + (user?.collectedEntriesCount?: 0) + "篇"
+                R.drawable.profile_collection_set -> return "" + (user?.collectionSetCount?: 0) + "个"
+                R.drawable.profile_view -> return "" + (user?.viewedEntriesCount?: 0) + "篇"
+                R.drawable.profile_tag -> return "" + (user?.subscribedTagsCount?: 0) + "个"
                 else -> return ""
             }
         }
