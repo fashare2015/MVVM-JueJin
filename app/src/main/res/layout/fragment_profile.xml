@@ -94,8 +94,8 @@
                     android:layout_marginTop="@dimen/profile_margin"
                     android:orientation="vertical"
                     android:background="@color/profile_item_bg"
-                    bind:itemView="@{profileVM.itemView}"
-                    bind:viewModels="@{profileVM.viewModels}"/>
+                    bind:vm="@{profileVM}"
+                    bind:data="@{profileVM.data}"/>
 
             </LinearLayout>
 

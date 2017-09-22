@@ -1,15 +1,14 @@
 package com.fashare.mvvm_juejin.viewmodel
 
 import android.content.Intent
-import android.databinding.ObservableArrayList
 import android.databinding.ObservableField
 import android.support.annotation.DrawableRes
 import android.view.View
-import com.fashare.mvvm_juejin.BR
+import com.fashare.databinding.ListVM
+import com.fashare.databinding.adapters.annotation.ResHolder
 import com.fashare.mvvm_juejin.R
 import com.fashare.mvvm_juejin.model.user.UserBean
 import com.fashare.mvvm_juejin.view.profile.login.LoginActivity
-import me.tatarka.bindingcollectionadapter.ItemView
 
 /**
  * <pre>
@@ -18,7 +17,8 @@ import me.tatarka.bindingcollectionadapter.ItemView
  *     desc   :
  * </pre>
  */
-class ProfileVM(){
+@ResHolder(R.layout.item_profile_list)
+class ProfileVM : ListVM<ProfileVM.Item>(){
     // login area
     var user = ObservableField<UserBean>(null)
 
@@ -32,10 +32,10 @@ class ProfileVM(){
     }
 
     // list area
-    val itemView = ItemView.of(BR.item, R.layout.item_profile_list)
-    val viewModels = ObservableArrayList<Item>().apply{
-        this.addAll(getDefaultList())
-    }
+//    val itemView = ItemView.of(BR.item, R.layout.item_profile_list)
+//    val viewModels = ObservableArrayList<Item>().apply{
+//        this.addAll(getDefaultList())
+//    }
 
     fun getDefaultList() = listOf(
             Item(R.drawable.profile_i_like, "我喜欢的", user.get()),

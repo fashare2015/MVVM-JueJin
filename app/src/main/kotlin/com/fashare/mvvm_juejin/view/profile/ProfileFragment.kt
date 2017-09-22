@@ -1,7 +1,6 @@
 package com.fashare.mvvm_juejin.view.profile
 
 import android.databinding.DataBindingUtil
-import android.databinding.ObservableField
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +26,10 @@ class ProfileFragment : BaseFragment(){
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return DataBindingUtil.inflate<FragmentProfileBinding>(inflater, R.layout.fragment_profile, container, false).apply {
             binding = this
-            this.profileVM = ProfileVM()
+            this.profileVM = ProfileVM().apply{
+                this.data.clear()
+                this.data.addAll(this.getDefaultList())
+            }
         }.root
     }
 
@@ -44,7 +46,7 @@ class ProfileFragment : BaseFragment(){
                     .compose(Composers.compose())
                     .subscribe({
                         binding.profileVM.user.set(it)
-                        binding.profileVM.viewModels.apply{
+                        binding.profileVM.data.apply{
                             this.clear()
                             this.addAll(binding.profileVM.getDefaultList())
                         }
