@@ -6,6 +6,27 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <!--加与不加前缀 android: 的区别???: https://stackoverflow.com/questions/34115049/edittext-not-using-theme-->
+        <!--https://stackoverflow.com/questions/32377202/android-set-edit-text-style-globally-in-theme-doesnt-work/34010235#34010235-->
+        <item name="editTextStyle">@style/G_EditText</item>
+        <item name="android:editTextStyle">@style/G_EditText</item>
+        <item name="android:buttonStyle">@style/G_Button</item>
+    </style>
+
+    <style name="G_EditText" parent="@android:style/Widget.EditText">
+        <item name="android:background">@null</item>
+        <item name="android:padding">@dimen/g_margin</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/g_text_black</item>
+        <item name="android:textColorHint">@color/g_text_gray</item>
+    </style>
+
+    <style name="G_Button" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/g_button_bg</item>
+        <item name="android:padding">@dimen/g_margin</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/g_text_white</item>
     </style>
 
 </resources>
