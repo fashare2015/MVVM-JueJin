@@ -4,9 +4,9 @@ import android.databinding.ObservableBoolean
 import android.databinding.ObservableInt
 import com.fashare.adapter.OnItemClickListener
 import com.fashare.adapter.ViewHolder
-import com.fashare.mvvm_juejin.BR
+import com.fashare.databinding.ListVM
+import com.fashare.databinding.adapters.annotation.ResHolder
 import com.fashare.mvvm_juejin.R
-import me.tatarka.bindingcollectionadapter.ItemView
 
 /**
  * <pre>
@@ -15,28 +15,18 @@ import me.tatarka.bindingcollectionadapter.ItemView
  *     desc   :
  * </pre>
  */
-class TabVM(var delegate: OnItemClickListener<Item>?){
-//    var img = "https://img.mp.itc.cn/upload/20160506/0afc31ee80dd444687b2b52fb21ec5e3_th.png"
-    var itemView = ItemView.of(BR.tabItem, R.layout.item_main_tab)
-    var viewModels = arrayOf(
-            Item(ObservableBoolean(true), R.drawable.tab_home_normal, R.drawable.tab_home),
-            Item(ObservableBoolean(false), R.drawable.tab_explore_normal, R.drawable.tab_explore),
-            Item(ObservableBoolean(false), R.drawable.tab_notifications_normal, R.drawable.tab_notifications),
-            Item(ObservableBoolean(false), R.drawable.tab_profile_normal, R.drawable.tab_profile)
-    )
-
+@ResHolder(R.layout.item_main_tab)
+class TabVM(): ListVM<TabVM.Item>() {
     var curIndex = ObservableInt(0)
 
-    var onItemClick = object: OnItemClickListener<Item>(){
+    override var onItemClick = object: OnItemClickListener<Item>(){
         override fun onItemClick(holder: ViewHolder?, data: Item?, position: Int) {
-            viewModels.forEach{
+            this@TabVM.data.forEach{
                 it.isSelected.set(false)
                 if(it == data)
                     it.isSelected.set(true)
             }
             curIndex.set(position)
-
-            delegate?.onItemClick(holder, data, position)
         }
     }
 

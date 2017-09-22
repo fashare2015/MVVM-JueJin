@@ -1,6 +1,7 @@
 package com.fashare.mvvm_juejin.view
 
 import android.databinding.DataBindingUtil
+import android.databinding.ObservableBoolean
 import android.os.Bundle
 import com.fashare.base_ui.BaseActivity
 import com.fashare.mvvm_juejin.R
@@ -25,7 +26,14 @@ class MainActivity : BaseActivity() {
                     ProfileFragment()
             ))
 
-            this.tab = TabVM(null)
+            this.tab = TabVM().apply{
+                this.data.addAll(listOf(
+                    TabVM.Item(ObservableBoolean(true), R.drawable.tab_home_normal, R.drawable.tab_home),
+                    TabVM.Item(ObservableBoolean(false), R.drawable.tab_explore_normal, R.drawable.tab_explore),
+                    TabVM.Item(ObservableBoolean(false), R.drawable.tab_notifications_normal, R.drawable.tab_notifications),
+                    TabVM.Item(ObservableBoolean(false), R.drawable.tab_profile_normal, R.drawable.tab_profile)
+                ))
+            }
         }
     }
 }

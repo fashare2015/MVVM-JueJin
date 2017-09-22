@@ -6,7 +6,7 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="tabItem" type="com.fashare.mvvm_juejin.viewmodel.TabVM.Item"/>
+        <variable name="item" type="com.fashare.mvvm_juejin.viewmodel.TabVM.Item"/>
     </data>
 
     <RelativeLayout
@@ -20,7 +20,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerInParent="true"
-            bind:placeholder="@{tabItem.isSelected? tabItem.iconResSelected: tabItem.iconResNormal}"
+            bind:placeholder="@{item.isSelected? item.iconResSelected: item.iconResNormal}"
             tools:src="@drawable/tab_home"/>
     </RelativeLayout>
 

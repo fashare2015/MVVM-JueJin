@@ -31,8 +31,6 @@ class HomeListVM: ListVM<ArticleBean>() {
 
     @ResHolder(R.layout.header_item_home)
     class HeaderVM: ListVM<ArticleBean>() {
-//        val itemView = ItemView.of(BR.item, R.layout.header_item_home)
-//        val viewModels = ObservableArrayList<ArticleBean>()
 
         override val onItemClick = object : OnItemClickListener<ArticleBean>() {
             override fun onItemClick(holder: ViewHolder?, data: ArticleBean?, position: Int) {

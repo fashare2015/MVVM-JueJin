@@ -5,13 +5,9 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-            name="pages"
-            type="com.fashare.mvvm_juejin.viewmodel.TabPagesVM"/>
+        <variable name="pages" type="com.fashare.mvvm_juejin.viewmodel.TabPagesVM"/>
 
-        <variable
-            name="tab"
-            type="com.fashare.mvvm_juejin.viewmodel.TabVM"/>
+        <variable name="tab" type="com.fashare.mvvm_juejin.viewmodel.TabVM"/>
     </data>
 
     <LinearLayout
@@ -32,9 +28,8 @@
             android:layout_height="50dp"
             android:orientation="horizontal"
             android:background="@color/g_item_bg"
-            bind:itemView="@{tab.itemView}"
-            bind:viewModels="@{tab.viewModels}"
-            bind:onItemClick="@{tab.onItemClick}"/>
+            bind:vm="@{tab}"
+            bind:data="@{tab.data}"/>
     </LinearLayout>
 
 </layout>
