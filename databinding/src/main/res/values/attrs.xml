@@ -15,8 +15,8 @@
     </declare-styleable>
 
     <declare-styleable name="ViewGroup">
-        <!--me.tatarka.bindingcollectionadapter.ItemView-->
-        <attr name="item" format="reference"/>
+        <!--com.fashare.databinding.ListVM-->
+        <attr name="vm" format="reference"/>
         <!--Object[] | List<?>-->
         <attr name="data" format="reference" />
         <!--com.fashare.adapter.OnItemClickListener<?>-->

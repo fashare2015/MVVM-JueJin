@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 
 import com.fashare.adapter.OnItemClickListener;
 import com.fashare.adapter.ViewHolder;
+import com.fashare.databinding.ListVM;
+import com.fashare.databinding.adapters.annotation.ResHolder;
+import com.fashare.databinding.adapters.annotation.ResUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,6 +39,16 @@ public final class ViewGroupAdapter {
                 setListener(onItemClickListener, ViewHolder.createViewHolder(viewGroup.getContext(), binding.getRoot()), viewModel, pos);
             }
         }
+    }
+
+    @BindingAdapter(value = {"vm", "data"})
+    public static <T> void addViews(ViewGroup viewGroup, ListVM<T> vm, List<T> datas) {
+        if(vm == null)
+            return ;
+
+        ItemView item = ResUtils.INSTANCE.getItemView(vm.getClass().getAnnotation(ResHolder.class));
+
+        addViews(viewGroup, item, datas.toArray(), vm.getOnItemClick());
     }
 
     private static void setListener(final OnItemClickListener onItemClickListener, final ViewHolder viewHolder, final Object data, final int pos) {

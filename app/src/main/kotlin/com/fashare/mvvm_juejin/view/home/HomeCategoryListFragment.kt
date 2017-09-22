@@ -71,7 +71,7 @@ class HomeCategoryListFragment(val categoryId: String = "") : BaseFragment(){
                     sv.onFinishFreshAndLoad()
                     val list = it?.entry?.entrylist?: Collections.emptyList<ArticleBean>()
 
-                    mListVM.headerData.viewModels.apply{
+                    mListVM.headerData.data.apply{
                         this.clear()
                         this.addAll(if(list.size<=3) list else list.subList(0, 3))
                     }
