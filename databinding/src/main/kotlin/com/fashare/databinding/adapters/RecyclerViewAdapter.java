@@ -5,7 +5,6 @@ import android.databinding.BindingConversion;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.LayoutRes;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 
@@ -40,58 +39,11 @@ public class RecyclerViewAdapter {
         return ItemView.of(defaultBindingVariable, layoutRes);
     }
 
-//    @BindingAdapter(value = {"item", "data", "header", "headerData", "onItemClick"}, requireAll = false)
-//    public static void bind(RecyclerView container, final ItemView item, final List<?> datas,
-//                            final List<? extends ItemView> header, final List<?> headerDatas,
-//                            final OnItemClickListener<?> onItemClickListener) {
-//        if(!(container.getContext() instanceof FragmentActivity))
-//            throw new IllegalArgumentException(TAG + "context must instanceof FragmentActivity");
-//
-//        RecyclerView.Adapter<?> adapter;
-//        if (datas != null) {
-//            // set default LayoutManager.
-//            if(container.getLayoutManager() == null)
-//                setLayoutManager(container, LayoutManagers.linear());
-//
-//            adapter = container.getAdapter();
-//            if(adapter == null) {
-//
-//                // initialize, adapter is only set once !!!
-//                CommonRvAdapter innerAdapter;
-//                container.setAdapter(adapter = new HeaderAndFooterWrapper<>(innerAdapter = new CommonRvAdapter<Object>(container.getContext(), item.layoutRes(), (List<Object>)datas) {
-//                    @Override
-//                    protected void convert(ViewHolder holder, Object data, int position) {
-//                        DataBindingUtil.bind(holder.itemView).setVariable(item.bindingVariable(), data);
-//                    }
-//                }));
-//                innerAdapter.setOnItemClickListener(onItemClickListener);
-//
-//                // add headers !!!
-//                if (header!=null && headerDatas != null) {
-//                    HeaderAndFooterWrapper headerAdapter = (HeaderAndFooterWrapper) adapter;
-//                    headerAdapter.removeHeaderViews();
-//                    for (int i = 0; i < header.size() && i < headerDatas.size(); i++) {
-//                        ItemView _itemView = header.get(i);
-//                        Object _data = headerDatas.get(i);
-//                        LayoutInflater inflater = LayoutInflater.from(container.getContext());
-//
-//                        ViewDataBinding binding = DataBindingUtil.inflate(inflater, _itemView.layoutRes(), container, false);
-//                        headerAdapter.addHeaderView(binding.getRoot());
-//                        binding.setVariable(_itemView.bindingVariable(), _data);
-//                    }
-//                }
-//            }
-//
-//            adapter.notifyDataSetChanged();
-//        }
-//    }
-
     @BindingAdapter(value = {"itemView", "viewModels", "headerItemViews", "headerViewModels", "onItemClick"}, requireAll = false)
     public static void bind(RecyclerView container, final ItemView item, final List<?> datas,
                             final List<? extends ItemView> header, final List<?> headerDatas,
                             final OnItemClickListener<?> onItemClickListener) {
-        if(!(container.getContext() instanceof FragmentActivity))
-            throw new IllegalArgumentException(TAG + "context must instanceof FragmentActivity");
+
 
         RecyclerView.Adapter<?> adapter;
         if (datas != null) {
@@ -132,13 +84,6 @@ public class RecyclerViewAdapter {
         }
     }
 
-//    @BindingAdapter(value = {"item", "data", "header", "headerData", "onItemClick"}, requireAll = false)
-//    public static void bind(RecyclerView container, final ItemView item, final List<?> datas,
-//                            final ItemView header, final Object headerData,
-//                            final OnItemClickListener<?> onItemClickListener) {
-//        bind(container, item, datas, Arrays.asList(header), Arrays.asList(headerData), onItemClickListener);
-//    }
-
     @BindingAdapter(value = {"itemView", "viewModels", "headerItemViews", "headerViewModels", "onItemClick"}, requireAll = false)
     public static void bind(RecyclerView container, final ItemView item, final List<?> datas,
                             final ItemView header, final Object headerData,
@@ -158,6 +103,9 @@ public class RecyclerViewAdapter {
 
         ItemView item = ResUtils.INSTANCE.getItemView(vm.getClass().getAnnotation(ResHolder.class)),
                 header = ResUtils.INSTANCE.getItemView(vm.getClass().getAnnotation(HeaderResHolder.class));
+
+        if(item == null)
+            throw new IllegalArgumentException(TAG + "ItemView is null, maybe you forget @ResHolder(R.layout.XXX) in " + vm.getClass().getCanonicalName());
 
         bind(container, item, datas, header, vm.getHeaderData(), vm.getOnItemClick());
     }

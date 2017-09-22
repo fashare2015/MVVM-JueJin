@@ -6,7 +6,7 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="item" type="com.fashare.mvvm_juejin.viewmodel.ExploreListVM.HeaderVM.Entry"/>
+        <variable name="item" type="com.fashare.mvvm_juejin.viewmodel.ExploreListVM.HeaderVM.Entrys.Item"/>
     </data>
 
     <LinearLayout

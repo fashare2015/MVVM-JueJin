@@ -19,15 +19,17 @@ import java.util.List;
 import me.tatarka.bindingcollectionadapter.ItemView;
 
 public final class ViewGroupAdapter {
+    public static final String TAG = "ViewGroupAdapter - binding ViewGroup...: ";
+
     @BindingAdapter(value = {"itemView", "viewModels", "onItemClick"}, requireAll = false)
-    public static void addViews(ViewGroup viewGroup, ItemView itemView, Object[] viewModelList, OnItemClickListener<?> onItemClickListener) {
+    public static void bind(ViewGroup viewGroup, ItemView itemView, Object[] viewModelList, OnItemClickListener<?> onItemClickListener) {
         if (viewModelList != null && viewModelList.length > 0) {
-            addViews(viewGroup, itemView, Arrays.asList(viewModelList), onItemClickListener);
+            bind(viewGroup, itemView, Arrays.asList(viewModelList), onItemClickListener);
         }
     }
 
     @BindingAdapter(value = {"itemView", "viewModels", "onItemClick"}, requireAll = false)
-    public static void addViews(ViewGroup viewGroup, ItemView itemView, List<?> viewModelList, final OnItemClickListener<?> onItemClickListener) {
+    public static void bind(ViewGroup viewGroup, ItemView itemView, List<?> viewModelList, final OnItemClickListener<?> onItemClickListener) {
         if (viewModelList != null && !viewModelList.isEmpty()) {
             viewGroup.removeAllViews();
             for (int pos=0; pos<viewModelList.size(); pos++) {
@@ -42,13 +44,16 @@ public final class ViewGroupAdapter {
     }
 
     @BindingAdapter(value = {"vm", "data"})
-    public static <T> void addViews(ViewGroup viewGroup, ListVM<T> vm, List<T> datas) {
+    public static <T> void bind(ViewGroup viewGroup, ListVM<T> vm, List<T> datas) {
         if(vm == null)
             return ;
 
         ItemView item = ResUtils.INSTANCE.getItemView(vm.getClass().getAnnotation(ResHolder.class));
 
-        addViews(viewGroup, item, datas.toArray(), vm.getOnItemClick());
+        if(item == null)
+            throw new IllegalArgumentException(TAG + "ItemView is null, maybe you forget @ResHolder(R.layout.XXX) in " + vm.getClass().getCanonicalName());
+
+        bind(viewGroup, item, datas.toArray(), vm.getOnItemClick());
     }
 
     private static void setListener(final OnItemClickListener onItemClickListener, final ViewHolder viewHolder, final Object data, final int pos) {

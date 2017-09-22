@@ -8,7 +8,7 @@
     <data>
         <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
 
-        <variable name="headerVM" type="com.fashare.mvvm_juejin.viewmodel.ExploreListVM.HeaderVM"/>
+        <variable name="item" type="com.fashare.mvvm_juejin.viewmodel.ExploreListVM.HeaderVM"/>
     </data>
 
     <LinearLayout
@@ -20,17 +20,16 @@
         <android.support.v4.view.ViewPager
             android:layout_width="match_parent"
             android:layout_height="140dp"
-            bind:itemView="@{headerVM.itemView}"
-            bind:viewModels="@{headerVM.viewModels}"/>
-            <!--bind:curIndex="@{0}"/>-->
+            bind:vm="@{item.banner}"
+            bind:data="@{item.banner.data}"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="@color/explore_item_bg"
-            bind:itemView="@{headerVM.itemViewEntry}"
-            bind:viewModels="@{headerVM.entrys}"/>
+            bind:vm="@{item.entrys}"
+            bind:data="@{item.entrys.data}"/>
 
         <include layout="@layout/g_line_horizontal"/>
 
@@ -57,8 +56,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
                 bind:layoutManager="@{LayoutManagers.linearHorizontal()}"
-                bind:itemView="@{headerVM.itemViewTopic}"
-                bind:viewModels="@{headerVM.topics}"/>
+                bind:vm="@{item.topics}"
+                bind:data="@{item.topics.data}"/>
 
             <include layout="@layout/g_line_horizontal"/>
 

@@ -9,6 +9,9 @@ import android.support.v4.view.ViewPager;
 import com.fashare.adapter.OnItemClickListener;
 import com.fashare.adapter.ViewHolder;
 import com.fashare.adapter.viewpager.CommonPagerAdapter;
+import com.fashare.databinding.ListVM;
+import com.fashare.databinding.adapters.annotation.ResHolder;
+import com.fashare.databinding.adapters.annotation.ResUtils;
 
 import java.util.List;
 
@@ -44,6 +47,19 @@ public class ViewPagerAdapter {
 
             adapter.notifyDataSetChanged();
         }
+    }
+
+    @BindingAdapter(value = {"vm", "data"})
+    public static <T> void bind(ViewPager container, ListVM<T> vm, List<T> datas) {
+        if(vm == null)
+            return ;
+
+        ItemView item = ResUtils.INSTANCE.getItemView(vm.getClass().getAnnotation(ResHolder.class));
+
+        if(item == null)
+            throw new IllegalArgumentException(TAG + "ItemView is null, maybe you forget @ResHolder(R.layout.XXX) in " + vm.getClass().getCanonicalName());
+
+        bind(container, item, datas, vm.getOnItemClick());
     }
 
     @BindingAdapter({"offscreenPageLimit"})

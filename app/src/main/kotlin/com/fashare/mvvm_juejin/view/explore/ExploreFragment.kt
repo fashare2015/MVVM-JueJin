@@ -18,7 +18,7 @@ import com.fashare.net.ApiFactory
 import com.liaoinstan.springview.container.DefaultFooter
 import com.liaoinstan.springview.container.DefaultHeader
 import com.liaoinstan.springview.widget.SpringView
-import kotlinx.android.synthetic.main.fragment_explore.*
+import kotlinx.android.synthetic.main.g_list.*
 import java.util.*
 
 /**
@@ -30,12 +30,12 @@ import java.util.*
  */
 class ExploreFragment : BaseFragment(){
     private val IS_CLEAR = true
-    lateinit var binding: FragmentExploreBinding
+    lateinit var mListVM: ExploreListVM
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return DataBindingUtil.inflate<FragmentExploreBinding>(inflater, R.layout.fragment_explore, container, false).apply{
-            binding = this
             this.listVM = ExploreListVM()
+            mListVM = this.listVM
         }.root
     }
 
@@ -52,7 +52,7 @@ class ExploreFragment : BaseFragment(){
             }
 
             override fun onLoadmore() {
-                val list: List<ArticleBean> = binding.listVM.viewModels
+                val list: List<ArticleBean> = mListVM.data
                 loadHotArticles(!IS_CLEAR, list[list.size-1].rankIndex.toString())
             }
         })
@@ -74,7 +74,7 @@ class ExploreFragment : BaseFragment(){
                 .subscribe({
                     val list = it?.banner?: Collections.emptyList<BannerListBean.Item>()
 
-                    binding.listVM.headerViewModels.get(0).viewModels.apply{
+                    mListVM.headerData.banner.data.apply{
                         this.clear()
                         this.addAll(list)
                     }
@@ -95,7 +95,7 @@ class ExploreFragment : BaseFragment(){
                 .subscribe({
                     val list = it?.entrylist as Iterable<ArticleBean>
 
-                    binding.listVM.headerViewModels.get(0).topics.apply{
+                    mListVM.headerData.topics.data.apply{
                         this.clear()
                         this.addAll(list)
                     }
@@ -117,7 +117,7 @@ class ExploreFragment : BaseFragment(){
                     sv.onFinishFreshAndLoad()
                     val list = it?.entrylist as Iterable<ArticleBean>
 
-                    binding.listVM.viewModels.apply{
+                    mListVM.data.apply{
                         if(isClear)
                             this.clear()
                         this.addAll(list.filter{ !this.contains(it) })  // 去重

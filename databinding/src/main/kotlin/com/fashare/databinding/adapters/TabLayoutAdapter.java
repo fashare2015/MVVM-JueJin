@@ -13,8 +13,6 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import me.tatarka.bindingcollectionadapter.ItemView;
-
 /**
  * User: fashare(153614131@qq.com)
  * Date: 2017-09-10
@@ -23,8 +21,8 @@ import me.tatarka.bindingcollectionadapter.ItemView;
 public class TabLayoutAdapter {
     public static final String TAG = "TabLayoutAdapter - binding TabLayout...: ";
 
-    @BindingAdapter(value = {"itemView", "viewModels", "viewPagerIdRes"}, requireAll = false)
-    public static void bind(final TabLayout container, final ItemView itemView, final List<String> datas, @IdRes final int viewPagerIdRes) {
+    @BindingAdapter(value = {"data", "viewPagerIdRes"}, requireAll = false)
+    public static void bind(final TabLayout container, final List<String> datas, @IdRes final int viewPagerIdRes) {
         ViewPager viewPager = findViewPager(container, viewPagerIdRes);
 
         if(datas != null && !datas.isEmpty()) {

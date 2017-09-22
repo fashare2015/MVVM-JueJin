@@ -21,24 +21,8 @@
             android:layout_height="40dp"
             android:background="@color/colorPrimary"/>
 
-        <com.liaoinstan.springview.widget.SpringView
-            android:id="@+id/sv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <!--sv:header="@layout/g_ptr_header"-->
-            <!--sv:footer="@layout/g_ptr_footer">-->
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                bind:layoutManager="@{LayoutManagers.linear()}"
-                bind:itemView="@{listVM.itemView}"
-                bind:viewModels="@{listVM.viewModels}"
-                bind:headerItemViews="@{listVM.headerItemViews}"
-                bind:headerViewModels="@{listVM.headerViewModels}"
-                bind:onItemClick="@{listVM.onItemClick}"/>
-
-        </com.liaoinstan.springview.widget.SpringView>
+        <include layout="@layout/g_list"
+            bind:listVM="@{listVM}"/>
 
     </LinearLayout>
 
