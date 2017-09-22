@@ -1,5 +1,8 @@
 package com.fashare.mvvm_juejin.repo
 
+import android.widget.Toast
+import com.fashare.mvvm_juejin.JueJinApp
+import com.fashare.net.exception.ApiException
 import com.fashare.net.exception.ExceptionFactory
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
@@ -18,7 +21,9 @@ object Composers {
                         }
                     }
                     .onErrorResumeNext { throwable: Throwable ->
-                        Observable.error(ExceptionFactory.create(throwable))
+                        val error : ApiException = ExceptionFactory.create(throwable)
+                        Toast.makeText(JueJinApp.instance, error.errorMsg, Toast.LENGTH_SHORT).show()
+                        Observable.error(error)
                     }
                     .subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())

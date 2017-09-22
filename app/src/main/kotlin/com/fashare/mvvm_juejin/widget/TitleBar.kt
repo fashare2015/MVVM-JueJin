@@ -26,6 +26,7 @@ class TitleBar : Toolbar {
         init()
     }
 
+    @Suppress("DEPRECATION")
     private fun init() {
         if(navigationIcon == null) {
             setNavigationIcon(R.drawable.g_back_white)
@@ -33,20 +34,20 @@ class TitleBar : Toolbar {
         setNavigationOnClickListener { (context as Activity).finish() }
 
         if(background == null)
-            setBackgroundColor(context.resources.getColor(R.color.colorPrimary, null))
+            setBackgroundColor(context.resources.getColor(R.color.colorPrimary))
 
         if(getTitleTextColor() == 0)
-            setTitleTextColor(context.resources.getColor(android.R.color.white, null))
+            setTitleTextColor(context.resources.getColor(android.R.color.white))
     }
 
     private fun getTitleTextColor(): Int {
-        try {
-            return Toolbar::class.java.getDeclaredField("mTitleTextColor").apply {
+        return try {
+            Toolbar::class.java.getDeclaredField("mTitleTextColor").apply {
                 this.isAccessible = true
             }.get(this) as Int
         }catch (e: NoSuchFieldException){
             Log.e(TAG, e.toString())
-            return 0
+            0
         }
     }
 }

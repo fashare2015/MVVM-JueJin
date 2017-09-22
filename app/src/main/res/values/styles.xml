@@ -23,8 +23,9 @@
     </style>
 
     <style name="G_Button" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/g_button_bg</item>
         <item name="android:padding">@dimen/g_margin</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/g_button_bg</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/g_text_white</item>
     </style>

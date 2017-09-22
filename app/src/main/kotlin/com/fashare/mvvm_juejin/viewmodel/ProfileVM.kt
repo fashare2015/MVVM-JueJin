@@ -51,12 +51,12 @@ class ProfileVM : ListVM<ProfileVM.Item>(){
                val user: UserBean? = null){
 
         fun parseItemCount(user: UserBean?):String{
-            when(iconRes){
-                R.drawable.profile_i_like -> return "" + (user?.collectedEntriesCount?: 0) + "篇"
-                R.drawable.profile_collection_set -> return "" + (user?.collectionSetCount?: 0) + "个"
-                R.drawable.profile_view -> return "" + (user?.viewedEntriesCount?: 0) + "篇"
-                R.drawable.profile_tag -> return "" + (user?.subscribedTagsCount?: 0) + "个"
-                else -> return ""
+            return when(iconRes){
+                R.drawable.profile_i_like -> "" + (user?.collectedEntriesCount?: 0) + "篇"
+                R.drawable.profile_collection_set -> "" + (user?.collectionSetCount?: 0) + "个"
+                R.drawable.profile_view -> "" + (user?.viewedEntriesCount?: 0) + "篇"
+                R.drawable.profile_tag -> "" + (user?.subscribedTagsCount?: 0) + "个"
+                else -> ""
             }
         }
     }

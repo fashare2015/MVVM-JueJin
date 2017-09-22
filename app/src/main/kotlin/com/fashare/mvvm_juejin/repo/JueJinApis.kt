@@ -82,14 +82,24 @@ interface JueJinApis {
 
         @FormUrlEncoded
         @Headers(
-//            "Content-Type: application/x-www-form-urlencoded",
             "X-Juejin-Src:android"
         )
         @POST("/v1/login")
         fun login(@FieldMap param: Map<String, String>): Observable<Response<UserBean.TokenBean>>
 
+
+
         @ApiFactory.BaseUrl("https://user-storage-api-ms.juejin.im")
         interface Storage{
+            @FormUrlEncoded
+            @POST("/v1/createUser")
+            fun register(@Field("email") email: String,
+                         @Field("username") username: String,
+                         @Field("password") password: String,
+                         @Field("mobilePhoneNumber") mobilePhoneNumber: String,
+                         @Field("smsCode") smsCode: String,
+                         @Field("src") src: String): Observable<Response<List<Any>>>
+
             @GET("v1/getUserInfo")
             fun getUserInfo(@Query("uid") uid: String,
                             @Query("current_uid") current_uid: String,

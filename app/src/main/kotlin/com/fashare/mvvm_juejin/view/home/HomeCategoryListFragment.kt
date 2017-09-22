@@ -61,7 +61,7 @@ class HomeCategoryListFragment(val categoryId: String = "") : BaseFragment(){
     private fun loadHeaderData(){
         ApiFactory.getApi(JueJinApis:: class.java)
                 .getEntryByHotRecomment(
-                        "57bd25f4a34131005b211b84",
+                        LocalUser.userToken?.user_id?:"unlogin",
                         "20",
                         LocalUser.userToken?.token?: "",
                         "b9ae8b6a-efe0-4944-b574-b01a3a1303ee",
@@ -83,7 +83,7 @@ class HomeCategoryListFragment(val categoryId: String = "") : BaseFragment(){
     private fun loadArticles(isClear: Boolean, before: String) {
         ApiFactory.getApi(JueJinApis:: class.java)
                 .getEntryByTimeLine(categoryId, "",
-                        "57bd25f4a34131005b211b84",
+                        LocalUser.userToken?.user_id?:"unlogin",
                         before,
                         "20",
                         LocalUser.userToken?.token?: "",

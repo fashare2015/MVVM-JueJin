@@ -7,7 +7,7 @@
 
     <data>
 
-        <variable name="loginVM" type="com.fashare.mvvm_juejin.viewmodel.LoginVM"/>
+        <variable name="registerVM" type="com.fashare.mvvm_juejin.viewmodel.RegisterVM"/>
     </data>
 
     <FrameLayout
@@ -22,17 +22,11 @@
             android:padding="@dimen/login_margin"
             android:background="@color/colorPrimary">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/login_margin"
-                android:src="@drawable/login_logo"/>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="@dimen/login_margin"
+                android:layout_marginTop="80dp"
                 android:background="@drawable/g_edit_text_bg">
 
                 <EditText
@@ -40,9 +34,16 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/login_edit_padding"
                     android:hint="手机号/邮箱"
-                    android:text="@={loginVM.userName}"/>
-                    <!-- @={XXX}: 双向绑定(two way databinding)!!! -->
-                    <!--https://halfthought.wordpress.com/2016/03/23/2-way-data-binding-on-android/-->
+                    android:text="@={registerVM.phoneNum}"/>
+
+                <include layout="@layout/g_line_horizontal"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/login_edit_padding"
+                    android:hint="用户名"
+                    android:text="@={registerVM.userName}"/>
 
                 <include layout="@layout/g_line_horizontal"/>
 
@@ -52,38 +53,15 @@
                     android:padding="@dimen/login_edit_padding"
                     android:inputType="textPassword"
                     android:hint="密码"
-                    android:text="@={loginVM.passWord}"/>
+                    android:text="@={registerVM.passWord}"/>
 
             </LinearLayout>
 
             <Button
                 style="@style/LoginButton"
                 android:layout_marginTop="12dp"
-                android:text="登录"
-                android:onClick="@{loginVM.doLogin}"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="忘记密码?"
-                    android:textColor="@color/login_text_light"
-                    android:textSize="13sp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="注册账号"
-                    android:textColor="@color/login_text_default"
-                    android:textSize="13sp"
-                    android:onClick="@{loginVM.toRegister}"/>
-
-            </RelativeLayout>
+                android:text="注册"
+                android:onClick="@{registerVM.doRegister}"/>
 
         </LinearLayout>
 
