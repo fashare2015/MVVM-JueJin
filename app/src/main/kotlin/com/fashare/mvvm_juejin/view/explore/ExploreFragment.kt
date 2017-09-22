@@ -18,7 +18,7 @@ import com.fashare.net.ApiFactory
 import com.liaoinstan.springview.container.DefaultFooter
 import com.liaoinstan.springview.container.DefaultHeader
 import com.liaoinstan.springview.widget.SpringView
-import kotlinx.android.synthetic.main.fragment_home_list.*
+import kotlinx.android.synthetic.main.fragment_explore.*
 import java.util.*
 
 /**

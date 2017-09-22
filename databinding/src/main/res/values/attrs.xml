@@ -16,9 +16,9 @@
 
     <declare-styleable name="ViewGroup">
         <!--me.tatarka.bindingcollectionadapter.ItemView-->
-        <attr name="itemView" format="reference"/>
+        <attr name="item" format="reference"/>
         <!--Object[] | List<?>-->
-        <attr name="viewModels" format="reference" />
+        <attr name="data" format="reference" />
         <!--com.fashare.adapter.OnItemClickListener<?>-->
         <attr name="onItemClick" format="reference" />
 
@@ -30,9 +30,9 @@
 
     <declare-styleable name="RecyclerView">
         <!--List<? extends me.tatarka.bindingcollectionadapter.ItemView>-->
-        <attr name="headerItemViews" format="reference"/>
+        <attr name="header" format="reference"/>
         <!--List<?>-->
-        <attr name="headerViewModels" format="reference" />
+        <attr name="headerData" format="reference" />
         <!--com.fashare.adapter.OnItemClickListener<?>-->
         <!--<attr name="onItemClick" format="reference" />-->
     </declare-styleable>

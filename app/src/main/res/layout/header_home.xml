@@ -8,7 +8,7 @@
     <data>
         <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
 
-        <variable name="headerVM" type="com.fashare.mvvm_juejin.viewmodel.HomeListVM.HeaderVM"/>
+        <variable name="item" type="com.fashare.mvvm_juejin.viewmodel.HomeListVM.HeaderVM"/>
     </data>
 
     <LinearLayout
@@ -58,8 +58,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            bind:itemView="@{headerVM.itemView}"
-            bind:viewModels="@{headerVM.viewModels}"/>
+            bind:itemView="@{item.itemView}"
+            bind:viewModels="@{item.viewModels}"/>
 
         <include layout="@layout/g_line_horizontal"/>
 

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.fashare.base_ui.BaseFragment
 import com.fashare.mvvm_juejin.R
-import com.fashare.mvvm_juejin.databinding.FragmentHomeListBinding
+import com.fashare.mvvm_juejin.databinding.GListBinding
 import com.fashare.mvvm_juejin.model.article.ArticleBean
 import com.fashare.mvvm_juejin.repo.Composers
 import com.fashare.mvvm_juejin.repo.JueJinApis
@@ -17,7 +17,7 @@ import com.fashare.net.ApiFactory
 import com.liaoinstan.springview.container.DefaultFooter
 import com.liaoinstan.springview.container.DefaultHeader
 import com.liaoinstan.springview.widget.SpringView
-import kotlinx.android.synthetic.main.fragment_home_list.*
+import kotlinx.android.synthetic.main.g_list.*
 import java.util.*
 
 /**
@@ -29,12 +29,12 @@ import java.util.*
  */
 class HomeCategoryListFragment(val categoryId: String = "") : BaseFragment(){
     private val IS_CLEAR = true
-    lateinit var binding: FragmentHomeListBinding
+    lateinit var mListVM: HomeListVM
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return DataBindingUtil.inflate<FragmentHomeListBinding>(inflater, R.layout.fragment_home_list, container, false).apply {
-            binding = this
-            binding.listVM = HomeListVM()
+        return DataBindingUtil.inflate<GListBinding>(inflater, R.layout.g_list, container, false).apply {
+            mListVM = HomeListVM()
+            this.listVM = mListVM
         }.root
     }
 
@@ -52,7 +52,7 @@ class HomeCategoryListFragment(val categoryId: String = "") : BaseFragment(){
             }
 
             override fun onLoadmore() {
-                val list: List<ArticleBean> = binding.listVM.viewModels
+                val list: List<ArticleBean> = mListVM.data
                 loadArticles(!IS_CLEAR, list[list.size-1].createdAt?: "")
             }
         })
@@ -71,7 +71,7 @@ class HomeCategoryListFragment(val categoryId: String = "") : BaseFragment(){
                     sv.onFinishFreshAndLoad()
                     val list = it?.entry?.entrylist?: Collections.emptyList<ArticleBean>()
 
-                    binding.listVM.headerViewModels.get(0).viewModels.apply{
+                    mListVM.headerData.viewModels.apply{
                         this.clear()
                         this.addAll(if(list.size<=3) list else list.subList(0, 3))
                     }
@@ -94,7 +94,7 @@ class HomeCategoryListFragment(val categoryId: String = "") : BaseFragment(){
                     sv.onFinishFreshAndLoad()
                     val list = it?.entrylist as Iterable<ArticleBean>
 
-                    binding.listVM.viewModels.apply{
+                    mListVM.data.apply{
                         if(isClear)
                             this.clear()
                         this.addAll(list)

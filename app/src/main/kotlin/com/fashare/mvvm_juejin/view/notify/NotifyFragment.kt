@@ -46,7 +46,7 @@ class NotifyFragment : BaseFragment(){
 //                    sv.onFinishFreshAndLoad()
                     val list = it
 
-                    binding.listVM.viewModels.apply{
+                    binding.listVM.data.apply{
 //                        if(isClear)
                             this.clear()
                         this.addAll(list)
