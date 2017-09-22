@@ -7,6 +7,8 @@ import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.webkit.WebView
+import com.fashare.adapter.OnItemClickListener
+import com.fashare.adapter.ViewHolder
 import com.fashare.base_ui.BaseActivity
 import com.fashare.mvvm_juejin.JueJinApp
 import com.fashare.mvvm_juejin.R
@@ -73,6 +75,12 @@ class ArticleActivity : BaseActivity() {
             Intent(from, ArticleActivity::class.java)
                     .putExtra(PARAMS_ARTICLE_ID, article?: ArticleBean("", "")).apply {
                 from.startActivity(this)
+            }
+        }
+
+        val START = object : OnItemClickListener<ArticleBean>() {
+            override fun onItemClick(holder: ViewHolder, data: ArticleBean, position: Int) {
+                ArticleActivity.start(holder.itemView.context, data)
             }
         }
     }

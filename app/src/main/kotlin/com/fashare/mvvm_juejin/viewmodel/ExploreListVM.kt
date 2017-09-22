@@ -1,8 +1,6 @@
 package com.fashare.mvvm_juejin.viewmodel
 
 import android.support.annotation.LayoutRes
-import com.fashare.adapter.OnItemClickListener
-import com.fashare.adapter.ViewHolder
 import com.fashare.databinding.ListVM
 import com.fashare.databinding.adapters.annotation.HeaderResHolder
 import com.fashare.databinding.adapters.annotation.ResHolder
@@ -22,13 +20,7 @@ import com.fashare.mvvm_juejin.view.detail.ArticleActivity
 @ResHolder(R.layout.item_explore_list)
 @HeaderResHolder(R.layout.header_explore)
 class ExploreListVM : ListVM<ArticleBean>() {
-    override val onItemClick = object: OnItemClickListener<ArticleBean>(){
-        override fun onItemClick(holder: ViewHolder?, data: ArticleBean?, position: Int) {
-            holder?.itemView?.context?.apply {
-                ArticleActivity.start(this, data)
-            }
-        }
-    }
+    override val onItemClick = ArticleActivity.START
 
     override val headerData = HeaderVM()
 
@@ -57,6 +49,8 @@ class ExploreListVM : ListVM<ArticleBean>() {
 
         // 沸点
         @ResHolder(R.layout.header_item_explore_topic)
-        class Topics : ListVM<ArticleBean>(){}
+        class Topics : ListVM<ArticleBean>(){
+            override val onItemClick = ArticleActivity.START
+        }
     }
 }

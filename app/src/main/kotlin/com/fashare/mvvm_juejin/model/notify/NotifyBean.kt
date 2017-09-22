@@ -1,5 +1,6 @@
 package com.fashare.mvvm_juejin.model.notify
 
+import com.fashare.mvvm_juejin.model.article.ArticleBean
 import com.fashare.mvvm_juejin.model.user.UserBean
 import java.io.Serializable
 
@@ -134,6 +135,15 @@ class NotifyBean : Serializable {
         var type: String? = null
         var screenshotUrl: String? = null
         var originalUrl: String? = null
+
+        fun toArticle(): ArticleBean{
+            return ArticleBean(title, "").apply {
+                this.objectId = this@EntryBean.objectId
+                this.type = this@EntryBean.type
+                this.screenshot = this@EntryBean.screenshotUrl
+                this.originalUrl = this@EntryBean.originalUrl
+            }
+        }
     }
 
     // -------------   解析数据   --------------

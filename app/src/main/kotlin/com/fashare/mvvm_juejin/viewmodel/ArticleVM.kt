@@ -9,6 +9,7 @@ import com.fashare.databinding.adapters.annotation.ResHolder
 import com.fashare.mvvm_juejin.R
 import com.fashare.mvvm_juejin.model.article.ArticleBean
 import com.fashare.mvvm_juejin.model.comment.CommentListBean
+import com.fashare.mvvm_juejin.view.detail.ArticleActivity
 
 /**
  * Created by apple on 2017/9/16.
@@ -25,6 +26,8 @@ class ArticleVM(val rv: RecyclerView) : ListVM<CommentListBean.Item>() {
     class HeaderVM : ListVM<ArticleBean>() {
         val html = ObservableField<String>("")
         val article = ObservableField<ArticleBean>(ArticleBean("", ""))
+
+        override val onItemClick = ArticleActivity.START
     }
 
     val scrollToComment = View.OnClickListener {
