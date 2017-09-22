@@ -22,7 +22,7 @@ import com.fashare.net.ApiFactory
 import com.liaoinstan.springview.container.DefaultFooter
 import com.liaoinstan.springview.container.DefaultHeader
 import com.liaoinstan.springview.widget.SpringView
-import kotlinx.android.synthetic.main.activity_article.*
+import kotlinx.android.synthetic.main.g_list.*
 import java.io.*
 
 class ArticleActivity : BaseActivity() {
@@ -102,7 +102,7 @@ class ArticleActivity : BaseActivity() {
             }
 
             override fun onLoadmore() {
-                val list: List<CommentListBean.Item> = binding.articleVM.viewModels
+                val list: List<CommentListBean.Item> = binding.articleVM.data
                 if(!list.isEmpty())
                     loadComment(!IS_CLEAR, article.objectId, list[list.size-1].createdAt?: "")
                 else
@@ -113,7 +113,7 @@ class ArticleActivity : BaseActivity() {
 
     private fun loadArticleHtml(article: ArticleBean) {
         binding.articleVM.article.set(article)
-        binding.articleVM.headerViewModels.get(0).article.set(article)
+        binding.articleVM.headerData.article.set(article)
 
         ApiFactory.getApi(JueJinApis.Article.Html::class.java)
                 .getHtml(article.objectId?: "",
@@ -134,7 +134,7 @@ class ArticleActivity : BaseActivity() {
                                 .replace("{gold-header}", com.daimajia.gold.utils.d.b.a(screenshot, article.originalUrl, article.title, article.user?.username?: ""))
                                 .replace("{gold-content}", it.content?: "")
                     }
-                    binding.articleVM.headerViewModels.get(0).html.set(template)
+                    binding.articleVM.headerData.html.set(template)
                 }, {})
     }
 
@@ -150,7 +150,7 @@ class ArticleActivity : BaseActivity() {
                 .subscribe({
                     val list = it?.entrylist as Iterable<ArticleBean>
 
-                    binding.articleVM.headerViewModels.get(0).viewModels.apply{
+                    binding.articleVM.headerData.data.apply{
                         this.clear()
                         this.addAll(list.filter{ !this.contains(it) })  // 去重
                     }
@@ -167,7 +167,7 @@ class ArticleActivity : BaseActivity() {
                 .compose(Composers.compose())
                 .subscribe({
                     sv.onFinishFreshAndLoad()
-                    binding.articleVM.viewModels.apply{
+                    binding.articleVM.data.apply{
                         if(isClear)
                             this.clear()
                         this.addAll(it.comments)

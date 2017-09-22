@@ -7,8 +7,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.fashare.mvvm_juejin.R"/>
-        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+        <!--<import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />-->
+        <import type="com.fashare.mvvm_juejin.R" />
 
         <variable name="articleVM" type="com.fashare.mvvm_juejin.viewmodel.ArticleVM"/>
     </data>
@@ -32,7 +32,6 @@
                         android:layout_height="wrap_content"
                         android:background="@color/g_item_bg"
                         app:navigationIcon="@drawable/g_back_black"
-                        bind:title='@{articleVM.article.title}'
                         app:layout_scrollFlags="scroll|enterAlways">
 
                         <ImageView
@@ -54,24 +53,16 @@
 
                 </android.support.design.widget.AppBarLayout>
 
-                <com.liaoinstan.springview.widget.SpringView
-                    android:id="@+id/sv"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="55dp"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rv"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        bind:layoutManager="@{LayoutManagers.linear()}"
-                        bind:itemView="@{articleVM.itemView}"
-                        bind:viewModels="@{articleVM.viewModels}"
-                        bind:headerItemViews="@{articleVM.headerItemViews}"
-                        bind:headerViewModels="@{articleVM.headerViewModels}"/>
+                    <include layout="@layout/g_list"
+                        bind:listVM="@{articleVM}"/>
 
-                </com.liaoinstan.springview.widget.SpringView>
+                </FrameLayout>
 
             </android.support.design.widget.CoordinatorLayout>
 

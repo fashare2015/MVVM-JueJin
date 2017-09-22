@@ -8,7 +8,7 @@
     <data>
         <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
 
-        <variable name="headerVM" type="com.fashare.mvvm_juejin.viewmodel.ArticleVM.HeaderVM"/>
+        <variable name="item" type="com.fashare.mvvm_juejin.viewmodel.ArticleVM.HeaderVM"/>
     </data>
 
     <LinearLayout
@@ -27,7 +27,7 @@
             <WebView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                bind:html="@{headerVM.html}"/>
+                bind:html="@{item.html}"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="5dp"
-                    android:text='@{"阅读 " + (headerVM.article.viewsCount) + " ・ " + "喜欢 " + (headerVM.article.collectionCount)}'
+                    android:text='@{"阅读 " + (item.article.viewsCount) + " ・ " + "喜欢 " + (item.article.collectionCount)}'
                     android:textColor="@color/g_text_gray"
                     android:textSize="12sp"
                     tools:text="阅读 0 ・ 喜欢 0"/>
@@ -67,7 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="5dp"
-                    android:text='@{headerVM.article.user.username + "的更多文章"}'
+                    android:text='@{item.article.user.username + "的更多文章"}'
                     android:textColor="@color/g_text_black"
                     android:textSize="15sp"
                     tools:text="用户A的更多文章"/>
@@ -79,8 +79,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                bind:itemView="@{headerVM.itemView}"
-                bind:viewModels="@{headerVM.viewModels}"/>
+                bind:vm="@{item}"
+                bind:data="@{item.data}"/>
 
             <include layout="@layout/g_line_horizontal"/>
         </LinearLayout>
@@ -90,13 +90,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@color/g_item_bg"
-            bind:visibility="@{headerVM.article.commentsCount != 0}">
+            bind:visibility="@{item.article.commentsCount != 0}">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/g_margin"
-                android:text='@{headerVM.article.commentsCount + " 条评论"}'
+                android:text='@{item.article.commentsCount + " 条评论"}'
                 android:textColor="@color/g_text_gray"
                 android:textSize="15sp"
                 tools:text="0 条评论"/>

@@ -13,7 +13,6 @@ import com.fashare.databinding.ListVM;
 import com.fashare.databinding.adapters.annotation.ResHolder;
 import com.fashare.databinding.adapters.annotation.ResUtils;
 
-import java.util.Arrays;
 import java.util.List;
 
 import me.tatarka.bindingcollectionadapter.ItemView;
@@ -21,15 +20,8 @@ import me.tatarka.bindingcollectionadapter.ItemView;
 public final class ViewGroupAdapter {
     public static final String TAG = "ViewGroupAdapter - binding ViewGroup...: ";
 
-    @BindingAdapter(value = {"itemView", "viewModels", "onItemClick"}, requireAll = false)
-    public static void bind(ViewGroup viewGroup, ItemView itemView, Object[] viewModelList, OnItemClickListener<?> onItemClickListener) {
-        if (viewModelList != null && viewModelList.length > 0) {
-            bind(viewGroup, itemView, Arrays.asList(viewModelList), onItemClickListener);
-        }
-    }
-
-    @BindingAdapter(value = {"itemView", "viewModels", "onItemClick"}, requireAll = false)
-    public static void bind(ViewGroup viewGroup, ItemView itemView, List<?> viewModelList, final OnItemClickListener<?> onItemClickListener) {
+//    @BindingAdapter(value = {"itemView", "viewModels", "onItemClick"}, requireAll = false)
+    private static void bind(ViewGroup viewGroup, ItemView itemView, List<?> viewModelList, final OnItemClickListener<?> onItemClickListener) {
         if (viewModelList != null && !viewModelList.isEmpty()) {
             viewGroup.removeAllViews();
             for (int pos=0; pos<viewModelList.size(); pos++) {
@@ -53,7 +45,7 @@ public final class ViewGroupAdapter {
         if(item == null)
             throw new IllegalArgumentException(TAG + "ItemView is null, maybe you forget @ResHolder(R.layout.XXX) in " + vm.getClass().getCanonicalName());
 
-        bind(viewGroup, item, datas.toArray(), vm.getOnItemClick());
+        bind(viewGroup, item, datas, vm.getOnItemClick());
     }
 
     private static void setListener(final OnItemClickListener onItemClickListener, final ViewHolder viewHolder, final Object data, final int pos) {

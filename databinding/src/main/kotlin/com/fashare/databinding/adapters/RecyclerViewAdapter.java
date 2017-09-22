@@ -39,8 +39,8 @@ public class RecyclerViewAdapter {
         return ItemView.of(defaultBindingVariable, layoutRes);
     }
 
-    @BindingAdapter(value = {"itemView", "viewModels", "headerItemViews", "headerViewModels", "onItemClick"}, requireAll = false)
-    public static void bind(RecyclerView container, final ItemView item, final List<?> datas,
+//    @BindingAdapter(value = {"itemView", "viewModels", "headerItemViews", "headerViewModels", "onItemClick"}, requireAll = false)
+    private static void bind(RecyclerView container, final ItemView item, final List<?> datas,
                             final List<? extends ItemView> header, final List<?> headerDatas,
                             final OnItemClickListener<?> onItemClickListener) {
 
@@ -84,8 +84,8 @@ public class RecyclerViewAdapter {
         }
     }
 
-    @BindingAdapter(value = {"itemView", "viewModels", "headerItemViews", "headerViewModels", "onItemClick"}, requireAll = false)
-    public static void bind(RecyclerView container, final ItemView item, final List<?> datas,
+//    @BindingAdapter(value = {"itemView", "viewModels", "headerItemViews", "headerViewModels", "onItemClick"}, requireAll = false)
+    private static void bind(RecyclerView container, final ItemView item, final List<?> datas,
                             final ItemView header, final Object headerData,
                             final OnItemClickListener<?> onItemClickListener) {
         if(header != null && headerData != null) {

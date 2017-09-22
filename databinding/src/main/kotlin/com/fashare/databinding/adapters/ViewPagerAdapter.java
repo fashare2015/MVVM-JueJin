@@ -2,7 +2,6 @@ package com.fashare.databinding.adapters;
 
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 
@@ -25,11 +24,8 @@ import me.tatarka.bindingcollectionadapter.ItemView;
 public class ViewPagerAdapter {
     public static final String TAG = "ViewPagerAdapter - binding ViewPager...: ";
 
-    @BindingAdapter(value = {"itemView", "viewModels", "onItemClick"}, requireAll = false)
-    public static void bind(ViewPager container, final ItemView itemView, final List<?> datas, final OnItemClickListener<?> onItemClickListener) {
-        if(!(container.getContext() instanceof FragmentActivity))
-            throw new IllegalArgumentException(TAG + "context must instanceof FragmentActivity");
-
+//    @BindingAdapter(value = {"itemView", "viewModels", "onItemClick"}, requireAll = false)
+    private static void bind(ViewPager container, final ItemView itemView, final List<?> datas, final OnItemClickListener<?> onItemClickListener) {
         PagerAdapter adapter;
         if (datas != null && !datas.isEmpty()) {
             adapter = container.getAdapter();
