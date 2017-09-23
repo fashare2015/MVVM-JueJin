@@ -18,32 +18,10 @@ import com.fashare.mvvm_juejin.viewmodel.NotifyListVM
 </pre> *
  */
 class NotifyFragment : BaseFragment(){
-    lateinit var binding: FragmentNotifyBinding
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return DataBindingUtil.inflate<FragmentNotifyBinding>(inflater, R.layout.fragment_notify, container, false).apply{
-            binding = this
             this.listVM = NotifyListVM()
         }.root
-    }
-
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-//        ApiFactory.getApi(JueJinApis.Notify:: class.java)
-//                .getUserNotification(""/* before */)
-//                .compose(Composers.compose())
-//                .subscribe({
-////                    sv.onFinishFreshAndLoad()
-//                    val list = it
-//
-//                    binding.listVM.data.apply{
-////                        if(isClear)
-//                            this.clear()
-//                        this.addAll(list)
-//                    }
-//                }, {
-//
-//                })
     }
 }

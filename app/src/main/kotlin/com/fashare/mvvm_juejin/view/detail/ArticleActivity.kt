@@ -14,14 +14,12 @@ import com.fashare.mvvm_juejin.JueJinApp
 import com.fashare.mvvm_juejin.R
 import com.fashare.mvvm_juejin.databinding.ActivityArticleBinding
 import com.fashare.mvvm_juejin.model.article.ArticleBean
-import com.fashare.mvvm_juejin.model.comment.CommentListBean
+import com.fashare.mvvm_juejin.model.notify.NotifyBean
 import com.fashare.mvvm_juejin.repo.Composers
 import com.fashare.mvvm_juejin.repo.JueJinApis
 import com.fashare.mvvm_juejin.viewmodel.ArticleVM
 import com.fashare.net.ApiFactory
-import com.liaoinstan.springview.container.DefaultFooter
-import com.liaoinstan.springview.widget.SpringView
-import kotlinx.android.synthetic.main.g_list.*
+import kotlinx.android.synthetic.main.g_two_way_list.*
 import java.io.*
 
 class ArticleActivity : BaseActivity() {
@@ -80,6 +78,12 @@ class ArticleActivity : BaseActivity() {
                 ArticleActivity.start(holder.itemView.context, data)
             }
         }
+
+        val START_FROM_NOTIFY = object : OnItemClickListener<NotifyBean>() {
+            override fun onItemClick(holder: ViewHolder, data: NotifyBean, position: Int) {
+                ArticleActivity.start(holder.itemView.context, data.entry?.toArticle())
+            }
+        }
     }
 
     private val IS_CLEAR = true
@@ -99,21 +103,6 @@ class ArticleActivity : BaseActivity() {
         val article = intent?.getSerializableExtra(PARAMS_ARTICLE_ID) as ArticleBean
         loadArticleHtml(article)
         loadRelatedArticles(article.objectId)
-        loadComment(IS_CLEAR, article.objectId, "")
-
-        sv.footer = DefaultFooter(this)
-        sv.setListener(object : SpringView.OnFreshListener{
-            override fun onRefresh() {
-            }
-
-            override fun onLoadmore() {
-                val list: List<CommentListBean.Item> = binding.articleVM.data
-                if(!list.isEmpty())
-                    loadComment(!IS_CLEAR, article.objectId, list[list.size-1].createdAt?: "")
-                else
-                    sv.onFinishFreshAndLoad()
-            }
-        })
     }
 
     private fun loadArticleHtml(article: ArticleBean) {
@@ -154,19 +143,5 @@ class ArticleActivity : BaseActivity() {
                 }, {
 
                 })
-    }
-
-    private fun loadComment(isClear: Boolean, articleId: String?, before: String?) {
-        ApiFactory.getApi(JueJinApis.Comment::class.java)
-                .getComments(articleId?: "", before?: "")
-                .compose(Composers.compose())
-                .subscribe({
-                    sv.onFinishFreshAndLoad()
-                    binding.articleVM.data.apply{
-                        if(isClear)
-                            this.clear()
-                        this.addAll(it.comments)
-                    }
-                }, {})
     }
 }

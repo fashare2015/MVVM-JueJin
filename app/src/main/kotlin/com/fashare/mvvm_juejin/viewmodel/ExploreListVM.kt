@@ -2,12 +2,16 @@ package com.fashare.mvvm_juejin.viewmodel
 
 import android.support.annotation.LayoutRes
 import com.fashare.databinding.ListVM
+import com.fashare.databinding.TwoWayListVM
 import com.fashare.databinding.adapters.annotation.HeaderResHolder
 import com.fashare.databinding.adapters.annotation.ResHolder
 import com.fashare.mvvm_juejin.R
 import com.fashare.mvvm_juejin.model.BannerListBean
 import com.fashare.mvvm_juejin.model.article.ArticleBean
+import com.fashare.mvvm_juejin.repo.Composers
+import com.fashare.mvvm_juejin.repo.JueJinApis
 import com.fashare.mvvm_juejin.view.detail.ArticleActivity
+import com.fashare.net.ApiFactory
 
 /**
  * <pre>
@@ -19,7 +23,14 @@ import com.fashare.mvvm_juejin.view.detail.ArticleActivity
 
 @ResHolder(R.layout.item_explore_list)
 @HeaderResHolder(R.layout.header_explore)
-class ExploreListVM : ListVM<ArticleBean>() {
+class ExploreListVM : TwoWayListVM<ArticleBean>() {
+    override val loadTask = { it: ArticleBean? ->
+        ApiFactory.getApi(JueJinApis:: class.java)
+                .getEntryByRank(before = it?.rankIndex?.toString()?: "")
+                .compose(Composers.compose())
+                .map { it.entrylist?: emptyList() } // 需要去重？？
+    }
+
     override val onItemClick = ArticleActivity.START
 
     override val headerData = HeaderVM()

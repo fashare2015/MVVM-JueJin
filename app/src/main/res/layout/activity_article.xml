@@ -59,7 +59,7 @@
                     android:layout_marginBottom="55dp"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                    <include layout="@layout/g_list"
+                    <include layout="@layout/g_two_way_list"
                         bind:listVM="@{articleVM}"/>
 
                 </FrameLayout>

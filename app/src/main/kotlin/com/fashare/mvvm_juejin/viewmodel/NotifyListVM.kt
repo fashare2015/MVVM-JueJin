@@ -1,7 +1,5 @@
 package com.fashare.mvvm_juejin.viewmodel
 
-import com.fashare.adapter.OnItemClickListener
-import com.fashare.adapter.ViewHolder
 import com.fashare.databinding.TwoWayListVM
 import com.fashare.databinding.adapters.annotation.HeaderResHolder
 import com.fashare.databinding.adapters.annotation.ResHolder
@@ -30,13 +28,8 @@ class NotifyListVM : TwoWayListVM<NotifyBean>() {
             .compose(Composers.compose())
     }
 
-    override val onItemClick = object : OnItemClickListener<NotifyBean>() {
-        override fun onItemClick(holder: ViewHolder, data: NotifyBean, position: Int) {
-            ArticleActivity.start(holder.itemView.context, data.entry?.toArticle())
-        }
-    }
+    override val onItemClick = ArticleActivity.START_FROM_NOTIFY
 
     override val headerData = HeaderVM()
-
     class HeaderVM
 }

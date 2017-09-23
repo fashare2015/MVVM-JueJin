@@ -14,10 +14,6 @@ import com.fashare.mvvm_juejin.repo.Composers
 import com.fashare.mvvm_juejin.repo.JueJinApis
 import com.fashare.mvvm_juejin.viewmodel.ExploreListVM
 import com.fashare.net.ApiFactory
-import com.liaoinstan.springview.container.DefaultFooter
-import com.liaoinstan.springview.container.DefaultHeader
-import com.liaoinstan.springview.widget.SpringView
-import kotlinx.android.synthetic.main.g_list.*
 import java.util.*
 
 /**
@@ -28,7 +24,6 @@ import java.util.*
 </pre> *
  */
 class ExploreFragment : BaseFragment(){
-    private val IS_CLEAR = true
     lateinit var mListVM: ExploreListVM
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -42,25 +37,11 @@ class ExploreFragment : BaseFragment(){
         super.onViewCreated(view, savedInstanceState)
 
         loadAll()
-
-        sv.header = DefaultHeader(context)
-        sv.footer = DefaultFooter(context)
-        sv.setListener(object : SpringView.OnFreshListener{
-            override fun onRefresh() {
-                loadAll()
-            }
-
-            override fun onLoadmore() {
-                val list: List<ArticleBean> = mListVM.data
-                loadHotArticles(!IS_CLEAR, list[list.size-1].rankIndex.toString())
-            }
-        })
     }
 
     fun loadAll(){
         loadHeaderBanner()
         loadHeaderTopic()
-        loadHotArticles(IS_CLEAR, "")
     }
 
     fun loadHeaderBanner(){
@@ -87,24 +68,6 @@ class ExploreFragment : BaseFragment(){
                     mListVM.headerData.topics.data.apply{
                         this.clear()
                         this.addAll(list)
-                    }
-                }, {
-
-                })
-    }
-
-    private fun loadHotArticles(isClear: Boolean, before: String) {
-        ApiFactory.getApi(JueJinApis:: class.java)
-                .getEntryByRank(before = before)
-                .compose(Composers.compose())
-                .subscribe({
-                    sv.onFinishFreshAndLoad()
-                    val list = it?.entrylist as Iterable<ArticleBean>
-
-                    mListVM.data.apply{
-                        if(isClear)
-                            this.clear()
-                        this.addAll(list.filter{ !this.contains(it) })  // 去重
                     }
                 }, {
 

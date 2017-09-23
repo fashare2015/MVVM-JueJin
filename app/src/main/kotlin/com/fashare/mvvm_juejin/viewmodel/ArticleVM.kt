@@ -4,12 +4,16 @@ import android.databinding.ObservableField
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.fashare.databinding.ListVM
+import com.fashare.databinding.TwoWayListVM
 import com.fashare.databinding.adapters.annotation.HeaderResHolder
 import com.fashare.databinding.adapters.annotation.ResHolder
 import com.fashare.mvvm_juejin.R
 import com.fashare.mvvm_juejin.model.article.ArticleBean
 import com.fashare.mvvm_juejin.model.comment.CommentListBean
+import com.fashare.mvvm_juejin.repo.Composers
+import com.fashare.mvvm_juejin.repo.JueJinApis
 import com.fashare.mvvm_juejin.view.detail.ArticleActivity
+import com.fashare.net.ApiFactory
 
 /**
  * Created by apple on 2017/9/16.
@@ -17,8 +21,15 @@ import com.fashare.mvvm_juejin.view.detail.ArticleActivity
 
 @ResHolder(R.layout.item_article_comment_list)
 @HeaderResHolder(R.layout.header_article)
-class ArticleVM(val rv: RecyclerView) : ListVM<CommentListBean.Item>() {
+class ArticleVM(val rv: RecyclerView) : TwoWayListVM<CommentListBean.Item>() {
     val article = ObservableField<ArticleBean>(ArticleBean("", ""))
+
+    override val loadTask = { it: CommentListBean.Item?->
+        ApiFactory.getApi(JueJinApis.Comment::class.java)
+                .getComments(article.get().objectId?: "", it?.createdAt?: "")
+                .compose(Composers.compose())
+                .map { it.comments }
+    }
 
     override val headerData = HeaderVM()
 
