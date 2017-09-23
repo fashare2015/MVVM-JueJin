@@ -1,7 +1,6 @@
 package com.fashare.net.exception
 
 
-import android.util.Log
 import com.google.gson.JsonIOException
 import com.google.gson.JsonParseException
 import com.google.gson.JsonSyntaxException
@@ -48,7 +47,7 @@ object ExceptionFactory {
             apiException = ApiException(throwable, UNKNOWN, "未知错误")
         }
 
-        Log.e(javaClass.name, apiException.toString())
+//        Log.e(javaClass.name, apiException.toString())
         return apiException
     }
 }

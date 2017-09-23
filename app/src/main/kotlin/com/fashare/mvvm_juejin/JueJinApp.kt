@@ -2,10 +2,14 @@ package com.fashare.mvvm_juejin
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import com.fashare.mvvm_juejin.repo.local.LocalUser
 import com.fashare.net.ApiFactory
 import com.fashare.net.widget.OkHttpFactory
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import okhttp3.Interceptor
+import okhttp3.ResponseBody
 
 /**
  * <pre>
@@ -17,6 +21,8 @@ import okhttp3.Interceptor
 class JueJinApp: Application() {
     companion object {
         lateinit var instance: Context
+
+        val GSON = Gson()
     }
 
     override fun onCreate() {
@@ -41,7 +47,35 @@ class JueJinApp: Application() {
                             .build()
                     ).build()
 
-            it.proceed(newRequest)
+            /** 处理不规范的返回值
+             *  <-- 400 Bad Request
+             *  {
+             *      "s": 10012,
+             *      "m": "密码错误",
+             *      "d": []             // 应该返回 空对象{}, 否则 Json 解析异常
+             *  }
+             */
+            var response = it.proceed(newRequest)
+            if(response.code() in 400 .. 500){
+                response = response.newBuilder()
+                        .apply {
+                            val originBody = response.body()
+                            var json = originBody?.string()
+                            try {
+                                val jsonMap : MutableMap<String, Any> = GSON.fromJson(json, object: TypeToken<HashMap<String, Any>>(){}.type)
+                                if(jsonMap.containsKey("d"))
+                                    jsonMap.remove("d")
+                                json = GSON.toJson(jsonMap)
+                            }catch (e: Exception){
+                                Log.e("initNet", "interceptor response" + e)
+                            }
+                            this.body(ResponseBody.create(originBody?.contentType(), json))
+                        }
+                        .code(200)
+                        .build()
+            }
+
+            response
         })
     }
 }

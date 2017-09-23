@@ -46,6 +46,8 @@ object ImageLoader {
      * @param callback 图片加载完成回调
      */
     fun loadImage(imageView: ImageView, url: String?, placeholderRes: Int?, callback: Callback? = null) {
+        imageView.setImageResource(placeholderRes?: 0)
+
         val context = imageView.context
         if (!isValid(context, url))
             return
@@ -104,6 +106,8 @@ object ImageLoader {
      * @param radiusPixels 圆角像素值
      */
     fun loadRoundImage(imageView: ImageView, url: String?, placeholderRes: Int?, radiusPixels: Int) {
+        imageView.setImageResource(placeholderRes?: 0)
+
         val context = imageView.context
         if (!isValid(context, url))
             return

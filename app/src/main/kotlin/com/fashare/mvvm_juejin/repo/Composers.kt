@@ -1,5 +1,6 @@
 package com.fashare.mvvm_juejin.repo
 
+import android.util.Log
 import android.widget.Toast
 import com.fashare.mvvm_juejin.JueJinApp
 import com.fashare.net.exception.ApiException
@@ -11,6 +12,8 @@ import io.reactivex.schedulers.Schedulers
 
 
 object Composers {
+    private val TAG = "Composers"
+
     fun <T> compose(): ObservableTransformer<Response<T>, T> {
         return ObservableTransformer { observable ->
             observable.map { responseModel: Response<T>? ->
@@ -21,13 +24,18 @@ object Composers {
                         }
                     }
                     .onErrorResumeNext { throwable: Throwable ->
-                        val error : ApiException = ExceptionFactory.create(throwable)
-                        Toast.makeText(JueJinApp.instance, error.errorMsg, Toast.LENGTH_SHORT).show()
-                        Observable.error(error)
+                        Observable.error(ExceptionFactory.create(throwable))
                     }
                     .subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
+                    .doOnError { e: Throwable ->
+                        Log.e(TAG, e.toString())
+                        (e as? ApiException)?.apply {
+                            // toast 前， 确保在 UI 线程 !!!
+                            Toast.makeText(JueJinApp.instance, this.errorMsg, Toast.LENGTH_SHORT).show()
+                        }
+                    }
         }
     }
 

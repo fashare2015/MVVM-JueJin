@@ -28,17 +28,15 @@ class RegisterVM {
                         passWord.get(),
                         "", "", "android")
                 .compose(Composers.compose())
+                .flatMap { LoginVM.getLoginTask(userName.get(), passWord.get(), "email") }
                 .subscribe({
-                    LoginVM.getLoginTask(userName.get(), passWord.get(), "email")
-                            .subscribe({
-                                LocalUser.userToken = it
+                    LocalUser.userToken = it
 
-                                view.context.apply {
-                                    this.startActivity(Intent(this, MainActivity::class.java)
-                                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                    )
-                                }
-                            }, {})
+                    view.context.apply {
+                        this.startActivity(Intent(this, MainActivity::class.java)
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        )
+                    }
                 }, {})
     }
 }
