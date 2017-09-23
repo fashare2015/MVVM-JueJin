@@ -11,7 +11,6 @@ import com.fashare.mvvm_juejin.databinding.GListBinding
 import com.fashare.mvvm_juejin.model.article.ArticleBean
 import com.fashare.mvvm_juejin.repo.Composers
 import com.fashare.mvvm_juejin.repo.JueJinApis
-import com.fashare.mvvm_juejin.repo.local.LocalUser
 import com.fashare.mvvm_juejin.viewmodel.HomeListVM
 import com.fashare.net.ApiFactory
 import com.liaoinstan.springview.container.DefaultFooter
@@ -59,12 +58,7 @@ class HomeListFragment : BaseFragment(){
 
     private fun loadHeaderData(){
         ApiFactory.getApi(JueJinApis:: class.java)
-                .getEntryByHotRecomment(
-                        LocalUser.userToken?.user_id?:"unlogin",
-                        "20",
-                        LocalUser.userToken?.token?: "",
-                        "b9ae8b6a-efe0-4944-b574-b01a3a1303ee",
-                        "android")
+                .getEntryByHotRecomment()
                 .compose(Composers.compose())
                 .subscribe({
                     sv.onFinishFreshAndLoad()
@@ -81,13 +75,7 @@ class HomeListFragment : BaseFragment(){
 
     private fun loadArticles(isClear: Boolean, before: String) {
         ApiFactory.getApi(JueJinApis:: class.java)
-                .getEntryByTimeLine("", "",
-                        LocalUser.userToken?.user_id?:"unlogin",
-                        before,
-                        "20",
-                        LocalUser.userToken?.token?: "",
-                        "b9ae8b6a-efe0-4944-b574-b01a3a1303ee",
-                        "android")
+                .getEntryByTimeLine(before = before)
                 .compose(Composers.compose())
                 .subscribe({
                     sv.onFinishFreshAndLoad()

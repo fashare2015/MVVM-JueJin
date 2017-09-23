@@ -10,7 +10,6 @@ import com.fashare.mvvm_juejin.R
 import com.fashare.mvvm_juejin.databinding.FragmentNotifyBinding
 import com.fashare.mvvm_juejin.repo.Composers
 import com.fashare.mvvm_juejin.repo.JueJinApis
-import com.fashare.mvvm_juejin.repo.local.LocalUser
 import com.fashare.mvvm_juejin.viewmodel.NotifyListVM
 import com.fashare.net.ApiFactory
 
@@ -35,12 +34,7 @@ class NotifyFragment : BaseFragment(){
         super.onViewCreated(view, savedInstanceState)
 
         ApiFactory.getApi(JueJinApis.Notify:: class.java)
-                .getUserNotification(LocalUser.userToken?.user_id?:"",
-                        ""/* before */,
-                        "30",
-                        LocalUser.userToken?.token?: "",
-                        "b9ae8b6a-efe0-4944-b574-b01a3a1303ee",
-                        "android")
+                .getUserNotification(""/* before */)
                 .compose(Composers.compose())
                 .subscribe({
 //                    sv.onFinishFreshAndLoad()

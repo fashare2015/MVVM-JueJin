@@ -1,8 +1,8 @@
 package com.fashare.net.widget
 
 import com.fashare.net.util.HttpsUtil
-import com.fashare.net.widget.HttpLoggingInterceptor
 import com.socks.library.KLog
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 
@@ -13,11 +13,11 @@ object OkHttpFactory {
 
     val client: OkHttpClient by lazy { create() }
 
-    fun create(): OkHttpClient {
+    fun create(customInterceptor: Interceptor? = null, enableLog: Boolean = true): OkHttpClient {
         val sslParams = HttpsUtil.getSslSocketFactory(null, null, null)
-        val loggingInterceptor = HttpLoggingInterceptor({ chain, msg ->
+        val loggingInterceptor = HttpLoggingInterceptor{ chain, msg ->
             KLog.json("okhttp-${chain.request().url().uri().path}", msg)
-        }).apply {
+        }.apply {
             this.level = HttpLoggingInterceptor.Level.BODY
         }
 
@@ -26,7 +26,14 @@ object OkHttpFactory {
                 .readTimeout(READ_TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .writeTimeout(WRITE_TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .connectTimeout(CONNECT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .addInterceptor(loggingInterceptor)
+                .apply {
+                    if(customInterceptor != null)
+                        this.addInterceptor(customInterceptor)
+                }
+                .apply {
+                    if(enableLog)
+                        this.addInterceptor(loggingInterceptor)
+                }
                 .build()
     }
 }

@@ -12,7 +12,6 @@ import com.fashare.mvvm_juejin.model.BannerListBean
 import com.fashare.mvvm_juejin.model.article.ArticleBean
 import com.fashare.mvvm_juejin.repo.Composers
 import com.fashare.mvvm_juejin.repo.JueJinApis
-import com.fashare.mvvm_juejin.repo.local.LocalUser
 import com.fashare.mvvm_juejin.viewmodel.ExploreListVM
 import com.fashare.net.ApiFactory
 import com.liaoinstan.springview.container.DefaultFooter
@@ -66,10 +65,7 @@ class ExploreFragment : BaseFragment(){
 
     fun loadHeaderBanner(){
         ApiFactory.getApi(JueJinApis.BannerStorage::class.java)
-                .getBanner("explore", 0, 20, "android",
-                        LocalUser.userToken?.token?: "",
-                        "b9ae8b6a-efe0-4944-b574-b01a3a1303ee",
-                        "android")
+                .getBanner(position = "explore")
                 .compose(Composers.compose())
                 .subscribe({
                     val list = it?.banner?: Collections.emptyList<BannerListBean.Item>()
@@ -83,14 +79,7 @@ class ExploreFragment : BaseFragment(){
 
     fun loadHeaderTopic(){
         ApiFactory.getApi(JueJinApis::class.java)
-                .getEntryByTimeLine("all",
-                        "vote",
-                        "",
-                        "",
-                        "5",
-                        LocalUser.userToken?.token?: "",
-                        "b9ae8b6a-efe0-4944-b574-b01a3a1303ee",
-                        "android")
+                .getEntryByTimeLine(type = "vote", limit = "5")
                 .compose(Composers.compose())
                 .subscribe({
                     val list = it?.entrylist as Iterable<ArticleBean>
@@ -106,12 +95,7 @@ class ExploreFragment : BaseFragment(){
 
     private fun loadHotArticles(isClear: Boolean, before: String) {
         ApiFactory.getApi(JueJinApis:: class.java)
-                .getEntryByRank(LocalUser.userToken?.user_id?:"unlogin",
-                        before,
-                        "30",
-                        LocalUser.userToken?.token?: "",
-                        "b9ae8b6a-efe0-4944-b574-b01a3a1303ee",
-                        "android")
+                .getEntryByRank(before = before)
                 .compose(Composers.compose())
                 .subscribe({
                     sv.onFinishFreshAndLoad()

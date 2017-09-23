@@ -40,7 +40,7 @@ public class GlideConfig implements GlideModule {
     // https 配置
     @Override
     public void registerComponents(Context context, Glide glide) {
-        glide.register(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(OkHttpFactory.INSTANCE.getClient()));
+        glide.register(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(OkHttpFactory.INSTANCE.create(null, false)));
     }
 
 //    // https 配置

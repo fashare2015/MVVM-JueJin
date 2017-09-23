@@ -21,11 +21,9 @@ class LoginVM{
     companion object {
         fun getLoginTask(userName: String, passWord: String, loginType: String = "tel") =
                 ApiFactory.getApi(JueJinApis.User::class.java)
-                        .login(JueJinApis.User.LoginParam().apply{
-                            this.login_type = loginType
-                            this.user = userName
-                            this.psd = passWord
-                        }.toMap())
+                        .login(login_type = loginType,
+                            user = userName,
+                            psd = passWord)
                         .compose(Composers.compose())
     }
 

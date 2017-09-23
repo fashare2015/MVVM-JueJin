@@ -13,9 +13,11 @@ object ApiFactory {
     @Retention(AnnotationRetention.RUNTIME)
     annotation class BaseUrl(val value: String)
 
+    var okhttpClient = OkHttpFactory.client
+
     private val mRetrofitBuilder: Retrofit.Builder by lazy {
         Retrofit.Builder()
-                .client(OkHttpFactory.client)
+                .client(okhttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
     }

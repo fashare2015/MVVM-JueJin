@@ -15,14 +15,11 @@ import com.fashare.mvvm_juejin.R
 import com.fashare.mvvm_juejin.databinding.ActivityArticleBinding
 import com.fashare.mvvm_juejin.model.article.ArticleBean
 import com.fashare.mvvm_juejin.model.comment.CommentListBean
-import com.fashare.mvvm_juejin.model.notify.NotifyBean
 import com.fashare.mvvm_juejin.repo.Composers
 import com.fashare.mvvm_juejin.repo.JueJinApis
-import com.fashare.mvvm_juejin.repo.local.LocalUser
 import com.fashare.mvvm_juejin.viewmodel.ArticleVM
 import com.fashare.net.ApiFactory
 import com.liaoinstan.springview.container.DefaultFooter
-import com.liaoinstan.springview.container.DefaultHeader
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.g_list.*
 import java.io.*
@@ -124,10 +121,7 @@ class ArticleActivity : BaseActivity() {
         binding.articleVM.headerData.article.set(article)
 
         ApiFactory.getApi(JueJinApis.Article.Html::class.java)
-                .getHtml(article.objectId?: "",
-                        LocalUser.userToken?.token?: "",
-                        "b9ae8b6a-efe0-4944-b574-b01a3a1303ee",
-                        "android")
+                .getHtml(article.objectId?: "")
                 .compose(Composers.compose())
                 .subscribe({
                     // 以下代码来自反编译的掘金app
@@ -148,12 +142,7 @@ class ArticleActivity : BaseActivity() {
 
     private fun loadRelatedArticles(articleId: String?) {
         ApiFactory.getApi(JueJinApis:: class.java)
-                .getRelatedEntry(
-                        articleId?: "",
-                        "4",
-                        LocalUser.userToken?.token?: "",
-                        "b9ae8b6a-efe0-4944-b574-b01a3a1303ee",
-                        "android")
+                .getRelatedEntry(entryId = articleId?: "")
                 .compose(Composers.compose())
                 .subscribe({
                     val list = it?.entrylist as Iterable<ArticleBean>
@@ -169,9 +158,7 @@ class ArticleActivity : BaseActivity() {
 
     private fun loadComment(isClear: Boolean, articleId: String?, before: String?) {
         ApiFactory.getApi(JueJinApis.Comment::class.java)
-                .getComments(articleId?: "",
-                        before?: "",
-                        "new")
+                .getComments(articleId?: "", before?: "")
                 .compose(Composers.compose())
                 .subscribe({
                     sv.onFinishFreshAndLoad()

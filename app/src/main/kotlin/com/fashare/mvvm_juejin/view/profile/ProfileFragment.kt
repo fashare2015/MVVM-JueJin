@@ -36,13 +36,8 @@ class ProfileFragment : BaseFragment(){
     override fun onResume() {
         super.onResume()
         LocalUser.userToken?.apply{
-            val device_id = "b9ae8b6a-efe0-4944-b574-b01a3a1303ee"
             ApiFactory.getApi(JueJinApis.User.Storage::class.java)
-                    .getUserInfo(this.user_id?:"",
-                            this.user_id?:"",
-                            this.token?:"",
-                            device_id,
-                            "android")
+                    .getUserInfo()
                     .compose(Composers.compose())
                     .subscribe({
                         binding.profileVM.user.set(it)

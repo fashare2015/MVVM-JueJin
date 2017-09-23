@@ -8,6 +8,7 @@ import com.fashare.mvvm_juejin.model.category.HomeCategoryListBean
 import com.fashare.mvvm_juejin.model.comment.CommentListBean
 import com.fashare.mvvm_juejin.model.notify.NotifyBean
 import com.fashare.mvvm_juejin.model.user.UserBean
+import com.fashare.mvvm_juejin.repo.local.LocalUser
 import com.fashare.net.ApiFactory
 import io.reactivex.Observable
 import retrofit2.http.*
@@ -21,72 +22,35 @@ const val BASE_URL = "https://timeline-merger-ms.juejin.im/"
 interface JueJinApis {
     // 热门推荐
     @GET("/v1/get_entry_by_hot_recomment")
-    fun getEntryByHotRecomment(@Query("uid") uid: String,
-                               @Query("limit") limit: String,
-                               @Query("token") token: String,
-                               @Query("device_id") device_id: String,
-                               @Query("src") src: String): Observable<Response<HotRecomment>>
+    fun getEntryByHotRecomment(@Query("limit") limit: String = "20"): Observable<Response<HotRecomment>>
 
     // 文章列表
     @GET("/v1/get_entry_by_timeline")
-    fun getEntryByTimeLine(@Query("category") categoryId: String,
-                           @Query("type") type: String,
-                           @Query("uid") uid: String,
-                           @Query("before") before: String,
-                           @Query("limit") limit: String,
-                           @Query("token") token: String,
-                           @Query("device_id") device_id: String,
-                           @Query("src") src: String): Observable<Response<ArticleListBean>>
+    fun getEntryByTimeLine(@Query("category") categoryId: String = "all",
+                           @Query("type") type: String = "",
+                           @Query("before") before: String = "",
+                           @Query("limit") limit: String = "20"): Observable<Response<ArticleListBean>>
 
     // 发现 - 热门文章列表
     @GET("/v1/get_entry_by_rank")
-    fun getEntryByRank(@Query("uid") uid: String,
-                       @Query("before") before: String,
-                       @Query("limit") limit: String,
-                       @Query("token") token: String,
-                       @Query("device_id") device_id: String,
-                       @Query("src") src: String): Observable<Response<ArticleListBean>>
+    fun getEntryByRank(@Query("before") before: String,
+                       @Query("limit") limit: String = "30"): Observable<Response<ArticleListBean>>
 
-    // 发现 - 热门文章列表
+    // 文章 - 相关文章列表
     @GET("/v1/get_related_entry")
     fun getRelatedEntry(@Query("entryId") entryId: String,
-                        @Query("limit") limit: String,
-                        @Query("token") token: String,
-                        @Query("device_id") device_id: String,
-                        @Query("src") src: String): Observable<Response<ArticleListBean>>
+                        @Query("limit") limit: String = "4"): Observable<Response<ArticleListBean>>
 
     @ApiFactory.BaseUrl("https://auth-center-ms.juejin.im")
     interface User{
-        class LoginParam{
-            var login_type = "tel"
-            var user = ""
-            var psd = ""
-            var client_id = "b9ae8b6a-efe0-4944-b574-b01a3a1303ee"
-            var state = "nOOKnTFSCE"
-            var src = "android"
-
-            fun toMap(): Map<String, String>{
-                return mapOf(
-                        "login_type" to login_type,
-                        "user" to user,
-                        "psd" to psd,
-                        "client_id" to client_id,
-                        "state" to state,
-                        "src" to src
-                )
-//                return (Gson().toJsonTree(this) as JsonObject).let{
-//                    JsonObject:: class.java.getField("members").get(it) as Map<String, *>
-//                }
-            }
-        }
-
         @FormUrlEncoded
-        @Headers(
-            "X-Juejin-Src:android"
-        )
         @POST("/v1/login")
-        fun login(@FieldMap param: Map<String, String>): Observable<Response<UserBean.TokenBean>>
-
+        fun login(@Field("login_type") login_type: String,
+                  @Field("user") user: String = "tel",
+                  @Field("psd") psd: String = "tel",
+                  @Field("client_id") client_id: String = "b9ae8b6a-efe0-4944-b574-b01a3a1303ee",
+                  @Field("state") state: String = "nOOKnTFSCE",
+                  @Field("src") src: String = "android"): Observable<Response<UserBean.TokenBean>>
 
 
         @ApiFactory.BaseUrl("https://user-storage-api-ms.juejin.im")
@@ -101,11 +65,7 @@ interface JueJinApis {
                          @Field("src") src: String): Observable<Response<List<Any>>>
 
             @GET("v1/getUserInfo")
-            fun getUserInfo(@Query("uid") uid: String,
-                            @Query("current_uid") current_uid: String,
-                            @Query("token") token: String,
-                            @Query("device_id") device_id: String,
-                            @Query("src") src: String): Observable<Response<UserBean>>
+            fun getUserInfo(@Query("current_uid") current_uid: String = LocalUser.userToken?.user_id?: ""): Observable<Response<UserBean>>
         }
     }
 
@@ -114,28 +74,20 @@ interface JueJinApis {
     interface BannerStorage{
         @GET("v1/get_banner")
         fun getBanner(@Query("position") position: String,
-                      @Query("page") page: Int,
-                      @Query("pageSize") pageSize: Int,
-                      @Query("platform") platform: String,
-                      @Query("token") token: String,
-                      @Query("device_id") device_id: String,
-                      @Query("src") src: String): Observable<Response<BannerListBean>>
+                      @Query("page") page: Int = 0,
+                      @Query("pageSize") pageSize: Int = 20,
+                      @Query("platform") platform: String = "android"): Observable<Response<BannerListBean>>
     }
 
     @ApiFactory.BaseUrl("https://ufp-api-ms.juejin.im")
     interface Notify{
         @GET("/v1/getUserNotification")
-        fun getUserNotification(@Query("uid") uid: String,
-                                @Query("before") before: String,
-                                @Query("limit") limit: String,
-                                @Query("token") token: String,
-                                @Query("device_id") device_id: String,
-                                @Query("src") src: String): Observable<Response<List<NotifyBean>>>
+        fun getUserNotification(@Query("before") before: String,
+                                @Query("limit") limit: String = "30"): Observable<Response<List<NotifyBean>>>
     }
 
     @ApiFactory.BaseUrl("https://gold-tag-ms.juejin.im")
     interface Tags{
-        @Headers("X-Juejin-Src:android")
         @GET("/v1/categories")
         fun getCategories(): Observable<Response<HomeCategoryListBean>>
     }
@@ -144,19 +96,15 @@ interface JueJinApis {
         @ApiFactory.BaseUrl("https://entry-view-storage-api-ms.juejin.im")
         interface Html{
             @GET("/v1/getEntryView")
-            fun getHtml(@Query("entryId") articleId: String,
-                        @Query("token") token: String,
-                        @Query("device_id") device_id: String,
-                        @Query("src") src: String): Observable<Response<ArticleHtmlBean>>
+            fun getHtml(@Query("entryId") articleId: String): Observable<Response<ArticleHtmlBean>>
         }
     }
 
     @ApiFactory.BaseUrl("https://comment-wrapper-ms.juejin.im")
     interface Comment{
-        @Headers("X-Juejin-Src:android")
         @GET("/v1/comments/entry/{articleId}")
         fun getComments(@Path("articleId") articleId: String,
                         @Query("createdAt") before: String,
-                        @Query("rankType") rankType: String): Observable<Response<CommentListBean>>
+                        @Query("rankType") rankType: String = "new"): Observable<Response<CommentListBean>>
     }
 }

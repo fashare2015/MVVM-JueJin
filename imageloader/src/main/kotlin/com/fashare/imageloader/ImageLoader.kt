@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
@@ -46,7 +47,7 @@ object ImageLoader {
      */
     fun loadImage(imageView: ImageView, url: String?, placeholderRes: Int?, callback: Callback? = null) {
         val context = imageView.context
-        if (!isValid(context))
+        if (!isValid(context, url))
             return
 
         Glide.with(context)
@@ -104,7 +105,7 @@ object ImageLoader {
      */
     fun loadRoundImage(imageView: ImageView, url: String?, placeholderRes: Int?, radiusPixels: Int) {
         val context = imageView.context
-        if (!isValid(context))
+        if (!isValid(context, url))
             return
 
         Glide.with(context)
@@ -127,7 +128,7 @@ object ImageLoader {
      * @param callback 图片加载完成回调
      */
     fun loadImage(context: Context, url: String, callback: Callback?) {
-        if (!isValid(context))
+        if (!isValid(context, url))
             return
 
         val imageView: ImageView? = null
@@ -168,11 +169,14 @@ object ImageLoader {
     /**
      * reason: [RequestManagerRetriever.assertNotDestroyed]
      * [Issue #138: Getting a crash in Glide 3.3 library](https://github.com/bumptech/glide/issues/138) */
-    private fun isValid(context: Context): Boolean {
+    private fun isValid(context: Context, url: String?): Boolean {
         if (context is Activity) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && context.isDestroyed)
                 return false
         }
+
+        if(TextUtils.isEmpty(url))
+            return false
 
         return true
     }
