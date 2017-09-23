@@ -12,7 +12,11 @@ import com.fashare.adapter.OnItemClickListener
  */
 
 open class ListVM<T>{
-    open val data = ObservableArrayList<T>()
+    open var data = ObservableArrayList<T>()
+            set(value) {
+                field.clear()
+                field.addAll(value)
+            }
     open val onItemClick: OnItemClickListener<T>? = null
 
     open val headerData: Any? = null

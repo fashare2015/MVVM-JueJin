@@ -5,7 +5,7 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="listVM" type="com.fashare.databinding.ListVM"/>
+        <variable name="listVM" type="com.fashare.databinding.TwoWayListVM"/>
     </data>
 
     <LinearLayout
@@ -23,7 +23,7 @@
             android:textSize="15sp"
             android:textColor="@android:color/white"/>
 
-        <include layout="@layout/g_list"
+        <include layout="@layout/g_two_way_list"
             bind:listVM="@{listVM}"/>
     </LinearLayout>
 

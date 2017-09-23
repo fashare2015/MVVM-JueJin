@@ -8,10 +8,7 @@ import android.view.ViewGroup
 import com.fashare.base_ui.BaseFragment
 import com.fashare.mvvm_juejin.R
 import com.fashare.mvvm_juejin.databinding.FragmentNotifyBinding
-import com.fashare.mvvm_juejin.repo.Composers
-import com.fashare.mvvm_juejin.repo.JueJinApis
 import com.fashare.mvvm_juejin.viewmodel.NotifyListVM
-import com.fashare.net.ApiFactory
 
 /**
  * <pre>
@@ -33,20 +30,20 @@ class NotifyFragment : BaseFragment(){
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ApiFactory.getApi(JueJinApis.Notify:: class.java)
-                .getUserNotification(""/* before */)
-                .compose(Composers.compose())
-                .subscribe({
-//                    sv.onFinishFreshAndLoad()
-                    val list = it
-
-                    binding.listVM.data.apply{
-//                        if(isClear)
-                            this.clear()
-                        this.addAll(list)
-                    }
-                }, {
-
-                })
+//        ApiFactory.getApi(JueJinApis.Notify:: class.java)
+//                .getUserNotification(""/* before */)
+//                .compose(Composers.compose())
+//                .subscribe({
+////                    sv.onFinishFreshAndLoad()
+//                    val list = it
+//
+//                    binding.listVM.data.apply{
+////                        if(isClear)
+//                            this.clear()
+//                        this.addAll(list)
+//                    }
+//                }, {
+//
+//                })
     }
 }

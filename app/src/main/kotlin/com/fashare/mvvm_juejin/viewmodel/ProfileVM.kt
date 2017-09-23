@@ -3,6 +3,7 @@ package com.fashare.mvvm_juejin.viewmodel
 import android.content.Intent
 import android.databinding.ObservableField
 import android.support.annotation.DrawableRes
+import android.text.TextUtils
 import android.view.View
 import com.fashare.databinding.ListVM
 import com.fashare.databinding.adapters.annotation.ResHolder
@@ -27,15 +28,9 @@ class ProfileVM : ListVM<ProfileVM.Item>(){
     }
 
     fun parseJobAndCompany(user: UserBean?): String{
-        return (user?.jobTitle?: "添加职位") + " @ " +
-                (user?.company?: "添加公司")
+        return (user?.jobTitle?.takeIf{ !TextUtils.isEmpty(it) }?: "添加职位") + " @ " +
+                (user?.company?.takeIf{ !TextUtils.isEmpty(it) }?: "添加公司")
     }
-
-    // list area
-//    val itemView = ItemView.of(BR.item, R.layout.item_profile_list)
-//    val viewModels = ObservableArrayList<Item>().apply{
-//        this.addAll(getDefaultList())
-//    }
 
     fun getDefaultList() = listOf(
             Item(R.drawable.profile_i_like, "我喜欢的", user.get()),
@@ -50,14 +45,12 @@ class ProfileVM : ListVM<ProfileVM.Item>(){
                val name: String = "",
                val user: UserBean? = null){
 
-        fun parseItemCount(user: UserBean?):String{
-            return when(iconRes){
-                R.drawable.profile_i_like -> "" + (user?.collectedEntriesCount?: 0) + "篇"
-                R.drawable.profile_collection_set -> "" + (user?.collectionSetCount?: 0) + "个"
-                R.drawable.profile_view -> "" + (user?.viewedEntriesCount?: 0) + "篇"
-                R.drawable.profile_tag -> "" + (user?.subscribedTagsCount?: 0) + "个"
-                else -> ""
-            }
+        fun parseItemCount(user: UserBean?) = when(iconRes){
+            R.drawable.profile_i_like -> "" + (user?.collectedEntriesCount?: 0) + "篇"
+            R.drawable.profile_collection_set -> "" + (user?.collectionSetCount?: 0) + "个"
+            R.drawable.profile_view -> "" + (user?.viewedEntriesCount?: 0) + "篇"
+            R.drawable.profile_tag -> "" + (user?.subscribedTagsCount?: 0) + "个"
+            else -> ""
         }
     }
 }

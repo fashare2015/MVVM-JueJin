@@ -27,6 +27,10 @@ public class HeaderAndFooterWrapper<T> extends RecyclerView.Adapter<RecyclerView
         mInnerAdapter = innerAdapter;
     }
 
+    public RecyclerView.Adapter getInnerAdapter() {
+        return mInnerAdapter;
+    }
+
     public HeaderAndFooterWrapper(RecyclerView.Adapter adapter)
     {
         mInnerAdapter = adapter;

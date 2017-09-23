@@ -10,6 +10,9 @@ import com.fashare.util.PreferencesUtil
 object LocalUser{
     val appContext by lazy { JueJinApp.instance }
 
+    val isLogin: Boolean
+        get() = userToken?.token != null
+
     var user: UserBean? = null
     var userToken: UserBean.TokenBean? = null
             set(value) {
@@ -30,6 +33,4 @@ object LocalUser{
                     PreferencesUtil.getInstance(appContext)
                             .getEntity("userToken", UserBean.TokenBean::class.java)
             }
-
-
 }

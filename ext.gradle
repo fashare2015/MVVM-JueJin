@@ -15,8 +15,6 @@ project.ext{
     versionCode = 1
     versionName = "1.0"
 
-    supportLibsVersion = '24.2.0'
-
     // App dependencies
     supportLibraryVersion = "25.3.1"
 

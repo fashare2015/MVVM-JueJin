@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="listVM" type="com.fashare.databinding.TwoWayListVM"/>
+    </data>
+
+    <com.fashare.mvvm_juejin.widget.MySpringView
+        android:id="@+id/sv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            bind:vm="@{listVM}"
+            bind:data="@={listVM.data}"/>
+
+    </com.fashare.mvvm_juejin.widget.MySpringView>
+
+</layout>
