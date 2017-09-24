@@ -15,7 +15,7 @@ import io.reactivex.schedulers.Schedulers
 object Composers {
     private val TAG = "Composers"
 
-    fun <T> compose(): ObservableTransformer<Response<T>, T> {
+    fun <T> handleError(): ObservableTransformer<Response<T>, T> {
         return ObservableTransformer { observable ->
             observable.map { responseModel: Response<T>? ->
                         if (responseModel != null && responseModel.s == 1 && responseModel.d != null) {

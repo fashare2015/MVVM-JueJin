@@ -16,9 +16,7 @@ import retrofit2.http.*
 /**
  * Created by apple on 2017/9/6.
  */
-const val BASE_URL = "https://timeline-merger-ms.juejin.im/"
-
-@ApiFactory.BaseUrl(BASE_URL)
+@ApiFactory.BaseUrl("https://timeline-merger-ms.juejin.im/")
 interface JueJinApis {
     // 首页 - 热门推荐
     @GET("/v1/get_entry_by_hot_recomment")

@@ -35,7 +35,7 @@ class HomeFragment : BaseFragment(){
 
         ApiFactory.getApi(JueJinApis.Tags::class.java)
                 .getCategories()
-                .compose(Composers.compose())
+                .compose(Composers.handleError())
                 .subscribe({
                     val list = it.categoryList
                     binding.pages.tabList.apply{

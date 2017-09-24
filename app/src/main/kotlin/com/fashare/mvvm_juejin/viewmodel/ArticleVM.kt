@@ -26,7 +26,7 @@ class ArticleVM(val rv: RecyclerView) : TwoWayListVM<CommentListBean.Item>() {
     override val loadTask = { lastItem: CommentListBean.Item?->
         ApiFactory.getApi(JueJinApis.Comment::class.java)
                 .getComments(article.get().objectId?: "", lastItem?.createdAt?: "")
-                .compose(Composers.compose())
+                .compose(Composers.handleError())
                 .map { it.comments }
     }
 
@@ -40,7 +40,7 @@ class ArticleVM(val rv: RecyclerView) : TwoWayListVM<CommentListBean.Item>() {
         override val loadTask = { lastItem: ArticleBean? ->
             ApiFactory.getApi(JueJinApis:: class.java)
                     .getRelatedEntry(entryId = article.get()?.objectId?: "")
-                    .compose(Composers.compose())
+                    .compose(Composers.handleError())
                     .map{ it.entrylist?: emptyList() }
         }
 

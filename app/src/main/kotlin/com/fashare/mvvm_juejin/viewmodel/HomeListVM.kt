@@ -25,7 +25,7 @@ class HomeListVM(val categoryId: String = ""): TwoWayListVM<ArticleBean>() {
     override val loadTask = { lastItem: ArticleBean? ->
         ApiFactory.getApi(JueJinApis::class.java)
                 .getEntryByTimeLine(categoryId = categoryId, before = lastItem?.createdAt ?: "")
-                .compose(Composers.compose())
+                .compose(Composers.handleError())
                 .map { it.entrylist ?: emptyList() }
     }
 
@@ -39,13 +39,13 @@ class HomeListVM(val categoryId: String = ""): TwoWayListVM<ArticleBean>() {
             if(TextUtils.isEmpty(categoryId)) {
                 ApiFactory.getApi(JueJinApis::class.java)
                         .getEntryByHotRecomment()
-                        .compose(Composers.compose())
+                        .compose(Composers.handleError())
                         .map { it.entry?.entrylist ?: emptyList() }
                         .map { if (it.size > 3) it.subList(0, 3) else it }
             }else{
                 ApiFactory.getApi(JueJinApis::class.java)
                         .getEntryByPeriod(categoryId = categoryId)
-                        .compose(Composers.compose())
+                        .compose(Composers.handleError())
                         .map { it.entrylist ?: emptyList() }
                         .map { if (it.size > 3) it.subList(0, 3) else it }
             }

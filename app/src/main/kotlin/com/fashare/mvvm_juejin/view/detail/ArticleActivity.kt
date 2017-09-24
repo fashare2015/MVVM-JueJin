@@ -116,7 +116,7 @@ class ArticleActivity : BaseActivity() {
 
         ApiFactory.getApi(JueJinApis.Article.Html::class.java)
                 .getHtml(article.objectId?: "")
-                .compose(Composers.compose())
+                .compose(Composers.handleError())
                 .subscribe({
                     // 以下代码来自反编译的掘金app
                     var template = LOCAL_TEMPLATE

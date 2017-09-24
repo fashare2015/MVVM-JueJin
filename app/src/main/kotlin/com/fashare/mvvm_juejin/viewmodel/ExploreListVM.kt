@@ -27,7 +27,7 @@ class ExploreListVM : TwoWayListVM<ArticleBean>() {
     override val loadTask = { lastItem: ArticleBean? ->
         ApiFactory.getApi(JueJinApis:: class.java)
                 .getEntryByRank(before = lastItem?.rankIndex?.toString()?: "")
-                .compose(Composers.compose())
+                .compose(Composers.handleError())
                 .map { it.entrylist?: emptyList() } // 需要去重？？
     }
 
@@ -53,7 +53,7 @@ class ExploreListVM : TwoWayListVM<ArticleBean>() {
             override val loadTask = { lastItem: BannerListBean.Item? ->
                 ApiFactory.getApi(JueJinApis.BannerStorage::class.java)
                         .getBanner(position = "explore")
-                        .compose(Composers.compose())
+                        .compose(Composers.handleError())
                         .map{ it.banner?: emptyList() }
             }
 
@@ -73,7 +73,7 @@ class ExploreListVM : TwoWayListVM<ArticleBean>() {
             override val loadTask = { lastItem: ArticleBean? ->
                 ApiFactory.getApi(JueJinApis::class.java)
                         .getEntryByTimeLine(categoryId = "all", type = "vote", limit = "5")
-                        .compose(Composers.compose())
+                        .compose(Composers.handleError())
                         .map { it.entrylist?: emptyList() }
             }
 

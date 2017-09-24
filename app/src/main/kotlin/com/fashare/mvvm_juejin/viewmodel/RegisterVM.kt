@@ -27,7 +27,7 @@ class RegisterVM {
                         userName.get(),
                         passWord.get(),
                         "", "", "android")
-                .compose(Composers.compose())
+                .compose(Composers.handleError())
                 .flatMap { LoginVM.getLoginTask(userName.get(), passWord.get(), "email") }
                 .subscribe({
                     LocalUser.userToken = it

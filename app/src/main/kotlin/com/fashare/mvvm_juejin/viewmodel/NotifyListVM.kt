@@ -25,7 +25,7 @@ class NotifyListVM : TwoWayListVM<NotifyBean>() {
     override val loadTask = { lastItem: NotifyBean? ->
         ApiFactory.getApi(JueJinApis.Notify:: class.java)
             .getUserNotification(lastItem?.createdAtString?: "")
-            .compose(Composers.compose())
+            .compose(Composers.handleError())
     }
 
     override val onItemClick = ArticleActivity.START_FROM_NOTIFY

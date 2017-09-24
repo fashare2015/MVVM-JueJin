@@ -38,7 +38,7 @@ class ProfileFragment : BaseFragment(){
         LocalUser.userToken?.apply{
             ApiFactory.getApi(JueJinApis.User.Storage::class.java)
                     .getUserInfo()
-                    .compose(Composers.compose())
+                    .compose(Composers.handleError())
                     .subscribe({
                         binding.profileVM.user.set(it)
                         binding.profileVM.data.apply{

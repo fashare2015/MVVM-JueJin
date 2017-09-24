@@ -24,7 +24,7 @@ class LoginVM{
                         .login(login_type = loginType,
                             user = userName,
                             psd = passWord)
-                        .compose(Composers.compose())
+                        .compose(Composers.handleError())
     }
 
     var userName = ObservableField<String>("18818276018")
