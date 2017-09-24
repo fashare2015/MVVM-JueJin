@@ -13,7 +13,7 @@ object LocalUser{
     val isLogin: Boolean
         get() = userToken?.token != null
 
-    var user: UserBean? = null
+//    var user: UserBean? = null
     var userToken: UserBean.TokenBean? = null
             set(value) {
                 field = value

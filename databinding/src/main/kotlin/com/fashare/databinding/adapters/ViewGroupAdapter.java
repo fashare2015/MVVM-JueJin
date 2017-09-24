@@ -3,6 +3,7 @@ package com.fashare.databinding.adapters;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.view.ViewGroup;
 import com.fashare.adapter.OnItemClickListener;
 import com.fashare.adapter.ViewHolder;
 import com.fashare.databinding.ListVM;
+import com.fashare.databinding.R;
+import com.fashare.databinding.TwoWayListVM;
 import com.fashare.databinding.adapters.annotation.ResHolder;
 import com.fashare.databinding.adapters.annotation.ResUtils;
 
@@ -35,8 +38,19 @@ public final class ViewGroupAdapter {
         }
     }
 
-    @BindingAdapter(value = {"vm", "data"})
-    public static <T> void bind(ViewGroup viewGroup, ListVM<T> vm, List<T> datas) {
+    private static void setListener(final OnItemClickListener onItemClickListener, final ViewHolder viewHolder, final Object data, final int pos) {
+        viewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(viewHolder, data, pos);
+                }
+            }
+        });
+    }
+
+//    @BindingAdapter(value = {"vm", "data"})
+    private static <T> void bind(ViewGroup viewGroup, ListVM<T> vm, List<T> datas) {
         if(vm == null)
             return ;
 
@@ -48,15 +62,35 @@ public final class ViewGroupAdapter {
         bind(viewGroup, item, datas, vm.getOnItemClick());
     }
 
-    private static void setListener(final OnItemClickListener onItemClickListener, final ViewHolder viewHolder, final Object data, final int pos) {
-        viewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (onItemClickListener != null) {
-                    onItemClickListener.onItemClick(viewHolder, data, pos);
-                }
+    /**
+     * (伪)双向 databinding: 同 {@link RecyclerViewAdapter#setDataTwoWay(RecyclerView, ListVM, List)}
+     *
+     * @param container
+     * @param vm
+     * @param datas
+     * @param <T>
+     */
+    @BindingAdapter({"vm", "data"})
+    public static <T> void setDataTwoWay(final ViewGroup container, final ListVM<T> vm, List<T> datas){
+        if(vm == null){
+            return ;
+        }
+        bind(container, vm, datas);
+
+        if(vm instanceof TwoWayListVM){
+            boolean isInited = container.getTag(R.id.db_inited) != null;
+            if(!isInited) {
+                container.setTag(R.id.db_inited, true);
+                loadData(container, (TwoWayListVM<T>)vm, null, null);
             }
-        });
+        }
+    }
+
+    public static <T> void loadData(final ViewGroup container, final TwoWayListVM<T> vm, T lastItem, final TwoWayListVM.Refreshable refreshable){
+        if(vm.getLoadTask() != null && vm.getLoadTaskObserver() != null){
+            vm.getLoadTask().invoke(lastItem)
+                    .subscribe(vm.getLoadTaskObserver().invoke(vm.getData(), refreshable));
+        }
     }
 }
 

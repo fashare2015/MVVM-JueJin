@@ -3,7 +3,6 @@ package com.fashare.mvvm_juejin.viewmodel
 import android.databinding.ObservableField
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.fashare.databinding.ListVM
 import com.fashare.databinding.TwoWayListVM
 import com.fashare.databinding.adapters.annotation.HeaderResHolder
 import com.fashare.databinding.adapters.annotation.ResHolder
@@ -24,9 +23,9 @@ import com.fashare.net.ApiFactory
 class ArticleVM(val rv: RecyclerView) : TwoWayListVM<CommentListBean.Item>() {
     val article = ObservableField<ArticleBean>(ArticleBean("", ""))
 
-    override val loadTask = { it: CommentListBean.Item?->
+    override val loadTask = { lastItem: CommentListBean.Item?->
         ApiFactory.getApi(JueJinApis.Comment::class.java)
-                .getComments(article.get().objectId?: "", it?.createdAt?: "")
+                .getComments(article.get().objectId?: "", lastItem?.createdAt?: "")
                 .compose(Composers.compose())
                 .map { it.comments }
     }
@@ -34,9 +33,16 @@ class ArticleVM(val rv: RecyclerView) : TwoWayListVM<CommentListBean.Item>() {
     override val headerData = HeaderVM()
 
     @ResHolder(R.layout.header_item_home)
-    class HeaderVM : ListVM<ArticleBean>() {
+    class HeaderVM : TwoWayListVM<ArticleBean>() {
         val html = ObservableField<String>("")
         val article = ObservableField<ArticleBean>(ArticleBean("", ""))
+
+        override val loadTask = { lastItem: ArticleBean? ->
+            ApiFactory.getApi(JueJinApis:: class.java)
+                    .getRelatedEntry(entryId = article.get()?.objectId?: "")
+                    .compose(Composers.compose())
+                    .map{ it.entrylist?: emptyList() }
+        }
 
         override val onItemClick = ArticleActivity.START
     }

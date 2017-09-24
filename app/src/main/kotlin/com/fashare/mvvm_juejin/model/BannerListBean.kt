@@ -1,5 +1,6 @@
 package com.fashare.mvvm_juejin.model
 
+import com.fashare.mvvm_juejin.model.article.ArticleBean
 import java.io.Serializable
 
 class BannerListBean : Serializable {
@@ -38,5 +39,16 @@ class BannerListBean : Serializable {
         var createdAt: String? = null
         var updatedAt: String? = null
         var osTime: String? = null
+
+        fun toArticle(): ArticleBean {
+            return ArticleBean(title, this.description).apply {
+                this.objectId = this@Item.relatedObjectId
+                this.type = this@Item.type
+                this.originalUrl = this@Item.url
+                this.screenshot = this@Item.screenshot
+                this.createdAt = this@Item.createdAt
+                this.updatedAt = this@Item.updatedAt
+            }
+        }
     }
 }

@@ -20,13 +20,20 @@ const val BASE_URL = "https://timeline-merger-ms.juejin.im/"
 
 @ApiFactory.BaseUrl(BASE_URL)
 interface JueJinApis {
-    // 热门推荐
+    // 首页 - 热门推荐
     @GET("/v1/get_entry_by_hot_recomment")
     fun getEntryByHotRecomment(@Query("limit") limit: String = "20"): Observable<Response<HotRecomment>>
 
+    // 首页 - 各子tab的热门推荐
+    @GET("/v1/get_entry_by_period")
+    fun getEntryByPeriod(@Query("category") categoryId: String = "",
+                         @Query("limit") limit: String = "20",
+                         @Query("period") period: String = "3day"): Observable<Response<ArticleListBean>>
+
+
     // 文章列表
     @GET("/v1/get_entry_by_timeline")
-    fun getEntryByTimeLine(@Query("category") categoryId: String = "all",
+    fun getEntryByTimeLine(@Query("category") categoryId: String = "",
                            @Query("type") type: String = "",
                            @Query("before") before: String = "",
                            @Query("limit") limit: String = "20"): Observable<Response<ArticleListBean>>

@@ -4,11 +4,14 @@ import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.RecyclerView;
 
 import com.fashare.adapter.OnItemClickListener;
 import com.fashare.adapter.ViewHolder;
 import com.fashare.adapter.viewpager.CommonPagerAdapter;
 import com.fashare.databinding.ListVM;
+import com.fashare.databinding.R;
+import com.fashare.databinding.TwoWayListVM;
 import com.fashare.databinding.adapters.annotation.ResHolder;
 import com.fashare.databinding.adapters.annotation.ResUtils;
 
@@ -23,6 +26,11 @@ import me.tatarka.bindingcollectionadapter.ItemView;
  */
 public class ViewPagerAdapter {
     public static final String TAG = "ViewPagerAdapter - binding ViewPager...: ";
+
+    @BindingAdapter({"offscreenPageLimit"})
+    public static void bind(ViewPager container, final int offscreenPageLimit) {
+        container.setOffscreenPageLimit(offscreenPageLimit);
+    }
 
 //    @BindingAdapter(value = {"itemView", "viewModels", "onItemClick"}, requireAll = false)
     private static void bind(ViewPager container, final ItemView itemView, final List<?> datas, final OnItemClickListener<?> onItemClickListener) {
@@ -45,8 +53,8 @@ public class ViewPagerAdapter {
         }
     }
 
-    @BindingAdapter(value = {"vm", "data"})
-    public static <T> void bind(ViewPager container, ListVM<T> vm, List<T> datas) {
+//    @BindingAdapter(value = {"vm", "data"})
+    private static <T> void bind(ViewPager container, ListVM<T> vm, List<T> datas) {
         if(vm == null)
             return ;
 
@@ -58,9 +66,34 @@ public class ViewPagerAdapter {
         bind(container, item, datas, vm.getOnItemClick());
     }
 
-    @BindingAdapter({"offscreenPageLimit"})
-    public static void bind(ViewPager container, final int offscreenPageLimit) {
-        container.setOffscreenPageLimit(offscreenPageLimit);
+    /**
+     * (伪)双向 databinding: 同 {@link RecyclerViewAdapter#setDataTwoWay(RecyclerView, ListVM, List)}
+     *
+     * @param container
+     * @param vm
+     * @param datas
+     * @param <T>
+     */
+    @BindingAdapter({"vm", "data"})
+    public static <T> void setDataTwoWay(final ViewPager container, final ListVM<T> vm, List<T> datas){
+        if(vm == null){
+            return ;
+        }
+        bind(container, vm, datas);
+
+        if(vm instanceof TwoWayListVM) {
+            boolean isInited = container.getTag(R.id.db_inited) != null;
+            if (!isInited) {
+                container.setTag(R.id.db_inited, true);
+                loadData(container, (TwoWayListVM<T>) vm, null, null);
+            }
+        }
     }
 
+    public static <T> void loadData(final ViewPager container, final TwoWayListVM<T> vm, T lastItem, final TwoWayListVM.Refreshable refreshable){
+        if(vm.getLoadTask() != null && vm.getLoadTaskObserver() != null){
+            vm.getLoadTask().invoke(lastItem)
+                    .subscribe(vm.getLoadTaskObserver().invoke(vm.getData(), refreshable));
+        }
+    }
 }

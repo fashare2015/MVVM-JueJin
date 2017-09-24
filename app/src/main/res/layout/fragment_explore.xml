@@ -14,10 +14,18 @@
         android:orientation="vertical"
         android:background="@color/g_bg">
 
-        <android.support.v7.widget.SearchView
+        <!--<android.support.v7.widget.SearchView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:background="@color/colorPrimary"/>-->
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@color/colorPrimary"/>
+            android:gravity="center"
+            android:background="@color/colorPrimary"
+            android:text="发现"
+            android:textSize="15sp"
+            android:textColor="@color/g_text_white"/>
 
         <include layout="@layout/g_two_way_list"
             bind:listVM="@{listVM}"/>

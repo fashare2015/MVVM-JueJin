@@ -3,6 +3,7 @@ package com.fashare.mvvm_juejin
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import com.fashare.mvvm_juejin.repo.Response
 import com.fashare.mvvm_juejin.repo.local.LocalUser
 import com.fashare.net.ApiFactory
 import com.fashare.net.widget.OkHttpFactory
@@ -56,26 +57,35 @@ class JueJinApp: Application() {
              *  }
              */
             var response = it.proceed(newRequest)
-            if(response.code() in 400 .. 500){
-                response = response.newBuilder()
-                        .apply {
-                            val originBody = response.body()
-                            var json = originBody?.string()
-                            try {
-                                val jsonMap : MutableMap<String, Any> = GSON.fromJson(json, object: TypeToken<HashMap<String, Any>>(){}.type)
-                                if(jsonMap.containsKey("d"))
-                                    jsonMap.remove("d")
-                                json = GSON.toJson(jsonMap)
-                            }catch (e: Exception){
-                                Log.e("initNet", "interceptor response" + e)
-                            }
-                            this.body(ResponseBody.create(originBody?.contentType(), json))
-                        }
-                        .code(200)
-                        .build()
-            }
+            response.newBuilder()
+                    .apply {
+                        val originBody = response.body()
+                        var json = originBody?.string()
+                        var res : Response<Any>? = null
 
-            response
+                        try {
+                            res = GSON.fromJson(json, object: TypeToken<Response<Any>>(){}.type)
+                        }catch (e: Exception){
+                            Log.e("initNet", "interceptor response" + e)
+                        }
+                        try {
+                            res = GSON.fromJson(json, object: TypeToken<Response<List<Any>>>(){}.type)
+                        }catch (e: Exception){
+                            Log.e("initNet", "interceptor response" + e)
+                        }
+
+                        // 不成功，则移除 "d" 字段
+                        if(1 != res?.s){
+                            res?.d = null
+                        }
+                        json = GSON.toJson(res)
+
+                        this.body(ResponseBody.create(originBody?.contentType(), json))
+                    }
+                    .apply {
+                        this.code(if(response.code() in 400 .. 500) 200 else response.code())
+                    }
+                    .build()
         })
     }
 }

@@ -6,26 +6,26 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
-
         <variable name="item" type="com.fashare.databinding.ListVM"/>
     </data>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/home_article_padding"
-        android:layout_marginBottom="@dimen/home_article_padding"
+        android:paddingBottom="@dimen/home_article_padding"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="@color/home_article_bg">
+        bind:visibility="@{!item.data.isEmpty()}">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/home_article_padding"
             android:orientation="horizontal"
             android:padding="@dimen/home_article_padding"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:background="@color/home_article_bg"
+            bind:visibility="@{!item.data.isEmpty()}">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -58,6 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="@color/home_article_bg"
             bind:vm="@{item}"
             bind:data="@{item.data}"/>
 

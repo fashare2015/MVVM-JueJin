@@ -3,6 +3,7 @@ package com.fashare.mvvm_juejin.repo
 import android.util.Log
 import android.widget.Toast
 import com.fashare.mvvm_juejin.JueJinApp
+import com.fashare.mvvm_juejin.repo.local.LocalUser
 import com.fashare.net.exception.ApiException
 import com.fashare.net.exception.ExceptionFactory
 import io.reactivex.Observable
@@ -32,8 +33,19 @@ object Composers {
                     .doOnError { e: Throwable ->
                         Log.e(TAG, e.toString())
                         (e as? ApiException)?.apply {
-                            // toast 前， 确保在 UI 线程 !!!
-                            Toast.makeText(JueJinApp.instance, this.errorMsg, Toast.LENGTH_SHORT).show()
+                            // 登录失效
+                            if(errorCode.equals("3") || errorMsg.equals("illegal token")){
+//                                Intent(JueJinApp.instance, LoginActivity::class.java)
+//                                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                                        .apply{
+//                                            JueJinApp.instance.startActivity(this)
+//                                        }
+                                LocalUser.userToken = null
+                                Toast.makeText(JueJinApp.instance, "登录已失效，请重新登录", Toast.LENGTH_SHORT).show()
+                            }else{
+                                // toast 前， 确保在 UI 线程 !!!
+                                Toast.makeText(JueJinApp.instance, this.errorMsg, Toast.LENGTH_SHORT).show()
+                            }
                         }
                     }
         }

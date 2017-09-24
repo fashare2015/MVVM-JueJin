@@ -24,9 +24,9 @@ import com.fashare.net.ApiFactory
 @ResHolder(R.layout.item_explore_list)
 @HeaderResHolder(R.layout.header_explore)
 class ExploreListVM : TwoWayListVM<ArticleBean>() {
-    override val loadTask = { it: ArticleBean? ->
+    override val loadTask = { lastItem: ArticleBean? ->
         ApiFactory.getApi(JueJinApis:: class.java)
-                .getEntryByRank(before = it?.rankIndex?.toString()?: "")
+                .getEntryByRank(before = lastItem?.rankIndex?.toString()?: "")
                 .compose(Composers.compose())
                 .map { it.entrylist?: emptyList() } // 需要去重？？
     }
@@ -49,7 +49,16 @@ class ExploreListVM : TwoWayListVM<ArticleBean>() {
 
         // banner
         @ResHolder(R.layout.header_item_explore_banner)
-        class Banner : ListVM<BannerListBean.Item>(){}
+        class Banner : TwoWayListVM<BannerListBean.Item>(){
+            override val loadTask = { lastItem: BannerListBean.Item? ->
+                ApiFactory.getApi(JueJinApis.BannerStorage::class.java)
+                        .getBanner(position = "explore")
+                        .compose(Composers.compose())
+                        .map{ it.banner?: emptyList() }
+            }
+
+            override val onItemClick = ArticleActivity.START_FROM_BANNER
+        }
 
         // 4 个入口
         @ResHolder(R.layout.header_item_explore_entry)
@@ -60,7 +69,14 @@ class ExploreListVM : TwoWayListVM<ArticleBean>() {
 
         // 沸点
         @ResHolder(R.layout.header_item_explore_topic)
-        class Topics : ListVM<ArticleBean>(){
+        class Topics : TwoWayListVM<ArticleBean>(){
+            override val loadTask = { lastItem: ArticleBean? ->
+                ApiFactory.getApi(JueJinApis::class.java)
+                        .getEntryByTimeLine(categoryId = "all", type = "vote", limit = "5")
+                        .compose(Composers.compose())
+                        .map { it.entrylist?: emptyList() }
+            }
+
             override val onItemClick = ArticleActivity.START
         }
     }

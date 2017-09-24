@@ -13,6 +13,7 @@ import com.fashare.base_ui.BaseActivity
 import com.fashare.mvvm_juejin.JueJinApp
 import com.fashare.mvvm_juejin.R
 import com.fashare.mvvm_juejin.databinding.ActivityArticleBinding
+import com.fashare.mvvm_juejin.model.BannerListBean
 import com.fashare.mvvm_juejin.model.article.ArticleBean
 import com.fashare.mvvm_juejin.model.notify.NotifyBean
 import com.fashare.mvvm_juejin.repo.Composers
@@ -84,9 +85,14 @@ class ArticleActivity : BaseActivity() {
                 ArticleActivity.start(holder.itemView.context, data.entry?.toArticle())
             }
         }
+
+        val START_FROM_BANNER = object : OnItemClickListener<BannerListBean.Item>() {
+            override fun onItemClick(holder: ViewHolder, data: BannerListBean.Item, position: Int) {
+                ArticleActivity.start(holder.itemView.context, data.toArticle())
+            }
+        }
     }
 
-    private val IS_CLEAR = true
     lateinit var binding : ActivityArticleBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,7 +108,6 @@ class ArticleActivity : BaseActivity() {
 
         val article = intent?.getSerializableExtra(PARAMS_ARTICLE_ID) as ArticleBean
         loadArticleHtml(article)
-        loadRelatedArticles(article.objectId)
     }
 
     private fun loadArticleHtml(article: ArticleBean) {
@@ -127,21 +132,5 @@ class ArticleActivity : BaseActivity() {
                     }
                     binding.articleVM.headerData.html.set(template)
                 }, {})
-    }
-
-    private fun loadRelatedArticles(articleId: String?) {
-        ApiFactory.getApi(JueJinApis:: class.java)
-                .getRelatedEntry(entryId = articleId?: "")
-                .compose(Composers.compose())
-                .subscribe({
-                    val list = it?.entrylist as Iterable<ArticleBean>
-
-                    binding.articleVM.headerData.data.apply{
-                        this.clear()
-                        this.addAll(list.filter{ !this.contains(it) })  // 去重
-                    }
-                }, {
-
-                })
     }
 }

@@ -22,9 +22,9 @@ import com.fashare.net.ApiFactory
 @HeaderResHolder(R.layout.header_notify)
 class NotifyListVM : TwoWayListVM<NotifyBean>() {
 
-    override val loadTask = { it: NotifyBean? ->
+    override val loadTask = { lastItem: NotifyBean? ->
         ApiFactory.getApi(JueJinApis.Notify:: class.java)
-            .getUserNotification(it?.createdAtString?: "")
+            .getUserNotification(lastItem?.createdAtString?: "")
             .compose(Composers.compose())
     }
 

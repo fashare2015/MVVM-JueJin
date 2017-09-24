@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             bind:vm="@{listVM}"
-            bind:data="@={listVM.data}"/>
+            bind:data="@{listVM.data}"/>
 
     </com.fashare.mvvm_juejin.widget.MySpringView>
 

@@ -3,11 +3,8 @@ package com.fashare.databinding.adapters;
 import android.databinding.BindingAdapter;
 import android.databinding.BindingConversion;
 import android.databinding.DataBindingUtil;
-import android.databinding.InverseBindingAdapter;
-import android.databinding.InverseBindingListener;
 import android.databinding.ObservableArrayList;
 import android.databinding.ViewDataBinding;
-import android.databinding.adapters.TextViewBindingAdapter;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,14 +22,9 @@ import com.fashare.databinding.adapters.annotation.HeaderResHolder;
 import com.fashare.databinding.adapters.annotation.ResHolder;
 import com.fashare.databinding.adapters.annotation.ResUtils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import me.tatarka.bindingcollectionadapter.ItemView;
 import me.tatarka.bindingcollectionadapter.LayoutManagers;
 
@@ -121,8 +113,8 @@ public class RecyclerViewAdapter {
      * @param datas
      * @param <T>
      */
-    @BindingAdapter(value = {"vm", "data"}, requireAll = false)
-    public static <T> void setData(RecyclerView container, ListVM<T> vm, List<T> datas){
+//    @BindingAdapter(value = {"vm", "data"}, requireAll = false)
+    private static <T> void setData(RecyclerView container, ListVM<T> vm, List<T> datas){
         // <include> 标签有 bug, 会多调用bind(), 若不判空将导致空指针
         if(vm == null){
             return ;
@@ -134,63 +126,53 @@ public class RecyclerViewAdapter {
         if(item == null)
             throw new IllegalArgumentException(TAG + "ItemView is null, maybe you forget @ResHolder(R.layout.XXX) in " + vm.getClass().getCanonicalName());
 
-        container.setTag(R.id.db_vm, vm);
-
         bind(container, item, datas, header, vm.getHeaderData(), vm.getOnItemClick());
     }
 
     /**
-     * 双向 databinding: 自动调用 {@link TwoWayListVM#getLoadTask()},
+     * (伪)双向 databinding: 自动调用 {@link TwoWayListVM#getLoadTask()},
      *      并自动触发 {@link TwoWayListVM#setData(ObservableArrayList)}
      *      然后自动更新 RecyclerView
      *
      * @param container
      * @param vm
      * @param datas
-     * @param listChanged
      * @param <T>
      */
-    @BindingAdapter(value = {"vm", "data", "listChanged"}, requireAll = false)
-    public static <T> void setData(final RecyclerView container, final TwoWayListVM<T> vm, List<T> datas, final InverseBindingListener listChanged){
-        // <include> 标签有 bug, 会多调用bind(), 若不判空将导致空指针
+    @BindingAdapter({"vm", "data"})
+    public static <T> void setDataTwoWay(final RecyclerView container, final ListVM<T> vm, List<T> datas){
         if(vm == null){
             return ;
         }
+        setData(container, vm, datas);
 
-        ItemView item = ResUtils.INSTANCE.getItemView(vm.getClass().getAnnotation(ResHolder.class)),
-                header = ResUtils.INSTANCE.getItemView(vm.getClass().getAnnotation(HeaderResHolder.class));
+        if(vm instanceof TwoWayListVM) {
+            boolean isInited = container.getTag(R.id.db_inited) != null;
+            if (!isInited) {
+                container.setTag(R.id.db_inited, true);
 
-        if(item == null)
-            throw new IllegalArgumentException(TAG + "ItemView is null, maybe you forget @ResHolder(R.layout.XXX) in " + vm.getClass().getCanonicalName());
+                final TwoWayListVM<T> _vm = ((TwoWayListVM<T>) vm);
 
-        bind(container, item, datas, header, vm.getHeaderData(), vm.getOnItemClick());
-
-        /**
-         * 类似 {@link TextViewBindingAdapter#haveContentsChanged(CharSequence, CharSequence)},
-         * 若数据未变则不 loadData(), 防止死循环
-         */
-        Object oldData = container.getTag(R.id.db_data);
-        if(!equals(oldData, datas)) {
-            loadData(container, vm, listChanged, null, null);
-
-            // 若 parent 可下拉刷新，设置回调
-            ViewParent parent = container.getParent();
-            if(parent != null && parent instanceof TwoWayListVM.Refreshable){
-                final TwoWayListVM.Refreshable refreshable = (TwoWayListVM.Refreshable) parent;
-                ((TwoWayListVM.Refreshable) parent).setOnRefresh(new TwoWayListVM.Refreshable.CallBack() {
-                    @Override
-                    public void onRefresh() {
-                        loadData(container, vm, listChanged, null, refreshable);
-                    }
-
-                    @Override
-                    public void onLoadMore() {
-                        List<T> data = getOriginData(container);
-                        if(data.size()-1 >= 0) {
-                            loadData(container, vm, listChanged, data.get(data.size()-1), refreshable);
+                loadData(container, _vm, null, null);
+                // 若 parent 可下拉刷新，设置回调
+                ViewParent parent = container.getParent();
+                if (parent != null && parent instanceof TwoWayListVM.Refreshable) {
+                    final TwoWayListVM.Refreshable refreshable = (TwoWayListVM.Refreshable) parent;
+                    ((TwoWayListVM.Refreshable) parent).setOnRefresh(new TwoWayListVM.Refreshable.CallBack() {
+                        @Override
+                        public void onRefresh() {
+                            loadData(container, _vm, null, refreshable);
                         }
-                    }
-                });
+
+                        @Override
+                        public void onLoadMore() {
+                            List<T> data = _vm.getData();
+                            if (data.size() - 1 >= 0) {
+                                loadData(container, _vm, data.get(data.size() - 1), refreshable);
+                            }
+                        }
+                    });
+                }
             }
         }
     }
@@ -208,61 +190,11 @@ public class RecyclerViewAdapter {
         return false;
     }
 
-    @InverseBindingAdapter(attribute = "data", event = "listChanged")
-    public static ObservableArrayList<?> getData(RecyclerView container) {
-        ObservableArrayList data = new ObservableArrayList<>();
-        Object _newData = container.getTag(R.id.db_data);
-        List<?> newData = (_newData != null && _newData instanceof List)? ((List<?>) _newData): Collections.emptyList();
-
-        data.addAll(newData);
-        return data;
-    }
-
 //    @BindingAdapter(value = {"listChanged"}, requireAll = false)
-    public static <T> void loadData(final RecyclerView container, TwoWayListVM<T> vm, final InverseBindingListener listChanged, T lastItem, final TwoWayListVM.Refreshable refreshable){
-        if(vm.getLoadTask() != null){
-            final boolean isLoadMore = lastItem != null;
-
-            vm.getLoadTask()
-                    .invoke(lastItem)
-                    .subscribe(new Consumer<List<T>>() {
-                        @Override
-                        public void accept(@NonNull List<T> objects) throws Exception {
-                            List<T> data = new ArrayList<>();
-                            if (isLoadMore) {
-                                data.addAll((List<T>)getOriginData(container));
-                            }
-                            data.addAll(objects);
-                            container.setTag(R.id.db_data, data);
-                            if (listChanged != null)
-                                listChanged.onChange();
-                        }
-                    }, new Consumer<Throwable>() {
-                        @Override
-                        public void accept(@NonNull Throwable throwable) throws Exception {
-
-                        }
-                    }, new Action() {
-                        @Override
-                        public void run() throws Exception {
-                            if(refreshable != null)
-                                refreshable.endRefresh();
-                        }
-                    });
+    public static <T> void loadData(final RecyclerView container, final TwoWayListVM<T> vm, T lastItem, final TwoWayListVM.Refreshable refreshable){
+        if(vm.getLoadTask() != null && vm.getLoadTaskObserver() != null){
+            vm.getLoadTask().invoke(lastItem)
+                    .subscribe(vm.getLoadTaskObserver().invoke(vm.getData(), refreshable));
         }
-    }
-
-    public static <T> List<T> getOriginData(RecyclerView container) {
-        RecyclerView.Adapter adapter = container.getAdapter();
-        List<T> originData = Collections.emptyList();
-        if(adapter != null) {
-            if(adapter instanceof HeaderAndFooterWrapper)
-                adapter = ((HeaderAndFooterWrapper) adapter).getInnerAdapter();
-
-            if(adapter instanceof CommonRvAdapter)
-                originData = ((CommonRvAdapter<T>) adapter).getDataList();
-        }
-
-        return originData;
     }
 }
