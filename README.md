@@ -8,7 +8,7 @@
 - [binding-collection-adapter](https://github.com/evant/binding-collection-adapter)
 
 ### 1.2 更进一步：view -> data -> view
-在本项目中，你将会看到一个带有 `下拉刷新` + `上啦加载` 的页面如何简化到`10+行java代码` !
+在本项目中，你将会看到一个带有 `下拉刷新` + `上拉加载` 的页面如何简化到`10+行java代码` !
 
 ## 2. 模块概览
 > 接口全抓自掘金app, 支持登录、注册（走的官方接口，并非假数据哦~）
