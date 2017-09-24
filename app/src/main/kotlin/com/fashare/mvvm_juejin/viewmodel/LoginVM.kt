@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.databinding.ObservableField
 import android.view.View
+import com.blankj.utilcode.util.RegexUtils
 import com.fashare.mvvm_juejin.repo.Composers
 import com.fashare.mvvm_juejin.repo.JueJinApis
 import com.fashare.mvvm_juejin.repo.local.LocalUser
@@ -19,9 +20,9 @@ import com.fashare.net.ApiFactory
  */
 class LoginVM{
     companion object {
-        fun getLoginTask(userName: String, passWord: String, loginType: String = "tel") =
+        fun getLoginTask(userName: String, passWord: String) =
                 ApiFactory.getApi(JueJinApis.User::class.java)
-                        .login(login_type = loginType,
+                        .login(login_type = if(RegexUtils.isMobileSimple(userName)) "tel" else "email",
                             user = userName,
                             psd = passWord)
                         .compose(Composers.handleError())

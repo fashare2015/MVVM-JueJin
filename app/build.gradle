@@ -19,18 +19,14 @@ dependencies {
     /******* 应用权限库 ****************************************************************************/
 //    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar'
 
-//    /******* 网络图片库 ****************************************************************************/
-//    compile "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
-//    compile "jp.wasabeef:glide-transformations:$rootProject.ext.glideTransformationsVersion"
-//    compile "com.github.bumptech.glide:okhttp3-integration:$rootProject.ext.glideOkhttp3IntegrationVersion"
-
     /******* 其它常用库 ****************************************************************************/
     compile "com.jude:swipebackhelper:$rootProject.ext.swipebackhelperVersion"
 
-
+    // 常用 utils
+    compile "com.blankj:utilcode:$rootProject.ext.utilcodeVersion"
 
     /******* 内存泄漏 ****************************************************************************/
-    debugCompile "com.squareup.leakcanary:leakcanary-android:$rootProject.ext.leakcanaryVersion"
-    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.ext.leakcanaryVersion"
-    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.ext.leakcanaryVersion"
+//    debugCompile "com.squareup.leakcanary:leakcanary-android:$rootProject.ext.leakcanaryVersion"
+//    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.ext.leakcanaryVersion"
+//    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.ext.leakcanaryVersion"
 }

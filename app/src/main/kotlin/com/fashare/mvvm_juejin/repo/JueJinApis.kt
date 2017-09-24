@@ -1,5 +1,6 @@
 package com.fashare.mvvm_juejin.repo
 
+import com.blankj.utilcode.util.DeviceUtils
 import com.fashare.mvvm_juejin.model.BannerListBean
 import com.fashare.mvvm_juejin.model.HotRecomment
 import com.fashare.mvvm_juejin.model.article.ArticleHtmlBean
@@ -53,7 +54,7 @@ interface JueJinApis {
         fun login(@Field("login_type") login_type: String,
                   @Field("user") user: String = "tel",
                   @Field("psd") psd: String = "tel",
-                  @Field("client_id") client_id: String = "b9ae8b6a-efe0-4944-b574-b01a3a1303ee",
+                  @Field("client_id") client_id: String = DeviceUtils.getAndroidID(),
                   @Field("state") state: String = "nOOKnTFSCE",
                   @Field("src") src: String = "android"): Observable<Response<UserBean.TokenBean>>
 
@@ -65,9 +66,9 @@ interface JueJinApis {
             fun register(@Field("email") email: String,
                          @Field("username") username: String,
                          @Field("password") password: String,
-                         @Field("mobilePhoneNumber") mobilePhoneNumber: String,
-                         @Field("smsCode") smsCode: String,
-                         @Field("src") src: String): Observable<Response<List<Any>>>
+                         @Field("mobilePhoneNumber") mobilePhoneNumber: String = "",
+                         @Field("smsCode") smsCode: String = "",
+                         @Field("src") src: String = "android"): Observable<Response<List<Any>>>
 
             @GET("v1/getUserInfo")
             fun getUserInfo(@Query("current_uid") current_uid: String = LocalUser.userToken?.user_id?: ""): Observable<Response<UserBean>>

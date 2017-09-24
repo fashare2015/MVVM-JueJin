@@ -3,6 +3,8 @@ package com.fashare.mvvm_juejin
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import com.blankj.utilcode.util.DeviceUtils
+import com.blankj.utilcode.util.Utils
 import com.fashare.mvvm_juejin.repo.Response
 import com.fashare.mvvm_juejin.repo.local.LocalUser
 import com.fashare.net.ApiFactory
@@ -30,6 +32,7 @@ class JueJinApp: Application() {
         super.onCreate()
         instance = this
 
+        Utils.init(this)
         initNet()
     }
 
@@ -43,7 +46,7 @@ class JueJinApp: Application() {
                     .url(originRequest.url().newBuilder()
                             .addQueryParameter("uid", LocalUser.userToken?.user_id?:"unlogin")
                             .addQueryParameter("token", LocalUser.userToken?.token?:"")
-                            .addQueryParameter("device_id", "b9ae8b6a-efe0-4944-b574-b01a3a1303ee")
+                            .addQueryParameter("device_id", DeviceUtils.getAndroidID())
                             .addQueryParameter("src", "android")
                             .build()
                     ).build()
