@@ -8,7 +8,7 @@
 - [binding-collection-adapter](https://github.com/evant/binding-collection-adapter)
 
 ### 1.2 更进一步：view -> data -> view
-在本项目中，你将会看到一个带有 `下拉刷新` + `上拉加载` 的页面如何简化到`10+行java代码` !
+在本项目中，你将会看到一个带有 `下拉刷新` + `上拉加载` 的页面如何简化到`10+行java代码` ! see [NotifyVM.kt](https://github.com/fashare2015/MVVM-JueJin/blob/master/app/src/main/kotlin/com/fashare/mvvm_juejin/viewmodel/NotifyListVM.kt)
 
 ## 2. 模块概览
 > 接口全抓自掘金app, 支持登录、注册（走的官方接口，并非假数据哦~）
@@ -32,11 +32,11 @@
     - ...
 
 ## 3. 效果图
-![首页](./screen-record/home.gif)
-![文章详情](./screen-record/article.gif)
+![首页](https://github.com/fashare2015/MVVM-JueJin/blob/master/screen-record/home.gif)
+![文章详情](https://github.com/fashare2015/MVVM-JueJin/blob/master/screen-record/article.gif)
 
-![登录](./screen-record/login.gif)
-![其他](./screen-record/other.gif)
+![登录](https://github.com/fashare2015/MVVM-JueJin/blob/master/screen-record/login.gif)
+![其他](https://github.com/fashare2015/MVVM-JueJin/blob/master/screen-record/other.gif)
 
 ## 4. 技术栈
 - databinding
@@ -46,9 +46,9 @@
 - glide
 
 ## 5. 关于 "10+行" 实现的分页列表
-我们来看第3个tab - 消息列表：
+我们来看第3个tab - 消息列表： see [NotifyVM.kt](https://github.com/fashare2015/MVVM-JueJin/blob/master/app/src/main/kotlin/com/fashare/mvvm_juejin/viewmodel/NotifyListVM.kt)
 
-![消息](./screen-record/notify.png)
+![消息](https://github.com/fashare2015/MVVM-JueJin/blob/master/screen-record/notify.png)
 
 ```kotlin
 // NotifyListVM.kt
