@@ -3,6 +3,7 @@ package com.fashare.mvvm_juejin.viewmodel
 import android.app.Activity
 import android.content.Intent
 import android.databinding.ObservableField
+import android.net.Uri
 import android.view.View
 import com.blankj.utilcode.util.RegexUtils
 import com.fashare.mvvm_juejin.repo.Composers
@@ -28,8 +29,8 @@ class LoginVM{
                         .compose(Composers.handleError())
     }
 
-    var userName = ObservableField<String>("18818276018")
-    var passWord = ObservableField<String>("qwe13579")
+    var userName = ObservableField<String>("")
+    var passWord = ObservableField<String>("")
 
     val doLogin = View.OnClickListener{ view: View ->
         getLoginTask(userName.get(), passWord.get())
@@ -43,5 +44,14 @@ class LoginVM{
         it.context.apply {
             this.startActivity(Intent(this, RegisterActivity::class.java))
         }
+    }
+
+    /**
+     * 跳转项目地址
+     */
+    val toGithub = View.OnClickListener {
+        Intent().setAction(Intent.ACTION_VIEW)
+                .setData(Uri.parse("https://github.com/fashare2015/MVVM-JueJin"))
+                .apply { it.context.startActivity(this) }
     }
 }

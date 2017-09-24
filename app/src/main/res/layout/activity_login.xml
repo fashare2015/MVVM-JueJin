@@ -85,6 +85,20 @@
 
             </RelativeLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:text="掘金[MVVM] ・ fashare (求star~~)"
+                android:textColor="@color/login_text_default"
+                android:textSize="15sp"
+                android:onClick="@{loginVM.toGithub}"/>
+
         </LinearLayout>
 
         <include layout="@layout/g_title_bar"/>
