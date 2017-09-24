@@ -21,15 +21,11 @@ import com.fashare.net.ApiFactory
 @ResHolder(R.layout.item_notify_list)
 @HeaderResHolder(R.layout.header_notify)
 class NotifyListVM : TwoWayListVM<NotifyBean>() {
-
     override val loadTask = { lastItem: NotifyBean? ->
         ApiFactory.getApi(JueJinApis.Notify:: class.java)
             .getUserNotification(lastItem?.createdAtString?: "")
             .compose(Composers.handleError())
     }
-
     override val onItemClick = ArticleActivity.START_FROM_NOTIFY
-
-    override val headerData = HeaderVM()
-    class HeaderVM
+    override val headerData = Any()
 }

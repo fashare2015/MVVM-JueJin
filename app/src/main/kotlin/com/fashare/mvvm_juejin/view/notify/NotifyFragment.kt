@@ -18,7 +18,6 @@ import com.fashare.mvvm_juejin.viewmodel.NotifyListVM
 </pre> *
  */
 class NotifyFragment : BaseFragment(){
-
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return DataBindingUtil.inflate<FragmentNotifyBinding>(inflater, R.layout.fragment_notify, container, false).apply{
             this.listVM = NotifyListVM()
