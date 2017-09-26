@@ -30,7 +30,7 @@
             android:text="@{item.title}"
             android:textSize="15sp"
             android:textColor="@color/explore_title"
-            tools:text="本周最热"/>
+            tools:text="hot"/>
 
     </LinearLayout>
 

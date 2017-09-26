@@ -39,10 +39,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="5dp"
-                    android:text='@{"阅读 " + (item.article.viewsCount) + " ・ " + "喜欢 " + (item.article.collectionCount)}'
+                    android:text='@{(@string/g_view) + (item.article.viewsCount) + (@string/g_dot) + (@string/g_like) + (item.article.collectionCount)}'
                     android:textColor="@color/g_text_gray"
                     android:textSize="12sp"
-                    tools:text="阅读 0 ・ 喜欢 0"/>
+                    tools:text="view 0 ・ like 0"/>
 
             </LinearLayout>
 
@@ -67,14 +67,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="5dp"
-                    android:text='@{item.article.user.username + "的更多文章"}'
+                    android:text='@{item.article.user.username + (@string/article_header_more)}'
                     android:textColor="@color/g_text_black"
                     android:textSize="15sp"
-                    tools:text="用户A的更多文章"/>
+                    tools:text="userA's more articles"/>
 
             </LinearLayout>
 
-            <!--列表, 固定3列-->
+            <!--list, 3 rows-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -96,10 +96,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/g_margin"
-                android:text='@{item.article.commentsCount + " 条评论"}'
+                android:text='@{item.article.commentsCount + (@string/article_header_comments_count)}'
                 android:textColor="@color/g_text_gray"
                 android:textSize="15sp"
-                tools:text="0 条评论"/>
+                tools:text="0 comments"/>
 
             <include layout="@layout/g_line_horizontal"/>
         </LinearLayout>

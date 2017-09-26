@@ -38,7 +38,7 @@
                 android:text='@{item.name}'
                 android:textSize="15sp"
                 android:textColor="@color/profile_title"
-                tools:text="我喜欢的"/>
+                tools:text="i like"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
                 android:text='@{item.parseItemCount(item.user)}'
                 android:textSize="13sp"
                 android:textColor="@color/profile_content"
-                tools:text="0篇"/>
+                tools:text="0"/>
 
         </LinearLayout>
 

@@ -1,0 +1,7 @@
+<resources>
+    <string name="explore_title">发现</string>
+
+    <string name="explore_topic">沸点</string>
+    <string name="explore_hot">热门文章</string>
+    <string name="explore_hot_settings">订制热门</string>
+</resources>

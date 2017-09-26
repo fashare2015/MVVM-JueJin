@@ -22,7 +22,7 @@
             android:drawablePadding="@dimen/notify_margin"
             android:padding="@dimen/notify_margin"
             android:gravity="center"
-            android:text="清除未读"
+            android:text="@string/notify_clear"
             android:textSize="12sp"
             android:textColor="@color/notify_content"/>
 

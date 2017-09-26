@@ -54,7 +54,7 @@
                         android:textColor="@color/home_article_username"
                         android:maxLines="2"
                         android:ellipsize="end"
-                        tools:text="用户A"/>
+                        tools:text="user A"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                         android:text='@{item.content}'
                         android:textSize="14sp"
                         android:textColor="@color/notify_title"
-                        tools:text="评论。。。评论。。。评论。。。评论。。。评论。。。评论。。。评论。。。评论。。。评论。。。"/>
+                        tools:text="comment"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -74,7 +74,7 @@
                         android:textColor="@color/notify_content"
                         android:maxLines="1"
                         android:ellipsize="end"
-                        tools:text="1天前 "/>
+                        tools:text="1 day ago"/>
 
                 </LinearLayout>
 

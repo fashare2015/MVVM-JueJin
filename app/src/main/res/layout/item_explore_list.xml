@@ -18,14 +18,12 @@
         android:gravity="center"
         android:background="@color/home_article_bg">
 
-        <!--内容-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:padding="@dimen/explore_margin"
             android:orientation="vertical">
 
-            <!--类型: 投稿-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,18 +43,18 @@
                         android:textColor="@color/home_article_title"
                         android:maxLines="2"
                         android:ellipsize="end"
-                        tools:text="标题"/>
+                        tools:text="title"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/home_article_padding"
-                        android:text='@{item.collectionCount + "人喜欢 · " + item.user.username + " · " + item.createdAt}'
+                        android:text='@{item.collectionCount + (@string/g_like) + (@string/g_dot) + item.user.username + (@string/g_dot) + item.createdAt}'
                         android:textSize="12sp"
                         android:textColor="@color/home_article_content"
                         android:maxLines="1"
                         android:ellipsize="end"
-                        tools:text="1人喜欢 "/>
+                        tools:text="2 people like "/>
 
                 </LinearLayout>
 

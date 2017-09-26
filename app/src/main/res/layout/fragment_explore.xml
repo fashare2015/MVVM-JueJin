@@ -23,7 +23,7 @@
             android:layout_height="40dp"
             android:gravity="center"
             android:background="@color/colorPrimary"
-            android:text="发现"
+            android:text="@string/explore_title"
             android:textSize="15sp"
             android:textColor="@color/g_text_white"/>
 

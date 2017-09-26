@@ -47,7 +47,7 @@
                             android:layout_height="wrap_content"
                             android:paddingLeft="10dp"
                             android:text='@{articleVM.article.user.username}'
-                            tools:text="用户A"/>
+                            tools:text="user A"/>
 
                     </com.fashare.mvvm_juejin.widget.TitleBar>
 
@@ -101,22 +101,22 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text='@{"喜欢 " + articleVM.article.collectionCount}'
+                    android:text='@{(@string/g_like) + articleVM.article.collectionCount}'
                     bind:visibility="@{articleVM.article.collectionCount != 0}"
-                    tools:text="喜欢 20"/>
+                    tools:text="like 20"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=' ・ '/>
+                    android:text="@string/g_dot"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text='@{"评论 " + articleVM.article.commentsCount}'
+                    android:text='@{(@string/g_comment) + articleVM.article.commentsCount}'
                     bind:visibility="@{articleVM.article.commentsCount != 0}"
                     android:onClick="@{articleVM.scrollToComment}"
-                    tools:text="评论 20"/>
+                    tools:text="comment 20"/>
 
             </LinearLayout>
 

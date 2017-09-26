@@ -47,7 +47,7 @@
                 android:drawableLeft="@drawable/explore_feidian_small"
                 android:drawableRight="@drawable/g_move"
                 android:drawablePadding="5dp"
-                android:text="沸点"
+                android:text="@string/explore_topic"
                 android:textColor="@color/explore_title"/>
 
             <include layout="@layout/g_line_horizontal"/>
@@ -77,7 +77,7 @@
                 android:padding="@dimen/explore_margin"
                 android:drawableLeft="@drawable/explore_hot_small"
                 android:drawablePadding="5dp"
-                android:text="热门文章"
+                android:text="@string/explore_hot"
                 android:textColor="@color/explore_title"/>
 
             <TextView
@@ -86,7 +86,7 @@
                 android:padding="@dimen/explore_margin"
                 android:drawableLeft="@drawable/explore_tag_settings"
                 android:drawablePadding="5dp"
-                android:text="订制热门"
+                android:text="@string/explore_hot_settings"
                 android:textColor="@color/explore_content"/>
 
         </LinearLayout>

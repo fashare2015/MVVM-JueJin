@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">掘金[MVVM]</string>
+
+    <string name="g_view">阅读</string>
+    <string name="g_dot"> ・ </string>
+    <string name="g_like">喜欢</string>
+    <string name="g_comment">评论</string>
 </resources>

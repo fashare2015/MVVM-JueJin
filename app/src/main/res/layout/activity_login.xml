@@ -39,9 +39,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/login_edit_padding"
-                    android:hint="手机号/邮箱"
+                    android:hint="@string/login_phone_num_hint"
                     android:text="@={loginVM.userName}"/>
-                    <!-- @={XXX}: 双向绑定(two way databinding)!!! -->
+                    <!-- @={XXX}: two way databinding!!! -->
                     <!--https://halfthought.wordpress.com/2016/03/23/2-way-data-binding-on-android/-->
 
                 <include layout="@layout/g_line_horizontal"/>
@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/login_edit_padding"
                     android:inputType="textPassword"
-                    android:hint="密码"
+                    android:hint="@string/login_password_hint"
                     android:text="@={loginVM.passWord}"/>
 
             </LinearLayout>
@@ -59,7 +59,7 @@
             <Button
                 style="@style/LoginButton"
                 android:layout_marginTop="12dp"
-                android:text="登录"
+                android:text="@string/login_login"
                 android:onClick="@{loginVM.doLogin}"/>
 
             <RelativeLayout
@@ -70,7 +70,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="忘记密码?"
+                    android:text="@string/login_forget_psd"
                     android:textColor="@color/login_text_light"
                     android:textSize="13sp"/>
 
@@ -78,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="注册账号"
+                    android:text="@string/login_goto_register"
                     android:textColor="@color/login_text_default"
                     android:textSize="13sp"
                     android:onClick="@{loginVM.toRegister}"/>
@@ -94,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50dp"
-                android:text="掘金[MVVM] ・ fashare (求star~~)"
+                android:text="@string/login_tips"
                 android:textColor="@color/login_text_default"
                 android:textSize="15sp"
                 android:onClick="@{loginVM.toGithub}"/>

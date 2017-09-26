@@ -1,0 +1,4 @@
+<resources>
+    <string name="notify_clear">清除未读</string>
+    <string name="notify_title">消息</string>
+</resources>

@@ -19,7 +19,7 @@
         android:orientation="vertical"
         android:background="@color/home_article_bg">
 
-        <!--用户-->
+        <!--user-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                     android:textColor="@color/home_article_username"
                     android:maxLines="1"
                     android:ellipsize="end"
-                    tools:text="用户"/>
+                    tools:text="user"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -61,19 +61,19 @@
                     android:textColor="@color/home_article_user_company"
                     android:maxLines="1"
                     android:ellipsize="end"
-                    tools:text="Android开发者"/>
+                    tools:text="Android Developer"/>
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <!--内容-->
+        <!--content-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!--类型: 投稿-->
+            <!--type: post-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
                         android:textStyle="bold"
                         android:maxLines="2"
                         android:ellipsize="end"
-                        tools:text="标题"/>
+                        tools:text="title"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -118,13 +118,13 @@
                         android:textColor="@color/home_article_content"
                         android:maxLines="3"
                         android:ellipsize="end"
-                        tools:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"/>
+                        tools:text="content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content "/>
 
                 </LinearLayout>
 
             </LinearLayout>
 
-            <!--类型: 文章-->
+            <!--tyle: article-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
                     android:maxLines="2"
                     android:ellipsize="end"
                     android:visibility='@{!TextUtils.isEmpty(item.content!=null? item.content.trim(): "")? View.VISIBLE: View.GONE}'
-                    tools:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"/>
+                    tools:text="content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content "/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -172,13 +172,13 @@
                         android:textStyle="bold"
                         android:maxLines="2"
                         android:ellipsize="end"
-                        tools:text="标题"/>
+                        tools:text="title"/>
 
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
-        <!--收藏, 评论-->
+        <!--collect, comment-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

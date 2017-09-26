@@ -22,7 +22,7 @@
             android:layout_height="40dp"
             android:gravity="center"
             android:background="@color/colorPrimary"
-            android:text="我"
+            android:text="@string/profile_title"
             android:textSize="15sp"
             android:textColor="@android:color/white"/>
 
@@ -62,10 +62,10 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text='@{profileVM.user != null? profileVM.user.username: "登录/注册"}'
+                            android:text='@{profileVM.user != null? profileVM.user.username: (@string/profile_login)}'
                             android:textSize="20sp"
                             android:textColor="@color/profile_title"
-                            tools:text="登录/注册"/>
+                            tools:text="login/register"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -74,7 +74,7 @@
                             android:text='@{profileVM.parseJobAndCompany(profileVM.user)}'
                             android:textSize="13sp"
                             android:textColor="@color/profile_content"
-                            tools:text="添加职位 @ 添加公司"/>
+                            tools:text="add job @ add company"/>
 
                     </LinearLayout>
 

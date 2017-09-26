@@ -33,7 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/login_edit_padding"
-                    android:hint="手机号/邮箱"
+                    android:hint="@string/login_phone_num_hint"
                     android:text="@={registerVM.phoneNum}"/>
 
                 <include layout="@layout/g_line_horizontal"/>
@@ -42,7 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/login_edit_padding"
-                    android:hint="用户名"
+                    android:hint="@string/login_nickname_hint"
                     android:text="@={registerVM.userName}"/>
 
                 <include layout="@layout/g_line_horizontal"/>
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/login_edit_padding"
                     android:inputType="textPassword"
-                    android:hint="密码"
+                    android:hint="@string/login_password_hint"
                     android:text="@={registerVM.passWord}"/>
 
             </LinearLayout>
@@ -60,7 +60,7 @@
             <Button
                 style="@style/LoginButton"
                 android:layout_marginTop="12dp"
-                android:text="注册"
+                android:text="@string/login_register"
                 android:onClick="@{registerVM.doRegister}"/>
 
         </LinearLayout>

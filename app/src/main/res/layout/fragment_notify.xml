@@ -19,7 +19,7 @@
             android:layout_height="40dp"
             android:gravity="center"
             android:background="@color/colorPrimary"
-            android:text="消息"
+            android:text="@string/notify_title"
             android:textSize="15sp"
             android:textColor="@android:color/white"/>
 
