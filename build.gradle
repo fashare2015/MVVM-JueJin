@@ -34,8 +34,11 @@ subprojects {
     apply plugin: 'kotlin-android'
     apply plugin: 'kotlin-android-extensions'   // 拓展
 
-    if(enableDataBinding)
-        apply plugin: 'kotlin-kapt'
+    // kapt
+    apply plugin: 'kotlin-kapt'
+    kapt {
+        generateStubs = true
+    }
 
     android {
         compileSdkVersion rootProject.ext.compileSdkVersion as Integer
@@ -72,17 +75,11 @@ subprojects {
     dependencies {
         // kotlin
         compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+        kapt "com.android.databinding:compiler:$rootProject.ext.android_plugin_version"
 
         /******* rx ****************************************************************************/
         compile "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjavaVersion"    //1.3MB [EventBus]
         compile "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxandroidVersion" //8KB
-
-        if(enableDataBinding){
-            kapt "com.android.databinding:compiler:$rootProject.ext.android_plugin_version"
-
-//            compile 'me.tatarka.bindingcollectionadapter:bindingcollectionadapter:1.1.0'
-//            compile 'me.tatarka.bindingcollectionadapter:bindingcollectionadapter-recyclerview:1.1.0'
-        }
     }
 }
 
