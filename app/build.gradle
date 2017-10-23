@@ -10,23 +10,13 @@ dependencies {
     compile project(":util")
 
     /******* support 包 ****************************************************************************/
-    compile "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion"
-    compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
-    compile "com.android.support:recyclerview-v7:$rootProject.ext.supportLibraryVersion"
-    compile "com.android.support:design:$rootProject.ext.supportLibraryVersion"
-    compile "com.android.support:cardview-v7:$rootProject.ext.supportLibraryVersion"
-
-    /******* 应用权限库 ****************************************************************************/
-//    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar'
+    compile support.support_v4
+    compile support.appcompat
+    compile support.recyclerview
+    compile support.design
+    compile support.cardview
 
     /******* 其它常用库 ****************************************************************************/
-    compile "com.jude:swipebackhelper:$rootProject.ext.swipebackhelperVersion"
-
-    // 常用 utils
-    compile "com.blankj:utilcode:$rootProject.ext.utilcodeVersion"
-
-    /******* 内存泄漏 ****************************************************************************/
-//    debugCompile "com.squareup.leakcanary:leakcanary-android:$rootProject.ext.leakcanaryVersion"
-//    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.ext.leakcanaryVersion"
-//    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.ext.leakcanaryVersion"
+    compile swipebackhelper
+    compile utilcode
 }

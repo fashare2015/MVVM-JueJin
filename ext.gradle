@@ -4,40 +4,79 @@ println("${project.name}: apply ext")
 // 以下写法为闭包, 可能不会立即赋值
 project.ext{
     println("${project.name}: init ext")
-//    kotlin_version = "1.1.3-2"
-//    android_plugin_version = "2.2.0"
 
-    compileSdkVersion = 24
-    buildToolsVersion = '24.0.1'
+    def androidPluginVersion = "2.2.0"
+    _android = [
+            plugin: "com.android.tools.build:gradle:$androidPluginVersion",
 
-    minSdkVersion = 15
-    targetSdkVersion = 24
-    versionCode = 1
-    versionName = "1.0"
+            compileSdkVersion : 24,
+            buildToolsVersion : '24.0.1',
 
-    // App dependencies
-    supportLibraryVersion = "25.3.1"
+            minSdkVersion : 15,
+            targetSdkVersion : 24,
+            versionCode : 1,
+            versionName : "1.0"
+    ]
 
-    rxjavaVersion = "2.1.0"
-    rxandroidVersion = "2.0.1"
-    rxpermissionsVersion = "0.9.4@aar"
-    rxlifecycleVersion = "2.1.0"
+    // kotlin
+    def kotlinVersion = "1.1.3-2"
+    _kotlin = [
+            // plugins
+            kotlin_gradle_plugin: "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
+            kotlin_android_extensions: "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion",
 
-    okhttp3Version = "3.8.0"
-    retrofitVersion = "2.3.0"
-    retrofit2rxjava2Version = "1.0.0"
-    gsonVersion = "2.7"
-    klogVersion = "1.6.0"
+            // libs
+            kotlin_stdlib: "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    ]
 
-    leakcanaryVersion = "1.5.1"
+    // UI
+    def supportLibraryVersion = "25.3.1"
+    support = [
+            support_v4: "com.android.support:support-v4:$supportLibraryVersion",
+            appcompat: "com.android.support:appcompat-v7:$supportLibraryVersion",
+            recyclerview: "com.android.support:recyclerview-v7:$supportLibraryVersion",
+            design: "com.android.support:design:$supportLibraryVersion",
+            cardview: "com.android.support:cardview-v7:$supportLibraryVersion"
+    ]
+    springview = "com.liaoinstan.springview:library:1.3.0"
+    swipebackhelper = "com.jude:swipebackhelper:3.1.2"
 
-    glideVersion = "3.7.0"
-    glideTransformationsVersion = "2.0.1"
-    glideOkhttp3IntegrationVersion = "1.4.0@aar"
+    databindingCompiler = "com.android.databinding:compiler:$androidPluginVersion"
 
-    eventbusVersion = "2.4.0"
-    swipebackhelperVersion = "3.1.2"
-    utilcodeVersion = "1.9.0"
+    // rx
+    def rxjavaVersion = "2.1.0"
+    def rxandroidVersion = "2.0.1"
+    rx = [
+            rxjava2: "io.reactivex.rxjava2:rxjava:$rxjavaVersion",
+            rxandroid2: "io.reactivex.rxjava2:rxandroid:$rxandroidVersion",
+            rxlifecycle: "com.trello.rxlifecycle2:rxlifecycle:$rxjavaVersion",
+            rxlifecycle_android: "com.trello.rxlifecycle2:rxlifecycle-android:$rxjavaVersion",
+            rxlifecycle_components: "com.trello.rxlifecycle2:rxlifecycle-components:$rxjavaVersion",
 
-    springViewVersion = "1.3.0"
+            rxpermissions: 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar'
+    ]
+
+    // net
+    def okhttp3Version = "3.8.0"
+    okhttp3 = [
+            logging_interceptor: "com.squareup.okhttp3:logging-interceptor:$okhttp3Version",
+    ]
+    def retrofitVersion = "2.3.0"
+    retrofit2 = [
+            retrofit: "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            adapter_rxjava2: "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion",
+            converter_gson: "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    ]
+    gson = "com.google.code.gson:gson:2.7"
+    klog = "com.github.zhaokaiqiang.klog:library:1.6.0"
+
+    def glideVersion = "3.7.0"
+    glide = [
+            glide: "com.github.bumptech.glide:glide:$glideVersion",
+            glide_transformations: "jp.wasabeef:glide-transformations:2.0.1",
+            okhttp3_integration: "com.github.bumptech.glide:okhttp3-integration:1.4.0@aar"
+    ]
+
+    // other
+    utilcode = "com.blankj:utilcode:1.9.0"
 }

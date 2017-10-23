@@ -3,13 +3,13 @@ apply plugin: 'com.android.library'
 dependencies {
     compile project(":adapter")
 
-    compile "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion"
-    compile "com.android.support:recyclerview-v7:$rootProject.ext.supportLibraryVersion"
+    compile support.support_v4
+    compile support.recyclerview
 
-    compile "com.trello.rxlifecycle2:rxlifecycle:$rootProject.ext.rxlifecycleVersion"
+    compile rx.rxlifecycle
     // If you want to bind to Android-specific lifecycles
-    compile "com.trello.rxlifecycle2:rxlifecycle-android:$rootProject.ext.rxlifecycleVersion"
-    compile "com.trello.rxlifecycle2:rxlifecycle-components:$rootProject.ext.rxlifecycleVersion"
+    compile rx.rxlifecycle_android
+    compile rx.rxlifecycle_components
 
-    compile "com.liaoinstan.springview:library:$rootProject.ext.springViewVersion"
+    compile springview
 }

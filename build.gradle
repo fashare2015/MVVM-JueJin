@@ -1,21 +1,21 @@
-// 导入 external 全局变量
-apply from: "ext.gradle"
 
 buildscript {
     println("${project.name}: buildscript")
 
     // rootProject.buildscript 里用的变量, 由于调用时机比 "闭包project.ext{ ... }" 早, 故不能写在那边
-    project.ext.kotlin_version = "1.1.3-2"
-    project.ext.android_plugin_version = "2.2.0"
+//    project.ext.kotlin_version = "1.1.3-2"
+//    project.ext.android_plugin_version = "2.2.0"
+    // 导入 external 全局变量
+    apply from: "ext.gradle"
 
     repositories {
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$project.ext.android_plugin_version"
+        classpath _android.plugin
 
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$project.ext.kotlin_version"
-        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$project.ext.kotlin_version"
+        classpath _kotlin.kotlin_gradle_plugin
+        classpath _kotlin.kotlin_android_extensions
     }
 }
 
@@ -41,17 +41,17 @@ subprojects {
     }
 
     android {
-        compileSdkVersion rootProject.ext.compileSdkVersion as Integer
-        buildToolsVersion rootProject.ext.buildToolsVersion as String
+        compileSdkVersion _android.compileSdkVersion as Integer
+        buildToolsVersion _android.buildToolsVersion as String
 
         defaultConfig {
             if(isAppModule)
                 applicationId "com.fashare.mvvm_juejin"
 
-            minSdkVersion rootProject.ext.minSdkVersion as Integer
-            targetSdkVersion rootProject.ext.targetSdkVersion as Integer
-            versionCode rootProject.ext.versionCode as Integer
-            versionName rootProject.ext.versionName as String
+            minSdkVersion _android.minSdkVersion as Integer
+            targetSdkVersion _android.targetSdkVersion as Integer
+            versionCode _android.versionCode as Integer
+            versionName _android.versionName as String
         }
 
         buildTypes {
@@ -74,12 +74,12 @@ subprojects {
 
     dependencies {
         // kotlin
-        compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-        kapt "com.android.databinding:compiler:$rootProject.ext.android_plugin_version"
+        compile _kotlin.kotlin_stdlib
+        kapt databindingCompiler
 
-        /******* rx ****************************************************************************/
-        compile "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjavaVersion"    //1.3MB [EventBus]
-        compile "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxandroidVersion" //8KB
+        // rxjava
+        compile rx.rxjava2
+        compile rx.rxandroid2
     }
 }
 

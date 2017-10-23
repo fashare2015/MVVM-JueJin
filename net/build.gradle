@@ -4,10 +4,10 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     /******* 网络请求库 ****************************************************************************/
-    compile "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.okhttp3Version"
-    compile "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
-    compile "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofitVersion"
-    compile "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
+    compile okhttp3.logging_interceptor
+    compile retrofit2.retrofit
+    compile retrofit2.adapter_rxjava2
+    compile retrofit2.converter_gson
 
-    compile "com.github.zhaokaiqiang.klog:library:$rootProject.ext.klogVersion"
+    compile klog
 }

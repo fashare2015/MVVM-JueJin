@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 
-
 dependencies {
-    compile "com.android.support:support-v4:$rootProject.ext.supportLibraryVersion"
-    compile "com.android.support:recyclerview-v7:$rootProject.ext.supportLibraryVersion"
+    compile support.support_v4
+    compile support.recyclerview
 }

@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
 
 dependencies {
-    compile "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
+    compile gson
 }
