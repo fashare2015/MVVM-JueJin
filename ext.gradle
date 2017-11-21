@@ -5,12 +5,12 @@ println("${project.name}: apply ext")
 project.ext{
     println("${project.name}: init ext")
 
-    def androidPluginVersion = "2.2.0"
+    def androidPluginVersion = "3.0.0"
     _android = [
             plugin: "com.android.tools.build:gradle:$androidPluginVersion",
 
             compileSdkVersion : 24,
-            buildToolsVersion : '24.0.1',
+            buildToolsVersion : '27.0.1',
 
             minSdkVersion : 15,
             targetSdkVersion : 24,
@@ -41,7 +41,16 @@ project.ext{
     springview = "com.liaoinstan.springview:library:1.3.0"
     swipebackhelper = "com.jude:swipebackhelper:3.1.2"
 
-    databindingCompiler = "com.android.databinding:compiler:$androidPluginVersion"
+//    def databindingCompilerVersion = androidPluginVersion
+    /**
+     * 理论上，databinding compiler 应该与 android plugin 版本保持一致。
+     * 然而，它升级到 3.0 会导致 databinding 的 <include/> 标签传值出错(子类无法传给父类)。
+     * 不确定是不是 databinding compiler 3.0 的 bug, 暂时先不升级。
+     *
+     * see https://stackoverflow.com/questions/44769078/android-databinding-3-0-0-alpha4-not-working-for-include-tags
+     */
+    def databindingCompilerVersion = "2.3.3"
+    databindingCompiler = "com.android.databinding:compiler:$databindingCompilerVersion"
 
     // rx
     def rxjavaVersion = "2.1.0"
