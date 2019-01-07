@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment
 /**
  * <pre>
  *     author : jinliangshan
- *     e-mail : jinliangshan@chexiang.com
+ *     e-mail : 153614131@qq.com
  *     desc   :
  * </pre>
  */
